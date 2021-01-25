@@ -1,88 +1,119 @@
 <html>
-  <head>
-  <meta charset="utf-8" />
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gridea</title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1611502403527">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<title>
+    Song&#39;s Daily
+</title>
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1611534926405">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://cubewatermelon.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Gridea - Atom Feed" href="https://cubewatermelon.github.io/atom.xml">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cubewatermelon.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
 
 
+</head>
 
-  <meta name="description" content="温故而知新" />
-  </head>
-  <body>
+<body>
     <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://cubewatermelon.github.io">
-  <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1611502403527" alt="">
-  </a>
-  <h1 class="site-title">
-    Gridea
-  </h1>
-  <p class="site-description">
-    温故而知新
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-
-        <div class="tags-container">
-          
-            <a class="tag" href="https://cubewatermelon.github.io/tag/P660K6oZo/">Gridea</a>
-          
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://cubewatermelon.github.io">
+                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1611534926405" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Song&#39;s Daily
+                </h1>
+            </div>
         </div>
-
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
-  <a class="rss" href="https://cubewatermelon.github.io/atom.xml" target="_blank">
-    <i class="ri-rss-line"></i> RSS
-  </a>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
 </div>
 
-      </div>
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div class="tags-container main-container">
+                <div class="tags-group">
+                    
+                        <a class="tags-tag i-tag
+                            i-tag-" href="https://cubewatermelon.github.io/tag/P660K6oZo/">
+                            Gridea
+                        </a>
+                        
+                </div>
+            </div>
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://cubewatermelon.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
     </div>
-  </body>
+</body>
+
 </html>

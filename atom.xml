@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cubewatermelon.github.io</id>
-    <title>Gridea</title>
-    <updated>2021-01-24T15:33:26.753Z</updated>
+    <title>Song&apos;s Daily</title>
+    <updated>2021-01-25T00:35:29.163Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cubewatermelon.github.io"/>
     <link rel="self" href="https://cubewatermelon.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>唯有不断前进</subtitle>
     <logo>https://cubewatermelon.github.io/images/avatar.png</logo>
     <icon>https://cubewatermelon.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Gridea</rights>
+    <rights>All rights reserved 2021, Song&apos;s Daily</rights>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://cubewatermelon.github.io/post/hello-gridea/</id>
