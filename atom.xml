@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cubewatermelon.github.io</id>
     <title>Firo&apos;s Daily</title>
-    <updated>2021-01-26T15:58:54.955Z</updated>
+    <updated>2021-01-27T03:01:12.550Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cubewatermelon.github.io"/>
     <link rel="self" href="https://cubewatermelon.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://cubewatermelon.github.io/images/avatar.png</logo>
     <icon>https://cubewatermelon.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Firo&apos;s Daily</rights>
+    <entry>
+        <title type="html"><![CDATA[漫谈]]></title>
+        <id>https://cubewatermelon.github.io/post/man-tan/</id>
+        <link href="https://cubewatermelon.github.io/post/man-tan/">
+        </link>
+        <updated>2021-01-27T02:37:56.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="grand-theft-auto-5">Grand Theft Auto 5</h2>
+<p>GTA5轻松的游戏氛围让人容易打下去，即使脑子比较疲惫。开各种载具、打打杀杀，有拖车拉货也有跑车追逐，可以在酒馆里玩飞镖也可以精心筹划抢劫大型银行，可以疯狂杀戮、暗杀、坐着潜艇直升机入侵军事基地，还得在FIB的胁迫下恐怖袭击，在洛圣都无法无天也可以有正常的生活，游戏玩法十分丰富，在几乎与真实世界相同的洛圣都里，无所不能。<br>
+GTA5的故事模式记录了小富由街头小混混到成熟混混的成长，麦克的报应，老崔的，额，就是癫狂，还有老崔和麦克的所谓和解。老崔的癫狂，小富的义气活力，麦克的复杂，三人一狗满足了玩家几乎所有的犯罪幻想。小富由一个年轻的黑人街头混混逐步成长，他也给家里弄的干干净净；麦克陷于家庭的困境，沾花惹草的阿曼达，肥宅无用儿子，一心成名的女儿；老崔一心一意的“癫狂”，不在乎任何事情，和老年人谈恋爱，也有自己要坚守的兄弟原则。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://cubewatermelon.github.io/post/hello-gridea/</id>
