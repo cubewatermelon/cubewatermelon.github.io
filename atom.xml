@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cubewatermelon.github.io</id>
     <title>Firo&apos;s Daily</title>
-    <updated>2021-01-29T03:04:26.842Z</updated>
+    <updated>2021-01-29T05:22:41.275Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cubewatermelon.github.io"/>
     <link rel="self" href="https://cubewatermelon.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://cubewatermelon.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Firo&apos;s Daily</rights>
     <entry>
-        <title type="html"><![CDATA[学术英语]]></title>
+        <title type="html"><![CDATA[Acadmic English]]></title>
         <id>https://cubewatermelon.github.io/post/xue-zhu-ying-yu/</id>
         <link href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/">
         </link>
@@ -24,13 +24,13 @@ The technical terms should be stated explicitly, and appear at the ends of their
 <blockquote>
 <p>Just as we look at the first few words of a sentence for point of view, we look to the last few words for emphasis. You can revise a sentence to emphasize particular words that you want readers to hear stressed and thereby note as particularly significant.</p>
 </blockquote>
-<p><em>Global warming could raise sea levels to a point where much of the world’s low-lying coastal areas would disappear, according to most atmospheric scientists.</em><br>
-🚩<em>According to most atmospheric scientists, global warming could raise sea levels to a point where much of the world’s low-lying coastal areas would disappear.</em></p>
+<p><em>Global warming could raise sea levels to a point where much of the world's low-lying coastal areas would disappear, according to most atmospheric scientists.</em><br>
+🚩<em>According to most atmospheric scientists, global warming could raise sea levels to a point where much of the world's low-lying coastal areas would disappear.</em></p>
 <blockquote>
 <p>You can easily check whether you have stressed the right words by reading your sentences aloud: As you speak the last few words, raise your voice and tap the table with your fingers. If you’ve stressed the wrong words, your voice and table thumping will feel wrong:<br>
 <em>It is sometimes possible to represent a complex idea in a simple sentence, but more often you cannot represent it in that kind of sentence.</em><br>
 If you've stressed the right words, your voice and table thumping will feel right:<br>
-<em>It is sometimes possible to represent a complex idea in a simple sentence, but more OFten you can NOT.</em></p>
+🚩<em>It is sometimes possible to represent a complex idea in a simple sentence, but more OFten you can NOT.</em></p>
 </blockquote>
 ]]></content>
     </entry>
@@ -40,9 +40,9 @@ If you've stressed the right words, your voice and table thumping will feel righ
         <link href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">
         </link>
         <updated>2021-01-28T06:01:01.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>唯有不断前进</strong><br>
-##自由<br>
-肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加<em>自由</em>了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。<br>
+        <content type="html"><![CDATA[<p><strong>唯有不断前进</strong></p>
+<h2 id="自由">自由</h2>
+<p>肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加<em>自由</em>了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。<br>
 进击的巨人，或者艾伦的执念是拯救三笠、艾尔敏还有大家，他又该如何做呢。</p>
 ]]></content>
     </entry>

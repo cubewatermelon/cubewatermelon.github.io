@@ -7,7 +7,7 @@
 <title>
     进击的巨人 | Firo&#39;s Daily
 </title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1611889458985">
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1611889742821">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -35,7 +35,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://cubewatermelon.github.io">
-                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1611889458985" alt="">
+                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1611889742821" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -121,9 +121,9 @@
                             <div class="post-feature-image" style="background-image: url('https://cubewatermelon.github.io/post-images/jin-ji-de-ju-ren.jpg')"></div>
                             
                                 <div class="post-content">
-                                    <p><strong>唯有不断前进</strong><br>
-##自由<br>
-肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加<em>自由</em>了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。<br>
+                                    <p><strong>唯有不断前进</strong></p>
+<h2 id="自由">自由</h2>
+<p>肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加<em>自由</em>了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。<br>
 进击的巨人，或者艾伦的执念是拯救三笠、艾尔敏还有大家，他又该如何做呢。</p>
 
                                 </div>
@@ -147,35 +147,46 @@
                 <!-- right -->
                 <div id="sidebar" class="main-container-right">
                     
-                                <!-- id-card -->
-                                
-    <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1611889458985)">
-        </div>
-        <h1 class="id_card-title">
-            Firo&#39;s Daily
-        </h1>
-        <h2 class="id_card-description">
-            唯有不断前进
-        </h2>
-        <!--  -->
-        <div class="id_card-sns">
-            <!-- github -->
-            
-                <a href="https://github.com/cubewatermelon" target="_blank" rel="noopener noreferrer"><i
-                class="fa fa-github"></i></a>
-                
-                    <!-- twitter -->
-                    
-                            <!-- weibo -->
-                            
-                                    <!-- facebook -->
-                                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E8%87%AA%E7%94%B1">自由</a></li>
+</ul>
+</li>
+</ul>
 
         </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
     </div>
     
-                                    
+                            
 
                 </div>
 
