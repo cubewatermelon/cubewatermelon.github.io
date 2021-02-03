@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://cubewatermelon.github.io</id>
     <title>Firo&apos;s Daily</title>
-    <updated>2021-01-29T05:22:41.275Z</updated>
+    <updated>2021-02-03T06:33:57.648Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://cubewatermelon.github.io"/>
     <link rel="self" href="https://cubewatermelon.github.io/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://cubewatermelon.github.io/images/avatar.png</logo>
     <icon>https://cubewatermelon.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Firo&apos;s Daily</rights>
+    <entry>
+        <title type="html"><![CDATA[周总结]]></title>
+        <id>https://cubewatermelon.github.io/post/zhou-zong-jie/</id>
+        <link href="https://cubewatermelon.github.io/post/zhou-zong-jie/">
+        </link>
+        <updated>2021-02-03T06:15:18.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="0302">03/02</h3>
+<ul>
+<li>数理解析模型：放大器（产品结构较为多变，具有较高准确率的普遍模型难以建立）；激光器（飞秒）。</li>
+<li>深度学习方法：强化学习、图神经网络、集成学习（Stacking方法）、Meta Learning、孪生网络</li>
+<li>Remi：使用的话大致理解下那两篇综述，然后进VPI看看DSP的demo了解下流程。从零编码还是比较吃力的，这个之后再看。DSP和ML很像都很需要实践和训练还有数据。<br>
+我记得那个仿真模块和我这次阿里做的差不多，但是规模很小，一组收发机就可以了，其他都一样，就是要注意解偏振那块的参考矩阵要重新根据仿真的带宽生成。</li>
+<li>QuaDRiGa v2.4 matlab光通信仿真<br>
+<img src="https://cubewatermelon.github.io/post-images/1612333823889.png" alt="" loading="lazy"></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Acadmic English]]></title>
         <id>https://cubewatermelon.github.io/post/xue-zhu-ying-yu/</id>
@@ -32,6 +49,9 @@ The technical terms should be stated explicitly, and appear at the ends of their
 If you've stressed the right words, your voice and table thumping will feel right:<br>
 🚩<em>It is sometimes possible to represent a complex idea in a simple sentence, but more OFten you can NOT.</em></p>
 </blockquote>
+<h3 id="example">Example</h3>
+<p><em>We also systematically <strong>benchmark</strong> methods of selecting relevant input for higher efficiency, achieving 4x gains in speed and memory, while retaining 92% of the results.</em><br>
+<em>We are benchmarking our performance against external criteria.</em></p>
 ]]></content>
     </entry>
     <entry>
@@ -40,10 +60,15 @@ If you've stressed the right words, your voice and table thumping will feel righ
         <link href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">
         </link>
         <updated>2021-01-28T06:01:01.000Z</updated>
-        <content type="html"><![CDATA[<p><strong>唯有不断前进</strong></p>
-<h2 id="自由">自由</h2>
+        <content type="html"><![CDATA[<h2 id="进击的巨人">进击的巨人</h2>
+<p><strong>唯有不断前进</strong></p>
+<h3 id="自由">自由</h3>
 <p>肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加<em>自由</em>了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。<br>
 进击的巨人，或者艾伦的执念是拯救三笠、艾尔敏还有大家，他又该如何做呢。</p>
+<h2 id="永生之酒-baccaon">永生之酒 Baccaon！</h2>
+<p>精妙的叙事技巧，讲述了跨越两百年的不死者争斗，以及一场涉及多方势力的火车混战。</p>
+<h2 id="电锯人">电锯人</h2>
+<p>自由恶魔-藤本树</p>
 ]]></content>
     </entry>
     <entry>
