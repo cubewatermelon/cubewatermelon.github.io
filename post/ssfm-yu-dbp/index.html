@@ -1,22 +1,125 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://cubewatermelon.github.io</id>
-    <title>Firo&apos;s Daily</title>
-    <updated>2021-02-22T02:39:41.506Z</updated>
-    <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://cubewatermelon.github.io"/>
-    <link rel="self" href="https://cubewatermelon.github.io/atom.xml"/>
-    <subtitle>唯有不断前进</subtitle>
-    <logo>https://cubewatermelon.github.io/images/avatar.png</logo>
-    <icon>https://cubewatermelon.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2021, Firo&apos;s Daily</rights>
-    <entry>
-        <title type="html"><![CDATA[SSFM与DBP]]></title>
-        <id>https://cubewatermelon.github.io/post/ssfm-yu-dbp/</id>
-        <link href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">
-        </link>
-        <updated>2021-02-21T08:19:17.000Z</updated>
-        <content type="html"><![CDATA[<h3 id="nlse">NLSE</h3>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    SSFM与DBP | Firo&#39;s Daily
+</title>
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1613961574869">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://cubewatermelon.github.io/styles/main.css">
+<!-- js -->
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cubewatermelon.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+        
+            
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+                
+
+                    
+                            
+</head>
+
+<body>
+    <div class="main">
+        <div class="header">
+    <div class="nav">
+        <div class="logo">
+            <a href="https://cubewatermelon.github.io">
+                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1613961574869" alt="">
+            </a>
+            <div class="site-title">
+                <h1>
+                    Firo&#39;s Daily
+                </h1>
+            </div>
+        </div>
+        <span class="menu-btn fa fa-align-justify"></span>
+        <div class="menu-container">
+            <ul>
+                
+                    
+                            <li>
+                                <a href="/" class="menu">
+                                    首页
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/archives" class="menu">
+                                    归档
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/tags" class="menu">
+                                    标签
+                                </a>
+                            </li>
+                            
+                                
+                    
+                            <li>
+                                <a href="/post/about" class="menu">
+                                    关于
+                                </a>
+                            </li>
+                            
+                                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".menu-btn").click(function() {
+            $(".menu-container").slideToggle();
+        });
+        $(window).resize(function() {
+
+            if (window.matchMedia('(min-width: 960px)').matches) {
+                $(".menu-container").css('display', 'block')
+            } else {
+                $(".menu-container").css('display', 'none')
+            }
+
+        });
+    });
+</script>
+
+            <div id="main-content" class="post-detail main-container">
+                <!-- left -->
+                <div id="content" class="main-container-left">
+                    <article class="post i-card">
+                        <h2 class="post-title">
+                            SSFM与DBP
+                        </h2>
+                        <div class="post-info">
+                            <time class="post-time">2021-02-21</time>
+                            
+                                <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
+                            i-tag-other_1">
+                            #科研日常
+                        </a>
+                                
+                        </div>
+                        
+                                <div class="post-content">
+                                    <h3 id="nlse">NLSE</h3>
 <p>当光信号的脉宽范围为10ns ~10 fs的范围内时，这样的光脉冲在光纤传输过程中，色散和非线性效应会同时影响其频谱。当脉冲宽度<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>T</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">T_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> &gt; 5ps的时候，拉曼散射和自陡效应相比克尔效应可以忽略，结合麦克斯韦方程组、电磁波波动理论以及光纤的电极化特性，忽略三阶色散及其他效应，在一定近似条件下可以推导得出光矢量在光纤中传输的非线性薛定谔方程（NLSE）</p>
 <p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mrow><mi mathvariant="normal">∂</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">∂</mi><mi>z</mi></mrow></mfrac><mo>+</mo><mfrac><mi>α</mi><mn>2</mn></mfrac><mi>E</mi><mo>+</mo><mfrac><mi>i</mi><mn>2</mn></mfrac><msub><mi>β</mi><mn>2</mn></msub><mfrac><mrow><msup><mi mathvariant="normal">∂</mi><mn>2</mn></msup><mi>E</mi></mrow><mrow><mi mathvariant="normal">∂</mi><msup><mi>t</mi><mn>2</mn></msup></mrow></mfrac><mo>−</mo><mi>i</mi><mi>γ</mi><mi mathvariant="normal">∣</mi><mi>E</mi><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup><mi>E</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\frac{\partial E}{\partial z}+\frac{\alpha}{2} E+\frac{i}{2} \beta_{2} \frac{\partial^{2} E}{\partial t^{2}}-i \gamma|E|^{2} E=0
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.177108em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3365200000000002em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.05278em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord" style="margin-right:0.05556em;">∂</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mord">∣</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span></span></p>
@@ -61,289 +164,123 @@ Why is the input data structured like this? For the DBP methods？It is hard for
 ? The results show that 121 taps and 128 samples per input, i.e., 512 total input vectors are optimal settings across most experimental setups studied in our work.<br>
 ? The whole batch of 6 + 16 + 6 = 28 inputs are processed together, while the output of the middle 16 vectors is used to calculate the cost function and update the parameters of the neural network.<br>
 <img src="file://C:/Users/11492/Pictures/Saved%20Pictures/gridea/nc.png" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[放大器、激光器等机理]]></title>
-        <id>https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/</id>
-        <link href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">
-        </link>
-        <updated>2021-02-20T12:58:38.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="ampedfa_dynamic">AmpEDFA_Dynamic</h2>
-<p>sampled signals<br>
-parameterized signals</p>
-<h2 id="edfa基础知识">EDFA基础知识</h2>
-<h3 id="edfa能级跃迁数学模型">EDFA能级跃迁数学模型</h3>
-<h3 id="基本知识">基本知识</h3>
-<p>980nm作为泵浦波长，具有更小的噪声系数和更高的泵浦效率。1480nm泵浦可以获得更高的泵浦功率。<br>
-对应一定的泵浦功率，EDF有一最大增益长度。<br>
-饱和输出功率，定义为增益相对于小信号增益降低3dB时的输出信号功率。小信号增益是线性的，随输入光功率增大，EDFA进入增益饱和区。<br>
-对于EDFA，放大的自发辐射是噪声的主要来源。NF具有3dB的量子极限。<br>
-密集波分复用(DWDM)光通信系统和未来的全光通信系统对EDFA 的性能要求越来越高，与第一代 EDFA 主要要求功率放大不同，下一代 EDFA 的要求更加全面，其功能也更加完善。这些主要表现在具有克服瞬态效应、宽带及其平坦、在线监控、低功耗、噪声系在数低、输出功率大、低成本等特点。</p>
-<h3 id="瞬态效应">瞬态效应</h3>
-<p>工作在实际通信线路上的EDFA,在输入光功率突然变大/变小的时刻,如果泵浦输出功率不能及时跟随输入变化而变小/变大,则掺铒光纤( Erbium Doped Fibe,EDF)中反转离子数仍保持在变化前的水平,会导致剩余通道的增益突然变小/变大,这种增益跃变经多级EDFA级联而积累,会引起线路阻塞或产生误码。如果输入光功率迅速增大,则产生时的光浪涌,经级联放大后,峰值功率可达数瓦,可能损坏通信设备的光/电(O/E)转换器及光连接器端面。</p>
-<h2 id="激光器基础知识">激光器基础知识</h2>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[光纤通信系统GN模型]]></title>
-        <id>https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/</id>
-        <link href="https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/">
-        </link>
-        <updated>2021-02-16T13:11:32.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="非线性光纤光学">非线性光纤光学</h2>
-<h3 id="光纤模式">光纤模式</h3>
-<p>纤芯和包层折射率分别为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">n_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>n</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">n_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，归一化频率定义为</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>V</mi><mo>=</mo><msub><mi>k</mi><mn>0</mn></msub><mi>a</mi><mo>(</mo><msubsup><mi>n</mi><mn>1</mn><mn>2</mn></msubsup><mo>−</mo><msubsup><mi>n</mi><mn>2</mn><mn>2</mn></msubsup><msup><mo>)</mo><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msup></mrow><annotation encoding="application/x-tex">V = k_{0} a(n_{1}^{2} - n_{2}^{2}  )^{1/2} 
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathdefault">a</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
-<p>式中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>k</mi><mn>0</mn></msub><mo>=</mo><mn>2</mn><mi>π</mi><mi mathvariant="normal">/</mi><mi>λ</mi></mrow><annotation encoding="application/x-tex">k_0=2\pi/\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mord">/</span><span class="mord mathdefault">λ</span></span></span></span>，a为纤芯半径，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span></span></span></span>为光波波长。若V &lt; 2.405则为单模。</p>
-<h3 id="光纤损耗">光纤损耗</h3>
-<p><img src="file://C:/Users/11492/Pictures/Saved%20Pictures/gridea/Snipaste_2021-02-17_14-54-01.png" alt="" loading="lazy"><br>
-主要因素是材料吸收（如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><msup><mi>H</mi><mo>−</mo></msup></mrow><annotation encoding="application/x-tex">OH^-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.771331em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.771331em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">−</span></span></span></span></span></span></span></span></span></span></span>）和瑞利散射。瑞利散射是由于制造过程中沉积到熔石英中的随机密度变化引起的，导致了折射率本身的起伏，使光向各个方向散射，主要作用在短波长区。</p>
-<h3 id="光纤色散">光纤色散</h3>
-<p>当一束电磁波与电介质的束缚电子相互作用时，介质的响应通常与光波频率有关，这种特性称为色散，它表明折射率<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>(</mo><mi>ω</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">n(\omega)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">ω</span><span class="mclose">)</span></span></span></span>对频率的依赖关系。<br>
-<img src="file://C:/Users/11492/Pictures/Saved%20Pictures/gridea/Snipaste_2021-02-17_15-08-02.png" alt="" loading="lazy"></p>
-<h3 id="偏振膜色散">偏振膜色散</h3>
-<p>单模光纤可以维持沿两正交方向偏振的简并模。在光纤的形状为严格的圆柱形、材料为各向同性的理想条件<br>
-下，x  方向偏振态的模式不会与干交的 y 方向偏振态的模耦合。然而，由于其实际形状略偏离圆柱形以及材料各向异性的彶小起伏，破坏了模式简并，导致了两个偏振态的混合。在数学上，模传输常数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\beta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span></span></span></span> 对于x , y 方向偏振模稍有不同，光纤的这个性质称为模式双折射。随机的模式双折射导致了无归偏振光。</p>
-<h3 id="非线性效应">非线性效应</h3>
-<p>光纤中的最低阶非线性效应起源于三阶电极化率，导致折射率与光强有关（光幅度的平方）。</p>
-<h4 id="自相位调制spm">自相位调制SPM</h4>
-<p>光场在光纤内传输时光场本身引起的附加的非线性相移。</p>
-<h4 id="交叉相位调整xpm">交叉相位调整XPM</h4>
-<p>XPM指的是由不同波长、传输方向或偏振态的脉冲共同传输时，一种光场引起的另一种光场的非线性相移。</p>
-<h4 id="受激拉曼散射srs">受激拉曼散射SRS</h4>
-<p>一幅简单的量子力学图像对 SRS和 SBS 都是适用的。一个人射场的光子（通常称为泵浦）的湮灭，产生了一个下移斯托克斯频率的光子和保持能量与动量守恒的另一个具有恰当能量与动量的声子。</p>
-<h4 id="四波混频fwm">四波混频FWM</h4>
-<p>参量过程起源于光场作用下介质中束缚电子的非线性响应。<br>
-特定的频率和折射率，以满足相位匹配条件。常见的有产生三次谐波，或者是对称的上下边带。</p>
-<h2 id="非线性薛定谔方程推导">非线性薛定谔方程推导</h2>
-<p>麦克斯韦方程组到波动方程到亥姆霍兹方程到非线性薛定谔方程<br>
-电位移矢量 感应电极化强度 线性极化率 三阶极化率</p>
-<h2 id="gn模型">GN模型</h2>
-<p>假设发射信号为高斯分布<br>
-单span非线性噪声功率谱密度解析式<br>
-对发射端的功率谱密度进行一定形式的积分，就可以得到非线性噪声的功率谱密度，对于今后衡量非线性噪声的大小以及信道均衡都是有很大意义的。</p>
-<h3 id="poggiolini-p-bosco-g-carena-a-curri-v-jiang-y-forghieri-f-the-gn-model-of-fiber-non-linear-propagation-and-its-applications-journal-of-lightwave-technology-2013-dec-17324694-721">Poggiolini P, Bosco G, Carena A, Curri V, Jiang Y, Forghieri F. The GN-model of fiber non-linear propagation and its applications. Journal of lightwave technology. 2013 Dec 17;32(4):694-721.</h3>
-<p>In networking, a <strong>greenfield deployment</strong> is the installation and configuration of a network where none existed before, for example in a new office. A <strong>brownfield deployment</strong>, in contrast, is an upgrade or addition to an existing network and uses some legacy components.<br>
-THE advent of coherent-detection systems supported by digital-signal-processing (DSP) has made it possible to carry out electronic fiber chromatic-dispersion (CD) compensation. This in turn has permitted to avoid optical dispersion compensation, or dispersion management (DM), thus allowing the exploitation of the so-called **'uncompensated' transmission (UT) **technique.<br>
-The GN-model reference formula (GNRF) provides <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>G</mi><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">I</mi></mrow></msub><mo>(</mo><mi>f</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">G_{\mathrm{NLI}}(f)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">N</span><span class="mord mathrm mtight">L</span><span class="mord mathrm mtight">I</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span>, that is, the PSD of NLI at the end of the link.<br>
-The NLI PSD generated at a frequency f, that is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>G</mi><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">I</mi></mrow></msub><mo>(</mo><mi>f</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">G_{\mathrm{NLI}}(f)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">N</span><span class="mord mathrm mtight">L</span><span class="mord mathrm mtight">I</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span>, is the integrated result of all the 'infinitesimal' non-degenerate FWM products occurring among any three spectral components of the transmitted signal, located at f1, f2 and f3 = (f1 + f2 − f).<br>
-<img src="file://C:/Users/11492/Pictures/Saved%20Pictures/gridea/gn.png" alt="" loading="lazy"><br>
-Whether the non-linear phenomena taxonomy formerly used for DM systems, such as SPM, XPM, and XPolM, can still be related to UT systems as represented through the GN-model.A possible alternative taxonomy was proposed, consisting of three categories: self-channel interference (SCI), cross-channel interference (XCI) and multi-channel interference (MCI).<br>
-We introduce here an alternative model which coincides with the GN-model over each single span but makes the further approximation of completely neglecting coherent interference among NLI generated in different spans. Assuming a transparent and homogeneous link, the IGNRF greatly simplifies to:</p>
-<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msubsup><mi>G</mi><mrow><mi mathvariant="normal">N</mi><mi mathvariant="normal">L</mi><mi mathvariant="normal">I</mi></mrow><mi mathvariant="normal">inc</mi><mo>⁡</mo></msubsup><mo>(</mo><mi>f</mi><mo>)</mo><mo>=</mo><mfrac><mn>16</mn><mn>27</mn></mfrac><msup><mi>γ</mi><mn>2</mn></msup><msubsup><mi>L</mi><mrow><mi mathvariant="normal">e</mi><mi mathvariant="normal">f</mi><mi mathvariant="normal">f</mi></mrow><mn>2</mn></msubsup><msub><mi>N</mi><mi>s</mi></msub></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></msubsup><msubsup><mo>∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></msubsup><msub><mi>G</mi><mrow><mi mathvariant="normal">W</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">M</mi></mrow></msub><mrow><mo fence="true">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo fence="true">)</mo></mrow><msub><mi>G</mi><mrow><mi mathvariant="normal">W</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">M</mi></mrow></msub><mrow><mo fence="true">(</mo><msub><mi>f</mi><mn>2</mn></msub><mo fence="true">)</mo></mrow><msub><mi>G</mi><mrow><mi mathvariant="normal">W</mi><mi mathvariant="normal">D</mi><mi mathvariant="normal">M</mi></mrow></msub><mrow><mo fence="true">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo>+</mo><msub><mi>f</mi><mn>2</mn></msub><mo>−</mo><mi>f</mi><mo fence="true">)</mo></mrow></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>ρ</mi><mrow><mo fence="true">(</mo><msub><mi>f</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>f</mi><mn>2</mn></msub><mo separator="true">,</mo><mi>f</mi><mo fence="true">)</mo></mrow><mi mathvariant="normal">d</mi><msub><mi>f</mi><mn>1</mn></msub><mrow><mtext> </mtext><mi mathvariant="normal">d</mi></mrow><msub><mi>f</mi><mn>2</mn></msub></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{array}{l}
-G_{\mathrm{NLI}}^{\operatorname{inc}}(f)=\frac{16}{27} \gamma^{2} L_{\mathrm{eff}}^{2} N_{s} \\
-\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} G_{\mathrm{WDM}}\left(f_{1}\right) G_{\mathrm{WDM}}\left(f_{2}\right) G_{\mathrm{WDM}}\left(f_{1}+f_{2}-f\right) \\
-\rho\left(f_{1}, f_{2}, f\right) \mathrm{d} f_{1} \mathrm{~d} f_{2}
-\end{array}
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.6785510000000006em;vertical-align:-1.5892755em;"></span><span class="mord"><span class="mtable"><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.0892755000000003em;"><span style="top:-4.2441675000000005em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.830502em;"><span style="top:-2.424669em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">N</span><span class="mord mathrm mtight">L</span><span class="mord mathrm mtight">I</span></span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">n</span><span class="mord mathrm mtight">c</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.275331em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">7</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">6</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-2.4168920000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">e</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span><span class="mord mathrm mtight" style="margin-right:0.07778em;">f</span></span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2831079999999999em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.0248755000000003em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8592920000000001em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3.2579000000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.41415100000000005em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8592920000000001em;"><span style="top:-2.34418em;margin-left:-0.19445em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">∞</span></span></span></span><span style="top:-3.2579000000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.41415100000000005em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">W</span><span class="mord mathrm mtight">D</span><span class="mord mathrm mtight">M</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">W</span><span class="mord mathrm mtight">D</span><span class="mord mathrm mtight">M</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">G</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">W</span><span class="mord mathrm mtight">D</span><span class="mord mathrm mtight">M</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span><span style="top:-1.7707245em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathrm">d</span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mspace nobreak"> </span><span class="mord mathrm">d</span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5892755em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span></span></span></span></span></span></span></p>
-<p>In essence, the IGN-model can be expected to practically coincide with the GN-model for systems with a large number of channels, that make use of a substantial part of the C-band.<br>
-The difference between OSNR and SNR.<br>
-There are still approximated closed-form GN formalution.</p>
-<h2 id="nyquist-wdm">Nyquist WDM</h2>
-<p>通过频谱压缩的方式使信号的频谱宽度等于信号的宽度，从而达到了频谱极限。发送端将单个子载波通过数字滤波或者光学滤波方式将信号在频率内整形为近似矩阵，因此在频域内的多个子载波可以以无间隔的方式并行传输。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[阅读]]></title>
-        <id>https://cubewatermelon.github.io/post/yue-du/</id>
-        <link href="https://cubewatermelon.github.io/post/yue-du/">
-        </link>
-        <updated>2021-02-06T14:36:37.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="加西亚马尔克斯">加西亚·马尔克斯</h2>
-<h3 id="霍乱时期的爱情">《霍乱时期的爱情》</h3>
-<p>在他背后，就在她的耳朵跟前响起了一个声音，只有她一个人才能在嘈杂的人声中分辨得清的声音：<br>
-“对于戴王冠的仙女来说，这里可不是什么好地方。”<br>
-她回过头来一看，在离自己的眼睛两巴掌远的地方，看见了两只冷若冰霜的眼睛，一张苍白的脸，两片因胆怯而咬紧了的嘴唇，就跟那天在望大弥撒时他第一次和她近在咫尺的情况一模一样，有所不同的只是热恋的激情变成了不满的严峻。一刹那间，她发觉自己上了个天大的当，惊讶的在心里自问，怎么可能让一个如此冷酷无情的魔鬼长年累月地占据了自己的芳心。她仅仅来得及想：“我的上帝哟，真是个可怜虫！”阿萨里勉强一笑，开口想说点什么，试图跟她一起走，但她把手一挥，把他从自己的生活里抹去了：<br>
-“不必了，”她说，“忘掉吧。”</p>
+
+                                </div>
+                    </article>
+                    <!--  -->
+                    
+                        <div class="next-post">
+                            <div class="next">下一篇</div>
+                            <a href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">
+                                <h3 class="post-title">
+                                    放大器、激光器等机理
+                                </h3>
+                            </a>
+                        </div>
+                        
+                            <div id="disqus_thread"></div>
+                            <div id="gitalk-container"></div>
+                </div>
+                <!-- middle -->
+                <div class="main-container-middle"></div>
+                <!-- right -->
+                <div id="sidebar" class="main-container-right">
+                    
+                        <!-- toc -->
+                        
+    <div class="toc-card i-card ">
+        <div class="toc-title i-card-title">目录</div>
+        <div class="toc-content">
+            <ul class="markdownIt-TOC">
+<li>
 <ul>
-<li>读<br>
-两个人的爱情故事，年轻时纯真地热恋，但女方选择了更为实际的道路，与一个地位显赫、家庭富有的医生结婚，度过了柴米油盐酱醋茶的琐碎生活。而男方生活失去了重心，过上了寻花觅柳的风流生活和不断追逐地位相平衡的一种生活。之后俩人年近八十了，女方的丈夫去世，两人间又掀起了热恋，并且是跨过了琐碎的点滴、老夫老妻的热恋。<br>
-爱与性的探讨，文字之中无限的可能性。需要细腻的心思才能体味。<br>
-马尔克斯以巧妙的语言叙述出人心的感受，并且有魔幻现实主义色彩（当然这部应该是较为写实的），令我着迷。</li>
-</ul>
-<h3 id="一桩事先张扬的凶杀案">《一桩事先张扬的凶杀案》</h3>
-<p>“圣地亚哥·纳萨尔被杀的那一天，清晨五点半就起了床，去迎候主教乘坐的船。”<br>
-圣地亚哥·纳萨尔被杀死，却依然捧着自己的肠子内脏绕了一圈回了家，摔倒了还会抖落内脏上的尘土，甚至还和路上的人打了招呼。<br>
-他只描述奇迹，却不肯说谁是圣徒。<br>
-给我一个偏见，我可以撬动整个地球。<br>
-最后几秒钟死者的母亲关上的死者逃生的前门，维卡里奥两兄弟竭力地希望有人能阻止他们行凶。<br>
-马尔克斯强大的叙事能力，在多个时间段叙述一件事情，互为补充。</p>
-<h2 id="川端康成">川端康成</h2>
-<h3 id="古都">古都</h3>
-<h3 id="心流">心流</h3>
-<p>你感觉自己完完全全在为这件事情本身而努力，就连自身也都因此显得很遥远。时光飞逝。你觉得自己的每一个动作、想法都如行云流水一般发生、发展。你觉得自己全神贯注，所有的能力被发挥到极致。<br>
-自己的技巧水平要与所面临挑战的难度相匹配，要有较为明确的目标。要使自己处在一个尽量舒服的环境里，清除杂念，深呼吸、冥想。有使自己兴奋的反馈。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Acadmic English]]></title>
-        <id>https://cubewatermelon.github.io/post/xue-zhu-ying-yu/</id>
-        <link href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/">
-        </link>
-        <updated>2021-01-28T13:55:38.000Z</updated>
-        <content type="html"><![CDATA[<p>Reading, writing, listening and speaking are all important.</p>
-<h2 id="style-lessons-in-clarity-and-grace">Style: lessons in clarity and grace</h2>
-<h3 id="6-emphasis">6 Emphasis</h3>
-<p>If you consistently write sentences whose subjects/topics name a few central characters and join them to strong verbs, you will likely get the rest of the sentence right, and in the process create a passage that is both cohesive and coherent.<br>
-The general principle is to carry the reader <strong>from simplicity to complexity</strong>.<br>
-The technical terms should be stated explicitly, and appear at the ends of their sentences.</p>
-<blockquote>
-<p>Just as we look at the first few words of a sentence for point of view, we look to the last few words for emphasis. You can revise a sentence to emphasize particular words that you want readers to hear stressed and thereby note as particularly significant.</p>
-</blockquote>
-<p><em>Global warming could raise sea levels to a point where much of the world's low-lying coastal areas would disappear, according to most atmospheric scientists.</em><br>
-🚩<em>According to most atmospheric scientists, global warming could raise sea levels to a point where much of the world's low-lying coastal areas would disappear.</em></p>
-<blockquote>
-<p>You can easily check whether you have stressed the right words by reading your sentences aloud: As you speak the last few words, raise your voice and tap the table with your fingers. If you’ve stressed the wrong words, your voice and table thumping will feel wrong:<br>
-<em>It is sometimes possible to represent a complex idea in a simple sentence, but more often you cannot represent it in that kind of sentence.</em><br>
-If you've stressed the right words, your voice and table thumping will feel right:<br>
-🚩<em>It is sometimes possible to represent a complex idea in a simple sentence, but more OFten you can NOT.</em></p>
-</blockquote>
-<p>Some editors discourage all there is/there are constructions, but using them lets you shift a subject to the right to emphasize it. Experienced writers commonly begin a paragraph with there to introduce new topics and concepts that they develop in sentences that follow.<br>
-<em>There are <strong>several syntactic devices</strong> that let you manage where in a sentence you locate units of new information.</em></p>
-<p>A passive verb lets you flip a subject and object.<br>
-<em>Some claim that our genes influence active aspects of behavior that we think are learned. Our genes, for example, seem to determine . . .</em><br>
-🚩<em>Some claim that aspects of behavior that we think are learned are in fact influenced passive by our genes. Our genes, for example, seem to determine . . .</em></p>
-<p>That passage now “hangs together” not for just one reason, but for three:</p>
+<li>
 <ul>
-<li>Its topics consistently focus on physicians and diagnosis.</li>
-<li>Running through it are strings of words that focus on the themes of (1) tests, (2) mental conditions, and (3) a new problem.</li>
-<li>And no less important, the opening sentence helps us notice those themes by emphasizing them at its end.<br>
-<em>In recent years, researchers have made great strides in the early and accurate diagnosis of Alzheimer's disease, but those diagnoses have raised a new problem about informing those most at risk who show no symptoms of it. Not too long ago, when a physician examined an older patient who seemed out of touch with reality, she had to guess whether that person had Alzheimer's or was only senile. In the past few years, however, physicians have been able to use new and more reliable tests focusing on genetic clues. But in the accuracy of these new tests lies the risk of another kind of human tragedy: physicians may be able to predict Alzheimer's long before its overt appearance, but such an early diagnosis could ps ychologically devastate an apparently healthy person.</em></li>
+<li><a href="#nlse">NLSE</a></li>
+<li><a href="#ssfm">SSFM</a></li>
+<li><a href="#dbp">DBP</a></li>
+<li><a href="#volterra%E7%BA%A7%E6%95%B0%E6%B3%95">Volterra级数法</a></li>
+<li><a href="#fan-q-zhou-g-gui-t-lu-c-lau-ap-advancing-theoretical-understanding-and-practical-performance-of-signal-processing-for-nonlinear-optical-communications-through-machine-learning-nature-communications-2020-jul-231111-1">Fan Q, Zhou G, Gui T, Lu C, Lau AP. Advancing theoretical understanding and practical performance of signal processing for nonlinear optical communications through machine learning. Nature Communications. 2020 Jul 23;11(1):1-1.</a></li>
 </ul>
-<h3 id="7-motivation">7 Motivation</h3>
-<p>Not only will we struggle through clotted sentences, but we’ll use our prior knowledge to fill in gaps, correct lapses in logic, and make sense of a tangled organization.</p>
-<ul>
-<li>Shared context.</li>
-<li>Problem [conditions + cost].</li>
-<li>Solution/Main Point/Claim.<br>
-Make sure the first word of the first sentence after the shared context is but, however, or some other word indicating that you will challenge that shared context. If you don’t explicitly signal the contrast between the shared context and the problem, readers may miss it.<br>
-Does the cost appropriately answer So what?<br>
-For a practical problem the key is to state its costs so clearly that readers will ask not So what? but What do we do?</li>
+</li>
 </ul>
-<h3 id="8-global-coherence">8 Global Coherence</h3>
-<p>Put the point sentence at the end of the short opening segment; make it the last sentence that your reader reads before starting the longer, more complex segment that follows.</p>
-<blockquote>
-<p>To write a document that readers will think is coherent, open every unit—section, subsection, and the whole—with a short, easily grasped introductory segment. At the end of that opening segment, put a sentence<br>
-that states both the point of the unit and the key concepts that follow.</p>
-</blockquote>
-<p>Readers are more likely to judge as clear any unit of writing that opens with a short segment that they can easily grasp and that frames the longer and more complex segment that follows.<br>
-In a simple sentence, that short, easily grasped segment is a subject/topic. Compare these two:<br>
-🚩<em>1a. Resistance in Nevada against its use as a waste disposal site has been heated.</em><br>
-<em>1b. Nevada has heatedly resisted its use as a waste disposal site.</em><br>
-<em>2b. Historians are reassessing Columbus' role in world history, because<br>
-they know more about pre-Columbian civilizations and how European colonization destroyed their societies by inflicting on them devastating diseases.</em><br>
-In (2b), the opening clause states the main point of the sentence, its most important claim: Historians are reassessing Columbus' role... That claim<br>
-is then supported by the longer and more complex clause that follows.</p>
-<h3 id="9-concision">9 Concision</h3>
-<p>You write more clearly when you match your characters and actions to your subjects and verbs, when you get the right characters into topics and the right words under stress, when you motivate readers with well-crafted introductions, and when you frame your paragraphs, sections, and documents to help readers grasp their global coherence.<br>
-<em>Imagine someone trying to learn the rules for playing the game of chess.</em><br>
-Learn implies trying, rules implies playing the game, chess is a game. So more concisely,<br>
-<em>Imagine learning the rules of chess.</em></p>
-<blockquote>
-<p>You need some metadiscourse in everything you write, especially metadiscourse that guides readers through your text, words such as first, second, therefore, on the other hand, and so on. You also need some metadiscourse that hedges your certainty, words such as perhaps, seems, could, and so on. The risk is in using too many.</p>
-</blockquote>
-<h3 id="10-shape">10 Shape</h3>
-<p>In this lesson, I focus on how to write sentences that are not only long and complex but also clear and shapely.</p>
-<blockquote>
-<p>Readers read most easily when you quickly get them to the subject of your main clause and then past that subject to its verb and object. Avoid long introductory phrases and clauses, long subjects, and interruptions between<br>
-subjects and verbs and between verbs and objects.</p>
-</blockquote>
-<ul>
-<li>Rule of Thumb 1: Get to the subject quickly.</li>
+</li>
 </ul>
-<p><em>Since most undergraduate students change their major fields of study at least once during their college careers, first-year students who are not certain about the program of studies they want to pursue should not load up their schedules to meet requirements for a particular program.</em><br>
-🚩<em>First-year students should not load up their schedules with requirements for a particular program if they are not certain about the program of studies they want to pursue, because most change their major fields of study at least once during their college careers.</em></p>
-<ul>
-<li>Rule of Thumb 2: Get to the verb and object quickly.</li>
-</ul>
-<p>🚩<em>In a long sentence, put <strong>at its end</strong> the newest and most important information that you want your reader to remember.</em><br>
-<em>Some scientists, because they write in a style that is impersonal and objective, do not easily communicate with laypeople.</em><br>
-🚩<em>Since some scientists write in a style that is impersonal and objective, they do not easily communicate with laypeople. This lack of communication damages . . .</em><br>
-<em>A company that focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs is likely to earn the loyalty of its employees.</em><br>
-🚩<em>A company is likely to earn the loyalty of its employees when it focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs.</em></p>
-<h3 id="example">Example</h3>
-<p><em>We also systematically <strong>benchmark</strong> methods of selecting relevant input for higher efficiency, achieving 4x gains in speed and memory, while retaining 92% of the results.</em><br>
-<em>We are benchmarking our performance against external criteria.</em><br>
-Promise: <em>a declaration or assurance that one will do a particular thing or that a particular thing will happen.</em><br>
-<em>Those principles are easy to state but hard to follow, because you have to inch your way through every sentence you write, cutting here, compressing there, and that's labor intensive.</em><br>
-<em>I can offer no principle that tells you when to replace a phrase with a word, much less give you the word.</em><br>
-<em>Now that we see what the sentence says, we can make it still more direct.</em><br>
-<em>But in boiling down that original paragraph to a quarter of its original length, I've bleached out its garrulous charm, a tradeoff that many readers would reject.</em></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[进击的巨人]]></title>
-        <id>https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/</id>
-        <link href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">
-        </link>
-        <updated>2021-01-28T06:01:01.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="进击的巨人">进击的巨人</h2>
-<p><strong>唯有不断前进</strong></p>
-<h3 id="自由">自由</h3>
-<p>肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加<em>自由</em>了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。<br>
-进击的巨人，或者艾伦的执念是拯救三笠、艾尔敏还有大家，他又该如何做呢。</p>
-<h2 id="永生之酒-baccaon">永生之酒 Baccaon！</h2>
-<p>精妙的叙事技巧，讲述了跨越两百年的不死者争斗，以及一场涉及多方势力的火车混战。</p>
-<h2 id="电锯人">电锯人</h2>
-<p>自由恶魔-藤本树</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Grand Theft Auto 5]]></title>
-        <id>https://cubewatermelon.github.io/post/man-tan/</id>
-        <link href="https://cubewatermelon.github.io/post/man-tan/">
-        </link>
-        <updated>2021-01-27T02:37:56.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="grand-theft-auto-5">Grand Theft Auto 5</h2>
-<p>GTA5轻松的游戏氛围让人容易打下去，即使脑子比较疲惫。开各种载具、打打杀杀，有拖车拉货也有跑车追逐，可以在酒馆里玩飞镖也可以精心筹划抢劫大型银行，可以疯狂杀戮、暗杀、坐着潜艇直升机入侵军事基地，还得在FIB的胁迫下恐怖袭击，在洛圣都无法无天也可以有正常的生活，游戏玩法十分丰富，在几乎与真实世界相同的洛圣都里，无所不能。<br>
-GTA5的故事模式记录了小富由街头小混混到成熟混混的成长，麦克的报应，老崔的，额，就是癫狂，还有老崔和麦克的所谓和解。老崔的癫狂，小富的义气活力，麦克的复杂，三人一狗满足了玩家几乎所有的犯罪幻想。小富由一个年轻的黑人街头混混逐步成长，他也给家里弄的干干净净；麦克陷于家庭的困境，沾花惹草的阿曼达，肥宅无用儿子，一心成名的女儿；老崔一心一意的“癫狂”，不在乎任何事情，和老年人谈恋爱，也有自己要坚守的兄弟原则。</p>
-<h2 id="what-remains-of-edith-finch">What remains of Edith Finch</h2>
-<p>交互式的电影，第九艺术的代表。Giant Sparrow.<br>
-每个故事都有其独特的玩法，演出十分精彩，然而许多人的去世玩下来感觉好多摸不着头脑（名字也根本记不住）。可能这就是被诅咒的死亡吧。<br>
-Molly:变成猫追逐鸟儿，变成老鹰狩猎兔子，变成鲨鱼捕食鱼儿，变成蛇杀死自己。好饿啊。<br>
-Calvin:荡秋千直到飞翔。<br>
-Barbara:漫画的视角体验芭芭拉的鬼屋惊魂。<br>
-Lewis:不断切鱼的精神病小子，左手想象，右手切鱼。王冠戴在头上，头落在地上。<br>
-Sam:和女儿狩猎鹿，却因为逞能被鹿撞下山崖。<br>
-Gus:在狂风中放风筝。<br>
-Gregory:在澡缸中戏水，在想象力的欢乐中去世。<br>
-Walter:因芭芭拉之死而终日在地下室度过，每天一罐桃子罐头。</p>
-<h2 id="red-dead-redemption-ii">Red Dead Redemption II</h2>
-<p>当我们把杰克“接”回来之后，我（阿瑟）和大家一起围在火堆旁，哈维尔弹着吉他，大家一起唱着歌，我知道我得写点什么了。荒野大镖客，令人沉浸的故事，有血有肉的时代环境，游戏艺术莫过如此。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://cubewatermelon.github.io/post/hello-gridea/</id>
-        <link href="https://cubewatermelon.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
-]]></content>
-    </entry>
-</feed>
+
+        </div>
+        <script>
+            function locateCatelogList() {
+                /*获取文章目录集合,可通过:header过滤器*/
+                var alis = $('.post-content :header');
+                /*获取侧边栏目录列表集合**/
+                var sidebar_alis = $('.markdownIt-TOC a');
+                /*获取滚动条到顶部的距离*/
+                var scroll_height = $(window).scrollTop();
+                for (var i = 0; i < alis.length; i++) {
+                    /*获取锚点集合中的元素分别到顶点的距离*/
+                    var a_height = $(alis[i]).offset().top;
+                    if (a_height < scroll_height) {
+                        /*高亮显示*/
+                        sidebar_alis.removeClass('on');
+                        $(sidebar_alis[i]).addClass('on');
+                    }
+                }
+            }
+            $(function() {
+                /*绑定滚动事件 */
+                $(window).bind('scroll', locateCatelogList);
+            });
+        </script>
+    </div>
+    
+                            
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://cubewatermelon.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+
+    </div>
+    <script>
+        $('#sidebar').stickySidebar({
+            topSpacing: 80,
+            // bottomSpacing: 60
+        });
+    </script>
+    
+        
+            <script>
+    window.onload = function() {
+        var gitalk = new Gitalk({
+            clientID: '161ae5993f4fc0ce26ed',
+            clientSecret: '45a806de9592a1a20339b7013e4a4382da2766e2',
+            repo: 'Blog-comments',
+            owner: 'Firo',
+            admin: ['Firo'],
+            id: (location.pathname).substring(0, 49), // Ensure uniqueness and length less than 50
+            distractionFreeMode: false // Facebook-like distraction free mode
+        })
+
+        gitalk.render('gitalk-container')
+    }
+</script>
+                
+
+                    
+                                
+</body>
+
+</html>

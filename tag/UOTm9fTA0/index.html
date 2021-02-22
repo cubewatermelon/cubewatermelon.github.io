@@ -7,7 +7,7 @@
 <title>
     科研日常 | Firo&#39;s Daily
 </title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1612334482301">
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1613961574869">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://cubewatermelon.github.io">
-                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1612334482301" alt="">
+                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1613961574869" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -104,6 +104,201 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">
+                        SSFM与DBP
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2021-02-21</time>
+                    
+                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
+                            i-tag-info">
+            #科研日常
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            NLSE
+当光信号的脉宽范围为10ns ~10 fs的范围内时，这样的光脉冲在光纤传输过程中，色散和非线性效应会同时影响其频谱。当脉冲宽度T0T_0T0​ &amp;gt; 5ps的时候，拉曼散射和自陡效应相比克尔效应可以忽略，结合麦克斯韦方程组、电磁波波动理论以及光纤的电极化特性，忽略三阶色散及其他效应，在一定近似条件下可以推导得出光矢量在光纤中传输的非线性薛定谔方程（NLSE）
+∂E∂z+α2E+i2β2∂2E∂t2−iγ∣E∣2E=0\frac{\partial E}{\partial z}+\frac{\alpha}{2} E+\frac{i}{2} \beta_{2} \frac{\partial^{2} E}{\partial t^{2}}-i \gamma|E|^{2} E=0
+∂z∂E​+2α​E+2i​β2​∂t2∂2E​−iγ∣E∣2E=0
+其中二阶色散常数和非线性系数分别为
+β2=λ022πcD\beta_{2}=\frac{\lambda_{0}^{2}}{2 \pi c} D
+β2​=2πcλ02​​D
+γ=2πn2λ0Aeff\gamma=\frac{2 \pi n_{2}}{\lambda_{0} A_{e f f}}
+γ=λ0​Aeff​2πn2​​
+其中λ0\lambda_0λ0​为传输的光信号的中心波长，D为色散系数，单位为 ps / (ns · km)；n2n_2n2​为非线性折射率，AeffA_effAe​ff为光纤有效面积，NLSE可变形为
+∂E(z,t)∂z=(D^+N^)E(z,t)\frac{\partial E(z, t)}{\partial z}=(\hat{D}+\hat{N}) E(z, t)
+∂z∂E(z,t)​=(D^+N^)E(z,t)
+D^=−α2−i2β2∂2∂t2\hat{D}=-\frac{\alpha}{2}-\frac{i}{2} \beta_{2} \frac{\partial^{2}}{\partial t^{2}}
+D^=−2α​−2i​β2​∂t2∂2​
+N^=iγ∣E(z,t)∣2\hat{N}=i \gamma|E(z, t)|^{2}
+N^=iγ∣E(z,t)∣2
+表明信号光在传输过程中将同时受到线性和非线性的效应，其中的线性效应主要引起衰减和色散，非线性效应主要引起相位旋转，并且相位旋转的大小和信号光功率成正比。
+色散长度和非线性长度为
+LD=T02∣β2∣L_{D}=\frac{T_{0}^{2}}{\left|\beta_{2}\right|}
+LD​=∣β2​∣T02​​
+LNL=1γP0L_{NL}=\frac{1}{\gamma P_{0}}
+LNL​=γP0​1​
+当光纤长度远小于色散和非线性长度时，此两效应才将同时起作用。
+SSFM
+当信号E(z,t)E(z,t)E(z,t)从zzz传输到z+Δzz+\Delta zz+Δz时，可以用解析的方法对上式求解，即
+dE(z,t)dz=(D^+N^)E(z,t)⇔1E(z,t)dE(z,t)=(D^+N^)dz\frac{d E(z, t)}{d z}=(\hat{D}+\hat{N}) E(z, t) \Leftrightarrow \frac{1}{E(z, t)} d E(z, t)=(\hat{D}+\hat{N}) d z
+dzdE(z,t)​=(D^+N^)E(z,t)⇔E(z,t)1​dE(z,t)=(D^+N^)dz
+两边积分，当Δz\Delta zΔz较小时，可认为线性算子与非线性算子是相互独立的，S-SSFM假设非线性相位旋转（非线性效应的本质是信号光在传输过程中任意时刻都会受到一个和瞬时功率成正比的相位旋转）分布在整个Δz\Delta zΔz中，前后分别计算色散效应（色散效应本质上一种码间干扰（ISI），其效果是使相邻的几个符号之间发生线性的叠加）其公式近似为
+E(z+Δz,t)≈exp⁡(Δz2D^)exp⁡(∫zz+ΔzN^(z′)dz′)exp⁡(Δz2D^)E(z,t)E(z+\Delta z, t) \approx \exp \left(\frac{\Delta z}{2} \hat{D}\right) \exp \left(\int_{z}^{z+\Delta z} \hat{N}\left(z^{\prime}\right) d z^{\prime}\right) \exp \left(\frac{\Delta z}{2} \hat{D}\right) E(z, t)
+E(z+Δz,t)≈exp(2Δz​D^)exp(∫zz+Δz​N^(z′)dz′)exp(2Δz​D^)E(z,t)
+非线性算子可用梯形法进行近似。线性算子D^\hat{D}D^由于含有对时间的二阶偏导数项，可以通过两次傅立叶变换成为线性运算。实际操作中，先将时域信号作傅立叶变换到频域，与F[D^]F[\hat{D}]F[D^]相乘之后再将乘积作傅立叶逆变换，再在时域进行后续的N^\hat{N}N^算子的运算（需要迭代）。这样就使得时域复杂的偏微分运算得以简化，还可以利用快速傅立叶变换（FFT）对运算进一步加速。
+DBP
+为了补偿色散非线性效应带来的损伤，BP 算法从光路可逆的角度，构建了一段“虚拟光纤”，这段虚拟光纤的长度和实际光纤相等，其衰减以及色散非线性相关的各项参数都和信号光经过的实际光纤相反，即(−α,−β2,−β3,−γ)(-\alpha, -\beta_2, -\beta_3, -\gamma)(−α,−β2​,−β3​,−γ)，因此将经过传输后的信号按照Manakov方程用SSFM 算法在虚拟光纤中传输一次之后，理论上可以完全抵消实际光纤的色散非线性效应，从而补偿信号受到的损伤。实际中每个span划分的步长数一般不超过4（一般取2），也正因为反正传输和正向传输时步长的划分是不对等的，使得BP算法无法完全消除色散非线性效应的损伤。除此之外，数据的采样率（一般都采用2 倍采样）、具体使用的SSFM算法等等也会对补偿效果造成很大的影响。
+经BP 算法恢复后的信号已经达到了前向纠错（FEC）的最低要求。算法的原理决定了BP 只能是在获取了全部传输符号后进行离线的后处理，而不能进行实时的、在线的补偿。
+Volterra级数法
+Volterra级数是一种类似于Taylor级数的泛函级数，和全部时刻的输入都相关，其核（kernel）具有清晰的物理意义。这种补偿方案一般用色散补偿光纤（DCF）补偿色散，而用Volterra 级数滤波器来补偿非线性效应。
+[1]杨杰. 高频谱效率相干检测光通信系统仿真与色散非线性补偿算法的性能和应用研究[D].北京邮电大学,2014. （主要）
+[2]李敏良. 基于高阶调制格式的相干光通信系统中色散与非线性补偿算法的研究[D].北京邮电大学,2014.
+[3]与相关程序结合进一步加深理解。
+Fan Q, Zhou G, Gui T, Lu C, Lau AP. Advancing theoretical understanding and practical performance of signal processing for nonlinear optical communications through machine learning. Nature Communications. 2020 Jul 23;11(1):1-1.
+We first demonstrate performance gain in realistic experimental settings using the deep neural network-based digital backpropagation (DNN-based DBP) architecture. We further extended DNN-based DBP to PDM and WDM systems with dynamic polarization-state estimation. In addition, the optimized DNN based DBP configurations reveal subtle mathematical structures that guide us to analyze the interplay between CD, nonlinearity, and noise.
+Why is the input data structured like this? For the DBP methods？It is hard for me to read.
+? The results show that 121 taps and 128 samples per input, i.e., 512 total input vectors are optimal settings across most experimental setups studied in our work.
+? The whole batch of 6 + 16 + 6 = 28 inputs are processed together, while the output of the middle 16 vectors is used to calculate the cost function and update the parameters of the neural network.
+
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">
+                        放大器、激光器等机理
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2021-02-20</time>
+                    
+                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
+                            i-tag-warning">
+            #科研日常
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            AmpEDFA_Dynamic
+sampled signals
+parameterized signals
+EDFA基础知识
+EDFA能级跃迁数学模型
+基本知识
+980nm作为泵浦波长，具有更小的噪声系数和更高的泵浦效率。1480nm泵浦可以获得更高的泵浦功率。
+对应一定的泵浦功率，EDF有一最大增益长度。
+饱和输出功率，定义为增益相对于小信号增益降低3dB时的输出信号功率。小信号增益是线性的，随输入光功率增大，EDFA进入增益饱和区。
+对于EDFA，放大的自发辐射是噪声的主要来源。NF具有3dB的量子极限。
+密集波分复用(DWDM)光通信系统和未来的全光通信系统对EDFA 的性能要求越来越高，与第一代 EDFA 主要要求功率放大不同，下一代 EDFA 的要求更加全面，其功能也更加完善。这些主要表现在具有克服瞬态效应、宽带及其平坦、在线监控、低功耗、噪声系在数低、输出功率大、低成本等特点。
+瞬态效应
+工作在实际通信线路上的EDFA,在输入光功率突然变大/变小的时刻,如果泵浦输出功率不能及时跟随输入变化而变小/变大,则掺铒光纤( Erbium Doped Fibe,EDF)中反转离子数仍保持在变化前的水平,会导致剩余通道的增益突然变小/变大,这种增益跃变经多级EDFA级联而积累,会引起线路阻塞或产生误码。如果输入光功率迅速增大,则产生时的光浪涌,经级联放大后,峰值功率可达数瓦,可能损坏通信设备的光/电(O/E)转换器及光连接器端面。
+激光器基础知识
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/">
+                        光纤通信系统GN模型
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2021-02-16</time>
+                    
+                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
+                            i-tag-banana">
+            #科研日常
+        </a>
+                        
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            非线性光纤光学
+光纤模式
+纤芯和包层折射率分别为n1n_1n1​和n2n_2n2​，归一化频率定义为
+V=k0a(n12−n22)1/2V = k_{0} a(n_{1}^{2} - n_{2}^{2}  )^{1/2} 
+V=k0​a(n12​−n22​)1/2
+式中k0=2π/λk_0=2\pi/\lambdak0​=2π/λ，a为纤芯半径，λ\lambdaλ为光波波长。若V &amp;lt; 2.405则为单模。
+光纤损耗
+
+主要因素是材料吸收（如OH−OH^-OH−）和瑞利散射。瑞利散射是由于制造过程中沉积到熔石英中的随机密度变化引起的，导致了折射率本身的起伏，使光向各个方向散射，主要作用在短波长区。
+光纤色散
+当一束电磁波与电介质的束缚电子相互作用时，介质的响应通常与光波频率有关，这种特性称为色散，它表明折射率n(ω)n(\omega)n(ω)对频率的依赖关系。
+
+偏振膜色散
+单模光纤可以维持沿两正交方向偏振的简并模。在光纤的形状为严格的圆柱形、材料为各向同性的理想条件
+下，x  方向偏振态的模式不会与干交的 y 方向偏振态的模耦合。然而，由于其实际形状略偏离圆柱形以及材料各向异性的彶小起伏，破坏了模式简并，导致了两个偏振态的混合。在数学上，模传输常数β\betaβ 对于x , y 方向偏振模稍有不同，光纤的这个性质称为模式双折射。随机的模式双折射导致了无归偏振光。
+非线性效应
+光纤中的最低阶非线性效应起源于三阶电极化率，导致折射率与光强有关（光幅度的平方）。
+自相位调制SPM
+光场在光纤内传输时光场本身引起的附加的非线性相移。
+交叉相位调整XPM
+XPM指的是由不同波长、传输方向或偏振态的脉冲共同传输时，一种光场引起的另一种光场的非线性相移。
+受激拉曼散射SRS
+一幅简单的量子力学图像对 SRS和 SBS 都是适用的。一个人射场的光子（通常称为泵浦）的湮灭，产生了一个下移斯托克斯频率的光子和保持能量与动量守恒的另一个具有恰当能量与动量的声子。
+四波混频FWM
+参量过程起源于光场作用下介质中束缚电子的非线性响应。
+特定的频率和折射率，以满足相位匹配条件。常见的有产生三次谐波，或者是对称的上下边带。
+非线性薛定谔方程推导
+麦克斯韦方程组到波动方程到亥姆霍兹方程到非线性薛定谔方程
+电位移矢量 感应电极化强度 线性极化率 三阶极化率
+GN模型
+假设发射信号为高斯分布
+单span非线性噪声功率谱密度解析式
+对发射端的功率谱密度进行一定形式的积分，就可以得到非线性噪声的功率谱密度，对于今后衡量非线性噪声的大小以及信道均衡都是有很大意义的。
+Poggiolini P, Bosco G, Carena A, Curri V, Jiang Y, Forghieri F. The GN-model of fiber non-linear propagation and its applications. Journal of lightwave technology. 2013 Dec 17;32(4):694-721.
+In networking, a greenfield deployment is the installation and configuration of a network where none existed before, for example in a new office. A brownfield deployment, in contrast, is an upgrade or addition to an existing network and uses some legacy components.
+THE advent of coherent-detection systems supported by digital-signal-processing (DSP) has made it possible to carry out electronic fiber chromatic-dispersion (CD) compensation. This in turn has permitted to avoid optical dispersion compensation, or dispersion management (DM), thus allowing the exploitation of the so-called **&#39;uncompensated&#39; transmission (UT) **technique.
+The GN-model reference formula (GNRF) provides GNLI(f)G_{\mathrm{NLI}}(f)GNLI​(f), that is, the PSD of NLI at the end of the link.
+The NLI PSD generated at a frequency f, that is GNLI(f)G_{\mathrm{NLI}}(f)GNLI​(f), is the integrated result of all the &#39;infinitesimal&#39; non-degenerate FWM products occurring among any three spectral components of the transmitted signal, located at f1, f2 and f3 = (f1 + f2 − f).
+
+Whether the non-linear phenomena taxonomy formerly used for DM systems, such as SPM, XPM, and XPolM, can still be related to UT systems as represented through the GN-model.A possible alternative taxonomy was proposed, consisting of three categories: self-channel interference (SCI), cross-channel interference (XCI) and multi-channel interference (MCI).
+We introduce here an alternative model which coincides with the GN-model over each single span but makes the further approximation of completely neglecting coherent interference among NLI generated in different spans. Assuming a transparent and homogeneous link, the IGNRF greatly simplifies to:
+GNLIinc⁡(f)=1627γ2Leff2Ns∫−∞∞∫−∞∞GWDM(f1)GWDM(f2)GWDM(f1+f2−f)ρ(f1,f2,f)df1 df2\begin{array}{l}
+G_{\mathrm{NLI}}^{\operatorname{inc}}(f)=\frac{16}{27} \gamma^{2} L_{\mathrm{eff}}^{2} N_{s} \\
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} G_{\mathrm{WDM}}\left(f_{1}\right) G_{\mathrm{WDM}}\left(f_{2}\right) G_{\mathrm{WDM}}\left(f_{1}+f_{2}-f\right) \\
+\rho\left(f_{1}, f_{2}, f\right) \mathrm{d} f_{1} \mathrm{~d} f_{2}
+\end{array}
+GNLIinc​(f)=2716​γ2Leff2​Ns​∫−∞∞​∫−∞∞​GWDM​(f1​)GWDM​(f2​)GWDM​(f1​+f2​−f)ρ(f1​,f2​,f)df1​ df2​​
+In essence, the IGN-model can be expected to practically coincide with the GN-model for systems with a large number of channels, that make use of a substantial part of the C-band.
+The difference between OSNR and SNR.
+There are still approximated closed-form GN formalution.
+Nyquist WDM
+通过频谱压缩的方式使信号的频谱宽度等于信号的宽度，从而达到了频谱极限。发送端将单个子载波通过数字滤波或者光学滤波方式将信号在频率内整形为近似矩阵，因此在频域内的多个子载波可以以无间隔的方式并行传输。
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://cubewatermelon.github.io/post/zhou-zong-jie/">
                         周总结
                     </a>
@@ -112,7 +307,7 @@
                     <time class="post-time">2021-02-03</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-primary">
+                            i-tag-">
             #科研日常
         </a>
                         
@@ -130,6 +325,21 @@ Remi：使用的话大致理解下那两篇综述，然后进VPI看看DSP的demo
 我记得那个仿真模块和我这次阿里做的差不多，但是规模很小，一组收发机就可以了，其他都一样，就是要注意解偏振那块的参考矩阵要重新根据仿真的带宽生成。
 QuaDRiGa v2.4 matlab光通信仿真
 
+
+06/02
+
+论文投稿，要快，估计还得再两家。学习LaTeX。
+remi博士，学习GN模型、DSP以及VPI等等。
+激光器、放大器方向非线性方程与神经网络结合。
+光纤通信系统，看书。
+学习强化学习。图神经网络。（入门）
+
+17/02
+
+dsp算法 光通信理论，配合程序
+光通信项目绑定 港理工：C+L EDFA配置实现平坦功率；提高GN模型准确率，由于链路参数不准确；准确、高效的C+L波段仿真系统（别的方式：深度学习？）
+与PINN结合的光通信理论验证；调研（下周初步，一个月内完成） 激光器（PDE飞秒较难，尝试PINN） 放大器（EDFA 拉曼的PDE） 高非线性领域（全光信号处理与深度学习的结合 相敏参量放大器PSA）
+与其他人的进度有所交叉
 
 
                                         </div>
@@ -149,7 +359,7 @@ QuaDRiGa v2.4 matlab光通信仿真
                     <time class="post-time">2021-01-28</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-other_1">
+                            i-tag-error">
             #科研日常
         </a>
                         
@@ -162,7 +372,8 @@ QuaDRiGa v2.4 matlab光通信仿真
                             <div class="post-content">
                                 
                                         <div class="post-content-content">
-                                            Style: lessons in clarity and grace
+                                            Reading, writing, listening and speaking are all important.
+Style: lessons in clarity and grace
 6 Emphasis
 If you consistently write sentences whose subjects/topics name a few central characters and join them to strong verbs, you will likely get the rest of the sentence right, and in the process create a passage that is both cohesive and coherent.
 The general principle is to carry the reader from simplicity to complexity.
@@ -178,9 +389,77 @@ It is sometimes possible to represent a complex idea in a simple sentence, but m
 If you&#39;ve stressed the right words, your voice and table thumping will feel right:
 🚩It is sometimes possible to represent a complex idea in a simple sentence, but more OFten you can NOT.
 
+Some editors discourage all there is/there are constructions, but using them lets you shift a subject to the right to emphasize it. Experienced writers commonly begin a paragraph with there to introduce new topics and concepts that they develop in sentences that follow.
+There are several syntactic devices that let you manage where in a sentence you locate units of new information.
+A passive verb lets you flip a subject and object.
+Some claim that our genes influence active aspects of behavior that we think are learned. Our genes, for example, seem to determine . . .
+🚩Some claim that aspects of behavior that we think are learned are in fact influenced passive by our genes. Our genes, for example, seem to determine . . .
+That passage now “hangs together” not for just one reason, but for three:
+
+Its topics consistently focus on physicians and diagnosis.
+Running through it are strings of words that focus on the themes of (1) tests, (2) mental conditions, and (3) a new problem.
+And no less important, the opening sentence helps us notice those themes by emphasizing them at its end.
+In recent years, researchers have made great strides in the early and accurate diagnosis of Alzheimer&#39;s disease, but those diagnoses have raised a new problem about informing those most at risk who show no symptoms of it. Not too long ago, when a physician examined an older patient who seemed out of touch with reality, she had to guess whether that person had Alzheimer&#39;s or was only senile. In the past few years, however, physicians have been able to use new and more reliable tests focusing on genetic clues. But in the accuracy of these new tests lies the risk of another kind of human tragedy: physicians may be able to predict Alzheimer&#39;s long before its overt appearance, but such an early diagnosis could ps ychologically devastate an apparently healthy person.
+
+7 Motivation
+Not only will we struggle through clotted sentences, but we’ll use our prior knowledge to fill in gaps, correct lapses in logic, and make sense of a tangled organization.
+
+Shared context.
+Problem [conditions + cost].
+Solution/Main Point/Claim.
+Make sure the first word of the first sentence after the shared context is but, however, or some other word indicating that you will challenge that shared context. If you don’t explicitly signal the contrast between the shared context and the problem, readers may miss it.
+Does the cost appropriately answer So what?
+For a practical problem the key is to state its costs so clearly that readers will ask not So what? but What do we do?
+
+8 Global Coherence
+Put the point sentence at the end of the short opening segment; make it the last sentence that your reader reads before starting the longer, more complex segment that follows.
+
+To write a document that readers will think is coherent, open every unit—section, subsection, and the whole—with a short, easily grasped introductory segment. At the end of that opening segment, put a sentence
+that states both the point of the unit and the key concepts that follow.
+
+Readers are more likely to judge as clear any unit of writing that opens with a short segment that they can easily grasp and that frames the longer and more complex segment that follows.
+In a simple sentence, that short, easily grasped segment is a subject/topic. Compare these two:
+🚩1a. Resistance in Nevada against its use as a waste disposal site has been heated.
+1b. Nevada has heatedly resisted its use as a waste disposal site.
+2b. Historians are reassessing Columbus&#39; role in world history, because
+they know more about pre-Columbian civilizations and how European colonization destroyed their societies by inflicting on them devastating diseases.
+In (2b), the opening clause states the main point of the sentence, its most important claim: Historians are reassessing Columbus&#39; role... That claim
+is then supported by the longer and more complex clause that follows.
+9 Concision
+You write more clearly when you match your characters and actions to your subjects and verbs, when you get the right characters into topics and the right words under stress, when you motivate readers with well-crafted introductions, and when you frame your paragraphs, sections, and documents to help readers grasp their global coherence.
+Imagine someone trying to learn the rules for playing the game of chess.
+Learn implies trying, rules implies playing the game, chess is a game. So more concisely,
+Imagine learning the rules of chess.
+
+You need some metadiscourse in everything you write, especially metadiscourse that guides readers through your text, words such as first, second, therefore, on the other hand, and so on. You also need some metadiscourse that hedges your certainty, words such as perhaps, seems, could, and so on. The risk is in using too many.
+
+10 Shape
+In this lesson, I focus on how to write sentences that are not only long and complex but also clear and shapely.
+
+Readers read most easily when you quickly get them to the subject of your main clause and then past that subject to its verb and object. Avoid long introductory phrases and clauses, long subjects, and interruptions between
+subjects and verbs and between verbs and objects.
+
+
+Rule of Thumb 1: Get to the subject quickly.
+
+Since most undergraduate students change their major fields of study at least once during their college careers, first-year students who are not certain about the program of studies they want to pursue should not load up their schedules to meet requirements for a particular program.
+🚩First-year students should not load up their schedules with requirements for a particular program if they are not certain about the program of studies they want to pursue, because most change their major fields of study at least once during their college careers.
+
+Rule of Thumb 2: Get to the verb and object quickly.
+
+🚩In a long sentence, put at its end the newest and most important information that you want your reader to remember.
+Some scientists, because they write in a style that is impersonal and objective, do not easily communicate with laypeople.
+🚩Since some scientists write in a style that is impersonal and objective, they do not easily communicate with laypeople. This lack of communication damages . . .
+A company that focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs is likely to earn the loyalty of its employees.
+🚩A company is likely to earn the loyalty of its employees when it focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs.
 Example
 We also systematically benchmark methods of selecting relevant input for higher efficiency, achieving 4x gains in speed and memory, while retaining 92% of the results.
 We are benchmarking our performance against external criteria.
+Promise: a declaration or assurance that one will do a particular thing or that a particular thing will happen.
+Those principles are easy to state but hard to follow, because you have to inch your way through every sentence you write, cutting here, compressing there, and that&#39;s labor intensive.
+I can offer no principle that tells you when to replace a phrase with a word, much less give you the word.
+Now that we see what the sentence says, we can make it still more direct.
+But in boiling down that original paragraph to a quarter of its original length, I&#39;ve bleached out its garrulous charm, a tradeoff that many readers would reject.
 
                                         </div>
                                         
@@ -200,7 +479,7 @@ We are benchmarking our performance against external criteria.
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1612334482301)">
+        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1613961574869)">
         </div>
         <h1 class="id_card-title">
             Firo&#39;s Daily
