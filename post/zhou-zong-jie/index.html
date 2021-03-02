@@ -7,7 +7,7 @@
 <title>
     周总结 | Firo&#39;s Daily
 </title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1613961574869">
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1614679004368">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -35,7 +35,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://cubewatermelon.github.io">
-                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1613961574869" alt="">
+                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1614679004368" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -112,37 +112,45 @@
                             <time class="post-time">2021-02-03</time>
                             
                                 <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-">
+                            i-tag-banana">
                             #科研日常
                         </a>
                                 
                         </div>
                         
                                 <div class="post-content">
-                                    <h3 id="0302">03/02</h3>
+                                    <h3 id="before">before</h3>
 <ul>
-<li>数理解析模型：放大器（产品结构较为多变，具有较高准确率的普遍模型难以建立）；激光器（飞秒）。</li>
+<li>About the PINNs program<br>
+So only 50 initial data is needed in the training (the input wave), how the TF perform gradient calculation.<br>
+Whats the meaning of H in the neural_net def?<br>
+Why there are two stages in the training process? The second is the ScipyOptimizerInterface. The ‘fetches’ parameter in optimizer.minimize() is very strange.<br>
+The construction method of f_u and f_v.</li>
+</ul>
+<h3 id="0302">03/02</h3>
+<ul>
 <li>深度学习方法：强化学习、图神经网络、集成学习（Stacking方法）、Meta Learning、孪生网络</li>
-<li>Remi：使用的话大致理解下那两篇综述，然后进VPI看看DSP的demo了解下流程。从零编码还是比较吃力的，这个之后再看。DSP和ML很像都很需要实践和训练还有数据。<br>
-我记得那个仿真模块和我这次阿里做的差不多，但是规模很小，一组收发机就可以了，其他都一样，就是要注意解偏振那块的参考矩阵要重新根据仿真的带宽生成。</li>
 <li>QuaDRiGa v2.4 matlab光通信仿真<br>
 <img src="https://cubewatermelon.github.io/post-images/1612333823889.png" alt="" loading="lazy"></li>
 </ul>
-<h3 id="0602">06/02</h3>
-<ul>
-<li>论文投稿，要快，估计还得再两家。学习LaTeX。</li>
-<li>remi博士，学习GN模型、DSP以及VPI等等。</li>
-<li>激光器、放大器方向非线性方程与神经网络结合。</li>
-<li>光纤通信系统，看书。</li>
-<li>学习强化学习。图神经网络。（入门）</li>
-</ul>
 <h3 id="1702">17/02</h3>
 <ul>
-<li>dsp算法 光通信理论，配合程序</li>
 <li>光通信项目绑定 港理工：C+L EDFA配置实现平坦功率；提高GN模型准确率，由于链路参数不准确；准确、高效的C+L波段仿真系统（别的方式：深度学习？）</li>
 <li>与PINN结合的光通信理论验证；调研（下周初步，一个月内完成） 激光器（PDE飞秒较难，尝试PINN） 放大器（EDFA 拉曼的PDE） 高非线性领域（<strong>全光信号处理</strong>与深度学习的结合 相敏参量放大器PSA）</li>
 <li>与其他人的进度有所交叉</li>
 </ul>
+<h3 id="2802">28/02</h3>
+<ul>
+<li>硅基论文问题</li>
+<li>remi博士<br>
+GN模型实际应用和庞旭豪配合（GN模型（IGN，EGN）pyGN（JOCN）） OSNR到SNR的转换？<br>
+VPI计算SNR可运行，考虑传输信号格式问题。<br>
+ISRSGN只能计算相同的多个span且无法有效体现放大器？<br>
+GNPy可以计算SNR。<br>
+还有IGN和GGN模型，大部分模型的逻辑推导还不太清晰。</li>
+</ul>
+<p>DSP和VPI学习 （使用的话大致理解下那两篇综述，然后进VPI看看DSP的demo了解下流程。从零编码还是比较吃力的，这个之后再看。DSP和ML很像都很需要实践和训练还有数据。<br>
+我记得那个仿真模块和我这次阿里做的差不多，但是规模很小，一组收发机就可以了，其他都一样，就是要注意解偏振那块的参考矩阵要重新根据仿真的带宽生成。）</p>
 
                                 </div>
                     </article>
@@ -166,9 +174,10 @@
 <ul>
 <li>
 <ul>
+<li><a href="#before">before</a></li>
 <li><a href="#0302">03/02</a></li>
-<li><a href="#0602">06/02</a></li>
 <li><a href="#1702">17/02</a></li>
+<li><a href="#2802">28/02</a></li>
 </ul>
 </li>
 </ul>

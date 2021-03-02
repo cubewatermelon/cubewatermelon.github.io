@@ -7,7 +7,7 @@
 <title>
     Firo&#39;s Daily
 </title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1613961574869">
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1614679004368">
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
@@ -27,7 +27,7 @@
     <div class="nav">
         <div class="logo">
             <a href="https://cubewatermelon.github.io">
-                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1613961574869" alt="">
+                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1614679004368" alt="">
             </a>
             <div class="site-title">
                 <h1>
@@ -99,6 +99,63 @@
         
             <article class="post i-card">
                 <h2 class="post-title">
+                    <a href="https://cubewatermelon.github.io/post/vpiphotonics-guide/">
+                        VPIphotonics guide
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2021-03-02</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            FiberNLS_PMD
+The module solves a system of two coupled nonlinear Schroedinger equations describing the propagation of two orthogonal polarization components of optical signals in fibers with randomly varying birefringence, and hence allows statistical modeling of polarization mode dispersion (PMD), including biasing the statistics for a high differential group delay.
+The model takes into account ** polarization-dependent loss (PDL)** and all orders of PMD, four-wave mixing (FWM), self-phase modulation (SPM), cross-phase modulation (XPM), first-order group velocity dispersion (GVD), second order GVD, and attenuation of the fiber. The adjustment factors for SPM, FWM, and XPM due to polarization evolution are automatically included.
+SNR的计算
+针对具有随机非正交双偏振的真实光纤，需要利用琼斯矩阵进行反解。
+通过EVM（信号误差矢量：指接收到的信号与理想信号之间误差矢量的幅度）计算SNR。
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/vpiphotonics-guide/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
+                    <a href="https://cubewatermelon.github.io/post/paper/">
+                        Paper
+                    </a>
+                </h2>
+                <div class="post-info">
+                    <time class="post-time">2021-02-28</time>
+                    
+                </div>
+                <div class="post-article">
+                    
+                            <div class="post-content">
+                                
+                                        <div class="post-content-content">
+                                            GNPy: an open source application for physical layer aware open optical networks.
+Ferrari A, Filer M, Balasubramanian K, Yin Y, Le Rouzic E, Kundrát J, Grammel G, Galimberti G, Curri V. Journal of Optical Communications and Networking. 2020 Jun 1;12(6):C31-40.
+GSNRi=PS,iPASE(fi)+PNLI(fi)=(OSNRi−1+SNRNL,i−1)−1\mathrm{GSNR}_{i}=\frac{P_{S, i}}{P_{\mathrm{ASE}}\left(f_{i}\right)+P_{\mathrm{NLI}}\left(f_{i}\right)}=\left(\mathrm{OSNR}_{i}^{-1}+\mathrm{SNR}_{\mathrm{NL}, \mathrm{i}}^{-1}\right)^{-1}
+GSNRi​=PASE​(fi​)+PNLI​(fi​)PS,i​​=(OSNRi−1​+SNRNL,i−1​)−1
+PS,iP_{S, i}PS,i​is the signal power of the ith channel and fif_ifi​ is its central frequency.
+
+                                        </div>
+                                        
+                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/paper/">Read More ~</a>
+                            </div>
+                </div>
+            </article>
+            
+            <article class="post i-card">
+                <h2 class="post-title">
                     <a href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">
                         SSFM与DBP
                     </a>
@@ -107,7 +164,7 @@
                     <time class="post-time">2021-02-21</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-success">
+                            i-tag-other_2">
             #科研日常
         </a>
                         
@@ -145,7 +202,7 @@ SSFM
 dE(z,t)dz=(D^+N^)E(z,t)⇔1E(z,t)dE(z,t)=(D^+N^)dz\frac{d E(z, t)}{d z}=(\hat{D}+\hat{N}) E(z, t) \Leftrightarrow \frac{1}{E(z, t)} d E(z, t)=(\hat{D}+\hat{N}) d z
 dzdE(z,t)​=(D^+N^)E(z,t)⇔E(z,t)1​dE(z,t)=(D^+N^)dz
 两边积分，当Δz\Delta zΔz较小时，可认为线性算子与非线性算子是相互独立的，S-SSFM假设非线性相位旋转（非线性效应的本质是信号光在传输过程中任意时刻都会受到一个和瞬时功率成正比的相位旋转）分布在整个Δz\Delta zΔz中，前后分别计算色散效应（色散效应本质上一种码间干扰（ISI），其效果是使相邻的几个符号之间发生线性的叠加）其公式近似为
-E(z+Δz,t)≈exp⁡(Δz2D^)exp⁡(∫zz+ΔzN^(z′)dz′)exp⁡(Δz2D^)E(z,t)E(z+\Delta z, t) \approx \exp \left(\frac{\Delta z}{2} \hat{D}\right) \exp \left(\int_{z}^{z+\Delta z} \hat{N}\left(z^{\prime}\right) d z^{\prime}\right) \exp \left(\frac{\Delta z}{2} \hat{D}\right) E(z, t)
+E(z+Δz,t)≈exp⁡(Δz2D^)exp⁡(∫zz+ΔzN^(z′)dz′)exp⁡(Δz2D^)E(z,t)\small E(z+\Delta z, t) \approx \exp \left(\frac{\Delta z}{2} \hat{D}\right) \exp \left(\int_{z}^{z+\Delta z} \hat{N}\left(z^{\prime}\right) d z^{\prime}\right) \exp \left(\frac{\Delta z}{2} \hat{D}\right) E(z, t)
 E(z+Δz,t)≈exp(2Δz​D^)exp(∫zz+Δz​N^(z′)dz′)exp(2Δz​D^)E(z,t)
 非线性算子可用梯形法进行近似。线性算子D^\hat{D}D^由于含有对时间的二阶偏导数项，可以通过两次傅立叶变换成为线性运算。实际操作中，先将时域信号作傅立叶变换到频域，与F[D^]F[\hat{D}]F[D^]相乘之后再将乘积作傅立叶逆变换，再在时域进行后续的N^\hat{N}N^算子的运算（需要迭代）。这样就使得时域复杂的偏微分运算得以简化，还可以利用快速傅立叶变换（FFT）对运算进一步加速。
 DBP
@@ -173,14 +230,14 @@ Why is the input data structured like this? For the DBP methods？It is hard for
             <article class="post i-card">
                 <h2 class="post-title">
                     <a href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">
-                        放大器、激光器等机理
+                        放大器机理
                     </a>
                 </h2>
                 <div class="post-info">
                     <time class="post-time">2021-02-20</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-other_3">
+                            i-tag-primary">
             #科研日常
         </a>
                         
@@ -190,9 +247,78 @@ Why is the input data structured like this? For the DBP methods？It is hard for
                             <div class="post-content">
                                 
                                         <div class="post-content-content">
-                                            AmpEDFA_Dynamic
-sampled signals
-parameterized signals
+                                            Fiber Optics Manual
+理想模型和实际系统的差距
+如何弥补这个差距
+修正测量参数
+提升系统整体准确率
+Population inversion ensures that the probability of stimulated emission (giving gain) remains higher than that of stimulated absorption.
+Ions in the lower level can absorb energy to become ions in the upper state. The probability of this occurring is weighted by the absorption cross section, σa(λ)\sigma_a(\lambda)σa​(λ). Similarly, ions in the upper level can be stimulated to return to the lower level, releasing a photon by stimulated emission. The probability of this occurring is weighted by the emission cross section, σe(λ)\sigma_e(\lambda)σe​(λ).Ions in the upper level can also return to the lower level spontaneously, releasing a photon by spontaneous emission. The probability of spontaneous emission is proportional to the minverse of the lifetime in the upper state.
+
+The spectral dependence of amplifier gain is a weighted combination of the gain and absorption cross sections where the weighting depends on the populations of the upper and lower levels.
+GdB(λ)=4.343(Nˉ2σe(λ)+Nˉ1σa(λ))ΓsL− IntrinsicLosses G_{dB}(\lambda)=4.343\left(\bar{N}_{2}\sigma_{e}(\lambda)+\bar{N}_{1}\sigma_{a}(\lambda)\right) \Gamma_{s} L-\text { IntrinsicLosses }
+GdB​(λ)=4.343(Nˉ2​σe​(λ)+Nˉ1​σa​(λ))Γs​L− IntrinsicLosses 
+where Γs\Gamma_{s}Γs​ indicates the effective overlap factor between signal and ion populations, Nˉ2\bar{N}_{2}Nˉ2​ indicates upper level, Nˉ1\bar{N}_{1}Nˉ1​ indicates lower level. Note that the ion populations will vary along the length of the amplifier. However, because gain is a multiplicative effect and proportional to the exponential-power of the gain and absorption coefficients, the gain can be calculated directly from the longitudinal average of the upper and lower level populations, as indicated by the top-bars on the populations in the above equation.
+For a full model, the radial inversion profile should be calculated self-consistently with the signal and pump waves at enough points along the fiber to represent the longitudinal dependence of spatial hole burning.
+Basic Simulation Setup
+The modular nature of VPIcomponentMaker Fiber Optics makes complex topologies and designs possible, simply by interconnecting modules.
+
+
+The DopedFiber module includes sophisticated numerical techniques to solve for the steady-state equilibrium of signals, pumps and noise.
+Doped Fiber
+The model is based on the bidirectional propagation equations for signals and multilevel rate equations for ion populations. The emission and absorption spectra can be specified in terms of cross sections or Giles parameters. The model includes erbium/ytterbium energy transfer, cross-relaxation effects, homogeneous upconversion, pair-induced quenching (except thulium-doped amplifier), excited-state absorption, homogeneous and inhomogeneous broadening, Rayleigh scattering, and Kerr nonlinearity. The model is resolved in both the longitudinal and transverse directions.
+The gain and absorption characteristics of the dopant ions within the glass host as a function of optical frequency can be specified using cross sections or Giles parameters. The Giles parameters, which represent the gain and absorption of the fiber per unit length, are generally easier to obtain experimentally and are often provided by manufacturers. The relationship between the gain and absorption per unit length and cross sections can be reached.
+Each saturation factor should correspond to the lifetime of spontaneous transition between levels.
+Rate Equations
+The rate equations describe how the population inversion depends on powers of the signals and pumps propagating in the fiber.
+In the Effective Overlap Approximation, the overlap between optical mode and excited ions is assumed to be independent of optical power and equal to the overlap between the mode and total dopant distribution. This approximation is valid if the dopant ions are well confined to the center of the optical mode and the intensity changes insignificantly over the transverse dopant profile. In this case, the solution of the steady-state rate equations for a two-level laser medium is given by:
+f2(z)≡nˉ2nˉt=∑kPk∗α12khfkζ1+∑kPk∗(α12k+g21k)hfkζf_{2}(z) \equiv \frac{\bar{n}_{2}}{\bar{n}_{t}}=\frac{\sum_{k} \frac{P_{k}^{*} \alpha_{12}^{k}}{h f_{k} \zeta}}{1+\sum_{k} \frac{P_{k}^{*}\left(\alpha_{12}^{k}+g_{21}^{k}\right)}{h f_{k} \zeta}}
+f2​(z)≡nˉt​nˉ2​​=1+∑k​hfk​ζPk∗​(α12k​+g21k​)​∑k​hfk​ζPk∗​α12k​​​
+Propagation Equations
+The propagation equations describing a spatial evolution of the optical fields propagating along the EDF. (what&#39;s the result?)
+uk±dPks±dz=[gkf2(z)−αkf1(z)]Pks±−lkPks±u_{k}^{\pm} \frac{d P_{k}^{s \pm}}{d z}=\left[g_{k} f_{2}(z)-\alpha_{k} f_{1}(z)\right] P_{k}^{s \pm}-l_{k} P_{k}^{s \pm}
+uk±​dzdPks±​​=[gk​f2​(z)−αk​f1​(z)]Pks±​−lk​Pks±​
+uk±dPkas±dz=[gkf2(z)−αkf1(z)]Pkase±+2gkf2(z)MhfkΔfk−lkPkase±+ηkPkase∓u_{k}^{\pm} \frac{d P_{k}^{a s \pm}}{d z}=\left[g_{k} f_{2}(z)-\alpha_{k} f_{1}(z)\right] P_{k}^{a s e \pm}+2 g_{k} f_{2}(z) M h f_{k} \Delta f_{k}-l_{k} P_{k}^{a s e \pm}+\eta_{k} P_{k}^{a s e \mp}
+uk±​dzdPkas±​​=[gk​f2​(z)−αk​f1​(z)]Pkase±​+2gk​f2​(z)Mhfk​Δfk​−lk​Pkase±​+ηk​Pkase∓​
+Transient Dynamics of a Single EDFA
+16 channels are transmitted. At the time moment t=0.2 ms the channels 9-16 are dropped. The decreased EDFA input power due to the channel dropping leads to an increase of the inversion level (for constant pumping) followed by an increase of the output power of the remaining channels. At the time moment t=0.7 ms the channels 9-16 are restored. This causes a second power transient followed by restoration of all output channel powers to the initial state. Duration of both drop and restore events is 0.1 ms.
+
+Dynamics of Electronically Gain-Clamped EDFA
+
+Modeling erbium-doped fiber amplifiers.
+Giles CR, Desurvire E. Journal of lightwave technology. 1991 Feb;9(2):271-83.
+PROPAGATION AND RATE EQUATION
+We can think of light in the amplifier to be propagating as a number of optical beams of frequency bandwidth Δvk\Delta v_kΔvk​ centered at the optical wavelength vkv_kvk​.
+Rate equations describe the effects of absorption, stimulated emission, and spontaneous emission on the populations of the ground and metastable states.
+SPATIAL-MODE MODELING IN ERBIUM AMPLIFIER
+ik(r)i_k(r)ik​(r):the normalized intensity distribution of the fundamental mode (LP01LP_01LP0​1). (?The modes of the pump and signal.)
+The fiber absorption and gain spectra:
+αk=σakΓknt\alpha_k = \sigma_{ak}\Gamma_kn_t
+αk​=σak​Γk​nt​
+gk=σekΓkntg_k = \sigma_{ek}\Gamma_kn_t
+gk​=σek​Γk​nt​
+The overlap integral between the dopant and optical mode:
+Γk=∫02π∫0bik(r,ϕ)rdrdϕ\Gamma_{k}=\int_{0}^{2 \pi} \int_{0}^{b} i_{k}(r, \phi) r d r d \phi
+Γk​=∫02π​∫0b​ik​(r,ϕ)rdrdϕ
+Written in terms of these new parameters, the amplifier propagation
+equation becomes
+dPkdz=αk+gk∗ΓkPk∫02π∫0bn2(r,ϕ,z)ntikrdrdϕ−(αk+lk)Pk+gk∗ΓkmhνkΔνk∫02π∫0bn2(r,ϕ,z)ntikrdrdϕ.\begin{aligned}
+\frac{d P_{k}}{d z}=&amp;amp; \frac{\alpha_{k}+g_{k}^{*}}{\Gamma_{k}} P_{k} \int_{0}^{2 \pi} \int_{0}^{b} \frac{n_{2}(r, \phi, z)}{n_{t}} i_{k} r d r d \phi-\left(\alpha_{k}+l_{k}\right) P_{k} \\
+&amp;amp;+\frac{g_{k}^{*}}{\Gamma_{k}} m h \nu_{k} \Delta \nu_{k} \int_{0}^{2 \pi} \int_{0}^{b} \frac{n_{2}(r, \phi, z)}{n_{t}} i_{k} r d r d \phi .
+\end{aligned}
+dzdPk​​=​Γk​αk​+gk∗​​Pk​∫02π​∫0b​nt​n2​(r,ϕ,z)​ik​rdrdϕ−(αk​+lk​)Pk​+Γk​gk∗​​mhνk​Δνk​∫02π​∫0b​nt​n2​(r,ϕ,z)​ik​rdrdϕ.​
+An additional loss term lkl_klk​ has been added to the propagation equation to account for excess fiber loss.
+n2(r,ϕ,z)=nt∑kτσakhvkPkik1+∑k(σak+σek)hνkPkik.n_{2}(r, \phi, z)=n_{t} \frac{\sum_{k} \frac{\tau \sigma_{a k}}{h v_{k}} P_{k} i_{k}}{1+\sum_{k} \frac{\left(\sigma_{a k}+\sigma_{e k}\right)}{h \nu_{k}} P_{k} i_{k}} .
+n2​(r,ϕ,z)=nt​1+∑k​hνk​(σak​+σek​)​Pk​ik​∑k​hvk​τσak​​Pk​ik​​.
+Solutions to above equations are obtained by standard numerical integration techniques.
+NUMERICAL MODELING OF SPECTRAL PROPERTIES
+what&#39;s the difference?
+Simulation of Dynamic Effects in EDFAs
+Amplifier modules used in modern WDM optical telecommunication systems should
+suppress gain variations that may result from nonstationary perturbations of the amplifier input power. The power changes can appear because of the network reconfiguration, protection switching or fiber cuts.
+A typical question is &#39;how fast and how good is the gain recovery?&#39;.
+∂N2∂t=−N2τ−∑jukhvkA∂Pk∂z\frac{\partial N_{2}}{\partial t}=-\frac{N_{2}}{\tau}-\sum_{j} \frac{u_{k}}{h v_{k} A} \frac{\partial P_{k}}{\partial z}
+∂t∂N2​​=−τN2​​−j∑​hvk​Auk​​∂z∂Pk​​
 EDFA基础知识
 EDFA能级跃迁数学模型
 基本知识
@@ -203,7 +329,30 @@ EDFA能级跃迁数学模型
 密集波分复用(DWDM)光通信系统和未来的全光通信系统对EDFA 的性能要求越来越高，与第一代 EDFA 主要要求功率放大不同，下一代 EDFA 的要求更加全面，其功能也更加完善。这些主要表现在具有克服瞬态效应、宽带及其平坦、在线监控、低功耗、噪声系在数低、输出功率大、低成本等特点。
 瞬态效应
 工作在实际通信线路上的EDFA,在输入光功率突然变大/变小的时刻,如果泵浦输出功率不能及时跟随输入变化而变小/变大,则掺铒光纤( Erbium Doped Fibe,EDF)中反转离子数仍保持在变化前的水平,会导致剩余通道的增益突然变小/变大,这种增益跃变经多级EDFA级联而积累,会引起线路阻塞或产生误码。如果输入光功率迅速增大,则产生时的光浪涌,经级联放大后,峰值功率可达数瓦,可能损坏通信设备的光/电(O/E)转换器及光连接器端面。
-激光器基础知识
+超短脉冲激光器
+被动锁模掺饵光纤激光器
+在净色散为正的色散管理激光器中，通过调节激光器的参数，如泵浦功率和偏振条件，可以在同一台激光器中输出色散管理孤子，自相似子及耗散孤子。不同的脉冲种类可以通过光谱进行区分。
+通过色散补偿技术，成功地在通信波段设计出全光纤耗散孤子超短脉冲光纤激光器，脉宽达到了 78.9 fs，能量 4.6 nJ，峰值功率超过 50 kW，该峰值功率可以和普通的啁啾放大系统相比拟。
+实验得到了 128  fs  的超短脉冲，这是在光纤负色散区得到的最短脉冲。得益于脉冲的超短脉宽，虽然激光器工作在负色散区，但是脉冲没有凯利边带。
+光纤激光器的被动锁模方法
+光纤激光器不仅可以利用传统的锁模方法实现锁模例如饱和吸收体等，还可以利用强的非线性效应如自相位调制，交叉相位调制，构成非线性偏振旋转机制锁模。
+基本原理：假设初始脉冲是线偏振态，通过一个四分之一波片后变为椭圆偏振态，椭圆偏振光可以认为是强度不同的两个偏振方向正交的线性偏振分量的叠加。这两个偏振分量在光纤中传输时，由于受到光纤的非线性效应作用（包括自相位调制和交叉相位调制），产生大小不同的非线性相移，从而使脉冲偏振态发生变化。由于偏振态的变化和光强有关，所以脉冲中心部分的变化量大于两翼处，再调节半波片使得脉冲中心的高强度部分能透过起偏器，则两翼的低强度部分会被起偏器阻止，这样就形成了等效的可饱和吸收体，从而可以实现锁模功能。
+光纤激光器中的脉冲特性受非线性及色散的影响很大。金兹堡-朗道方程是在非线性薛定谔方程的基础上，增加一些激光器内的物理效应，如增益饱和，饱和吸收体，及其它高阶项等，该方程的实用条件是假设脉冲在腔内的变化不大：
+iψz+D2ψtt+ψ∣ψ∣2=iδψ+iβψtt+iεψ∣ψ∣2+iμψ∣ψ∣4i \psi_{z}+\frac{D}{2} \psi_{t t}+\psi|\psi|^{2}=i \delta \psi+i \beta \psi_{t t}+i \varepsilon \psi|\psi|^{2}+i \mu \psi|\psi|^{4}
+iψz​+2D​ψtt​+ψ∣ψ∣2=iδψ+iβψtt​+iεψ∣ψ∣2+iμψ∣ψ∣4
+β=goωg2∣β2∣\beta=\frac{g_{o}}{\omega_{g}^{2}\left|\beta_{2}\right|}
+β=ωg2​∣β2​∣go​​
+δ=Lgo+ln⁡∣θcos⁡2α3cos⁡α∣\delta=L g_{o}+\ln \left|\theta \cos 2 \alpha_{3} \cos \alpha\right|
+δ=Lgo​+ln∣θcos2α3​cosα∣
+ε=−13sin⁡2α2tan⁡α,μ=−19sin⁡22α32cos⁡2α,α=2α2−α1−α3\varepsilon=-\frac{1}{3} \sin 2 \alpha_{2} \tan \alpha, \mu=-\frac{1}{9} \frac{\sin ^{2} 2 \alpha_{3}}{2 \cos ^{2} \alpha}, \alpha=2 \alpha_{2}-\alpha_{1}-\alpha_{3}
+ε=−31​sin2α2​tanα,μ=−91​2cos2αsin22α3​​,α=2α2​−α1​−α3​
+ψ\psiψ是光场振幅, z  和 t 表示传播距离和时间，D 是腔内总色散，β2\beta_2β2​是增益介质二阶色散大小，g0g_0g0​是线性增益，ωg\omega_gωg​是增益带宽，α1\alpha_1α1​,α2\alpha_2α2​和α3\alpha_3α3​表示波片 1,2,3 的本征轴和起偏器偏振方向的夹角。在负色散和非线性的平衡作用下，产生孤子脉冲。当耗散效应较强无法忽略时，金兹堡-朗道方程的解是耗散孤子脉冲和自相似子脉冲。
+论证
+调研
+相敏参量放大
+全光信号处理 逻辑门：数学模型
+解耦
+C+L 满载 非参数化 高精度仿真 效率问题（考虑SRS 光纤的传输计算耗时）
 
                                         </div>
                                         
@@ -222,7 +371,7 @@ EDFA能级跃迁数学模型
                     <time class="post-time">2021-02-16</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-other_1">
+                            i-tag-banana">
             #科研日常
         </a>
                         
@@ -246,7 +395,7 @@ V=k0​a(n12​−n22​)1/2
 
 偏振膜色散
 单模光纤可以维持沿两正交方向偏振的简并模。在光纤的形状为严格的圆柱形、材料为各向同性的理想条件
-下，x  方向偏振态的模式不会与干交的 y 方向偏振态的模耦合。然而，由于其实际形状略偏离圆柱形以及材料各向异性的彶小起伏，破坏了模式简并，导致了两个偏振态的混合。在数学上，模传输常数β\betaβ 对于x , y 方向偏振模稍有不同，光纤的这个性质称为模式双折射。随机的模式双折射导致了无归偏振光。
+下，x  方向偏振态的模式不会与正交的 y 方向偏振态的模耦合。然而，由于其实际形状略偏离圆柱形以及材料各向异性的彶小起伏，破坏了模式简并，导致了两个偏振态的混合。在数学上，模传输常数β\betaβ 对于x , y 方向偏振模稍有不同，光纤的这个性质称为模式双折射。随机的模式双折射导致了无归偏振光。
 非线性效应
 光纤中的最低阶非线性效应起源于三阶电极化率，导致折射率与光强有关（光幅度的平方）。
 自相位调制SPM
@@ -302,7 +451,7 @@ Nyquist WDM
                     <time class="post-time">2021-02-06</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-banana">
+                            i-tag-other_3">
             #漫谈
         </a>
                         
@@ -354,7 +503,7 @@ Nyquist WDM
                     <time class="post-time">2021-01-28</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-primary">
+                            i-tag-info">
             #科研日常
         </a>
                         
@@ -447,6 +596,20 @@ Some scientists, because they write in a style that is impersonal and objective,
 🚩Since some scientists write in a style that is impersonal and objective, they do not easily communicate with laypeople. This lack of communication damages . . .
 A company that focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs is likely to earn the loyalty of its employees.
 🚩A company is likely to earn the loyalty of its employees when it focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs.
+If you are confused by a sprawling sentence when you read, focus on the relative pronouns who, which, and that. Pause a moment to figure out what each one refers to.
+When you have to write a long sentence, don&#39;t just add one phrase or clause after another, willy-nilly. Particularly avoid tacking one relative clause onto another onto another. Try extending the line of a sentence with
+resumptive, summative, and free modifiers.
+Coordination lets you extend the line of a sentence more gracefully than by tacking on one element to another. When you can coordinate, try to order the elements so that they go from shorter to longer, from simpler to more complex.
+We should devote a few final words to a matter that reaches beyond the techniques of research to the connections between objective research and those subjective values that reflect our deepest ethical choices and strongest intellectual commitments.
+When you use one of these conjunctions, however, be sure to put the and, but, or (n)or before a word that is coordinate with what follows the both, not only, and (n)either.
+When you punctuate carefully, you not only help readers understand a complex sentence more easily, but you enhance your own image as a good writer.
+They should precede the same part of speech:
+🚩When you punctuate carefully, you not only help readers understand a complex sentence more easily, but enhance your own image as a good writer.
+Ordinarily, we coordinate elements only of the same grammatical structure: clause and clause, prepositional phrase andprepositional phrase, and so on.
+We respond to coordination best when the elements are coordinate not only in grammar but also in thought. Some inexperienced writers coordinate by just joining one element to another with and:
+Grade inflation is a problem at many universities, and it leads to a devaluation of good grades earned by hard work and will not be solved simply by grading harder.
+Those ands obscure the relationships among those claims:
+🚩Grade inflation is a problem at many universities, because it devalues good grades that were earned by hard work, but it will not be solved simply by grading harder.
 Example
 We also systematically benchmark methods of selecting relevant input for higher efficiency, achieving 4x gains in speed and memory, while retaining 92% of the results.
 We are benchmarking our performance against external criteria.
@@ -455,6 +618,7 @@ Those principles are easy to state but hard to follow, because you have to inch 
 I can offer no principle that tells you when to replace a phrase with a word, much less give you the word.
 Now that we see what the sentence says, we can make it still more direct.
 But in boiling down that original paragraph to a quarter of its original length, I&#39;ve bleached out its garrulous charm, a tradeoff that many readers would reject.
+Leonardo da Vinci was a man of powerful intellect, driven by [i.e., Leonardo was driven by] an insatiable curiosity and haunted by a vision of artistic perfection.
 
                                         </div>
                                         
@@ -466,14 +630,14 @@ But in boiling down that original paragraph to a quarter of its original length,
             <article class="post i-card">
                 <h2 class="post-title">
                     <a href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">
-                        进击的巨人
+                        你是自由的
                     </a>
                 </h2>
                 <div class="post-info">
                     <time class="post-time">2021-01-28</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-warning">
+                            i-tag-banana">
             #漫谈
         </a>
                         
@@ -506,14 +670,14 @@ But in boiling down that original paragraph to a quarter of its original length,
             <article class="post i-card">
                 <h2 class="post-title">
                     <a href="https://cubewatermelon.github.io/post/man-tan/">
-                        Grand Theft Auto 5
+                        哦，阿瑟
                     </a>
                 </h2>
                 <div class="post-info">
                     <time class="post-time">2021-01-27</time>
                     
                         <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-other_2">
+                            i-tag-primary">
             #漫谈
         </a>
                         
@@ -542,6 +706,10 @@ Gregory:在澡缸中戏水，在想象力的欢乐中去世。
 Walter:因芭芭拉之死而终日在地下室度过，每天一罐桃子罐头。
 Red Dead Redemption II
 当我们把杰克“接”回来之后，我（阿瑟）和大家一起围在火堆旁，哈维尔弹着吉他，大家一起唱着歌，我知道我得写点什么了。荒野大镖客，令人沉浸的故事，有血有肉的时代环境，游戏艺术莫过如此。
+阿瑟去世了，筋疲力尽后望着日出，以他的救赎使得约翰和阿比盖尔与小杰克可以幸福地活下去（几年）。范帮早该解散让大家各谋生路去了，但是达奇这个疯子又怎么会愿意呢，他只想进行西部时代最后的疯狂，而且要拉所有人一起陪葬，他一直都有他的god damn plan，去进行所谓的“最后一票”，然后大家一起去塔希提（大溪地，居然华侨很多，高更也是在这里；看样阿瑟对那个画家的建议被采纳了）种芒果。
+大表哥2真的是开放世界之神，在这个世界真的几乎可以干所有那个时代的事情，而且精彩的故事模式也将玩家深深地带入到那个世界之中，伤感的音乐以及顶级的画面。在之前，我去银行从来是抢劫，但是约翰进银行就是贷款了（信用借贷起步真早），而且约翰还得在牧场里挤奶、铲粪、修围栏等等，一天才赚3刀。
+这个游戏我最爱的兄弟第一是查尔斯，第二是兰尼。也正如阿瑟所说，查尔斯不用装，他就是个好人；而我，时时在好人与坏人之间伪装徘徊，不知道自己是什么。兰尼也是个好人，而且还十分年轻，非常地积极，想要做出成就，帮助他人，他的死全怪迈卡老贼。查尔斯的陪伴也是约翰活下来后最重要的了，帮约翰保卫牧场安全，说实话，他为了安全找来保镖押送房屋建材的时候我真是十分感动，查尔斯确实是全心全意地在为他人考虑，还帮忙把房子建起来了。
+还有就是英雄迟暮的感觉，阿瑟是范帮第一工具人了，而且各方面也都是最强的（射击，搏斗，执行力等等），但是肺结核严重了之后连骂迈卡都骂不上劲了，眼看着他排挤自己，颠倒黑白。何西阿应该也是这样吧，年纪很大了，游戏前期还带着阿瑟去打猎，骗钱啥的，后期感觉确实是没有精力了，在范帮也说不上什么话了。难受。
 
                                         </div>
                                         
@@ -594,7 +762,7 @@ Red Dead Redemption II
                     <!-- 个人信息 -->
                     
     <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1613961574869)">
+        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1614679004368)">
         </div>
         <h1 class="id_card-title">
             Firo&#39;s Daily
