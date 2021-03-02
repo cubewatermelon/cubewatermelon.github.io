@@ -1,713 +1,464 @@
 <html>
-
 <head>
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    Firo&#39;s Daily
-</title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1614680338007">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+<title>Firo&#39;s Daily</title>
+
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1614699993575">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cubewatermelon.github.io/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cubewatermelon.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<style>
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 </head>
-
 <body>
-    <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://cubewatermelon.github.io">
-                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1614680338007" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    Firo&#39;s Daily
-                </h1>
-            </div>
+<div class="main gt-bg-theme-color-first">
+    <div class="main-content">
+        <style>
+    /* 导航栏样式 */
+    .navbar {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-brand {
+        display: inline-block;
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
+
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        text-decoration: none;
+    }
+
+    .navbar-nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .navbar-collapse {
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+
+    .navbar-toggler:hover,
+    .navbar-toggler:focus {
+        text-decoration: none;
+    }
+
+    @media (min-width: 992px) {
+        .navbar-expand-lg {
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+        }
+
+        .navbar-expand-lg .navbar-nav {
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        .navbar-expand-lg .navbar-collapse {
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        }
+
+        .navbar-expand-lg .navbar-toggler {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        #navbarSupportedContent {
+            display: none;
+        }
+    }
+</style>
+<nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Firo&#39;s Daily
         </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
                 
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/post/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
         </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1614699993575"
+                action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+        <div class="post-list-container">
+    <div class="post-inner">
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/vpiphotonics-guide/">
+                            <span class="post-title gt-c-content-color-first">VPIphotonics guide</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>VPI Design Suite Notes</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-03-02 ·
+                        </time>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/vpiphotonics-guide/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/vpiphotonics-guide.jpg')">
+                    </a>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/paper/">
+                            <span class="post-title gt-c-content-color-first">Paper</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>Paper Summary in March</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-02-28 ·
+                        </time>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/paper/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/paper.png')">
+                    </a>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">
+                            <span class="post-title gt-c-content-color-first">SSFM与DBP</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>分步傅里叶方法与数字反向传播。</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-02-21 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag">
+                                # 科研日常
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">
+                            <span class="post-title gt-c-content-color-first">EDFA Modeling Theory</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>Mainly are doped-fiber theory.</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-02-20 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag">
+                                # 科研日常
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/">
+                            <span class="post-title gt-c-content-color-first">光纤通信系统GN模型</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>GN model.</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-02-16 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag">
+                                # 科研日常
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/yue-du/">
+                            <span class="post-title gt-c-content-color-first">阅读</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>读点书吧。</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-02-06 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag">
+                                # 漫谈
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/yue-du/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/yue-du.jpg')">
+                    </a>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/">
+                            <span class="post-title gt-c-content-color-first">Acadmic English</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-01-28 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag">
+                                # 科研日常
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/xue-zhu-ying-yu.png')">
+                    </a>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/hello-gridea/">
+                            <span class="post-title gt-c-content-color-first">Hello Gridea</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2018-12-12 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/P660K6oZo/" class="post-tag">
+                                # Gridea
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/hello-gridea/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/hello-gridea.png')">
+                    </a>
+                
+            </div>
+        
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-container main-container">
-                <div id="content" class="main-container-left">
-                    
-        
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/vpiphotonics-guide/">
-                        VPIphotonics guide
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-03-02</time>
-                    
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            FiberNLS_PMD
-The module solves a system of two coupled nonlinear Schroedinger equations describing the propagation of two orthogonal polarization components of optical signals in fibers with randomly varying birefringence, and hence allows statistical modeling of polarization mode dispersion (PMD), including biasing the statistics for a high differential group delay.
-The model takes into account ** polarization-dependent loss (PDL)** and all orders of PMD, four-wave mixing (FWM), self-phase modulation (SPM), cross-phase modulation (XPM), first-order group velocity dispersion (GVD), second order GVD, and attenuation of the fiber. The adjustment factors for SPM, FWM, and XPM due to polarization evolution are automatically included.
-SNR的计算
-针对具有随机非正交双偏振的真实光纤，需要利用琼斯矩阵进行反解。
-通过EVM（信号误差矢量：指接收到的信号与理想信号之间误差矢量的幅度）计算SNR。
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/vpiphotonics-guide/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/paper/">
-                        Paper
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-02-28</time>
-                    
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            GNPy: an open source application for physical layer aware open optical networks.
-Ferrari A, Filer M, Balasubramanian K, Yin Y, Le Rouzic E, Kundrát J, Grammel G, Galimberti G, Curri V. Journal of Optical Communications and Networking. 2020 Jun 1;12(6):C31-40.
-GSNRi=PS,iPASE(fi)+PNLI(fi)=(OSNRi−1+SNRNL,i−1)−1\mathrm{GSNR}_{i}=\frac{P_{S, i}}{P_{\mathrm{ASE}}\left(f_{i}\right)+P_{\mathrm{NLI}}\left(f_{i}\right)}=\left(\mathrm{OSNR}_{i}^{-1}+\mathrm{SNR}_{\mathrm{NL}, \mathrm{i}}^{-1}\right)^{-1}
-GSNRi​=PASE​(fi​)+PNLI​(fi​)PS,i​​=(OSNRi−1​+SNRNL,i−1​)−1
-PS,iP_{S, i}PS,i​is the signal power of the ith channel and fif_ifi​ is its central frequency.
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/paper/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">
-                        SSFM与DBP
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-02-21</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-other_1">
-            #科研日常
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            NLSE
-当光信号的脉宽范围为10ns ~10 fs的范围内时，这样的光脉冲在光纤传输过程中，色散和非线性效应会同时影响其频谱。当脉冲宽度T0T_0T0​ &amp;gt; 5ps的时候，拉曼散射和自陡效应相比克尔效应可以忽略，结合麦克斯韦方程组、电磁波波动理论以及光纤的电极化特性，忽略三阶色散及其他效应，在一定近似条件下可以推导得出光矢量在光纤中传输的非线性薛定谔方程（NLSE）
-∂E∂z+α2E+i2β2∂2E∂t2−iγ∣E∣2E=0\frac{\partial E}{\partial z}+\frac{\alpha}{2} E+\frac{i}{2} \beta_{2} \frac{\partial^{2} E}{\partial t^{2}}-i \gamma|E|^{2} E=0
-∂z∂E​+2α​E+2i​β2​∂t2∂2E​−iγ∣E∣2E=0
-其中二阶色散常数和非线性系数分别为
-β2=λ022πcD\beta_{2}=\frac{\lambda_{0}^{2}}{2 \pi c} D
-β2​=2πcλ02​​D
-γ=2πn2λ0Aeff\gamma=\frac{2 \pi n_{2}}{\lambda_{0} A_{e f f}}
-γ=λ0​Aeff​2πn2​​
-其中λ0\lambda_0λ0​为传输的光信号的中心波长，D为色散系数，单位为 ps / (ns · km)；n2n_2n2​为非线性折射率，AeffA_effAe​ff为光纤有效面积，NLSE可变形为
-∂E(z,t)∂z=(D^+N^)E(z,t)\frac{\partial E(z, t)}{\partial z}=(\hat{D}+\hat{N}) E(z, t)
-∂z∂E(z,t)​=(D^+N^)E(z,t)
-D^=−α2−i2β2∂2∂t2\hat{D}=-\frac{\alpha}{2}-\frac{i}{2} \beta_{2} \frac{\partial^{2}}{\partial t^{2}}
-D^=−2α​−2i​β2​∂t2∂2​
-N^=iγ∣E(z,t)∣2\hat{N}=i \gamma|E(z, t)|^{2}
-N^=iγ∣E(z,t)∣2
-表明信号光在传输过程中将同时受到线性和非线性的效应，其中的线性效应主要引起衰减和色散，非线性效应主要引起相位旋转，并且相位旋转的大小和信号光功率成正比。
-色散长度和非线性长度为
-LD=T02∣β2∣L_{D}=\frac{T_{0}^{2}}{\left|\beta_{2}\right|}
-LD​=∣β2​∣T02​​
-LNL=1γP0L_{NL}=\frac{1}{\gamma P_{0}}
-LNL​=γP0​1​
-当光纤长度远小于色散和非线性长度时，此两效应才将同时起作用。
-SSFM
-当信号E(z,t)E(z,t)E(z,t)从zzz传输到z+Δzz+\Delta zz+Δz时，可以用解析的方法对上式求解，即
-dE(z,t)dz=(D^+N^)E(z,t)⇔1E(z,t)dE(z,t)=(D^+N^)dz\frac{d E(z, t)}{d z}=(\hat{D}+\hat{N}) E(z, t) \Leftrightarrow \frac{1}{E(z, t)} d E(z, t)=(\hat{D}+\hat{N}) d z
-dzdE(z,t)​=(D^+N^)E(z,t)⇔E(z,t)1​dE(z,t)=(D^+N^)dz
-两边积分，当Δz\Delta zΔz较小时，可认为线性算子与非线性算子是相互独立的，S-SSFM假设非线性相位旋转（非线性效应的本质是信号光在传输过程中任意时刻都会受到一个和瞬时功率成正比的相位旋转）分布在整个Δz\Delta zΔz中，前后分别计算色散效应（色散效应本质上一种码间干扰（ISI），其效果是使相邻的几个符号之间发生线性的叠加）其公式近似为
-E(z+Δz,t)≈exp⁡(Δz2D^)exp⁡(∫zz+ΔzN^(z′)dz′)exp⁡(Δz2D^)E(z,t)\small E(z+\Delta z, t) \approx \exp \left(\frac{\Delta z}{2} \hat{D}\right) \exp \left(\int_{z}^{z+\Delta z} \hat{N}\left(z^{\prime}\right) d z^{\prime}\right) \exp \left(\frac{\Delta z}{2} \hat{D}\right) E(z, t)
-E(z+Δz,t)≈exp(2Δz​D^)exp(∫zz+Δz​N^(z′)dz′)exp(2Δz​D^)E(z,t)
-非线性算子可用梯形法进行近似。线性算子D^\hat{D}D^由于含有对时间的二阶偏导数项，可以通过两次傅立叶变换成为线性运算。实际操作中，先将时域信号作傅立叶变换到频域，与F[D^]F[\hat{D}]F[D^]相乘之后再将乘积作傅立叶逆变换，再在时域进行后续的N^\hat{N}N^算子的运算（需要迭代）。这样就使得时域复杂的偏微分运算得以简化，还可以利用快速傅立叶变换（FFT）对运算进一步加速。
-DBP
-为了补偿色散非线性效应带来的损伤，BP 算法从光路可逆的角度，构建了一段“虚拟光纤”，这段虚拟光纤的长度和实际光纤相等，其衰减以及色散非线性相关的各项参数都和信号光经过的实际光纤相反，即(−α,−β2,−β3,−γ)(-\alpha, -\beta_2, -\beta_3, -\gamma)(−α,−β2​,−β3​,−γ)，因此将经过传输后的信号按照Manakov方程用SSFM 算法在虚拟光纤中传输一次之后，理论上可以完全抵消实际光纤的色散非线性效应，从而补偿信号受到的损伤。实际中每个span划分的步长数一般不超过4（一般取2），也正因为反正传输和正向传输时步长的划分是不对等的，使得BP算法无法完全消除色散非线性效应的损伤。除此之外，数据的采样率（一般都采用2 倍采样）、具体使用的SSFM算法等等也会对补偿效果造成很大的影响。
-经BP 算法恢复后的信号已经达到了前向纠错（FEC）的最低要求。算法的原理决定了BP 只能是在获取了全部传输符号后进行离线的后处理，而不能进行实时的、在线的补偿。
-Volterra级数法
-Volterra级数是一种类似于Taylor级数的泛函级数，和全部时刻的输入都相关，其核（kernel）具有清晰的物理意义。这种补偿方案一般用色散补偿光纤（DCF）补偿色散，而用Volterra 级数滤波器来补偿非线性效应。
-[1]杨杰. 高频谱效率相干检测光通信系统仿真与色散非线性补偿算法的性能和应用研究[D].北京邮电大学,2014. （主要）
-[2]李敏良. 基于高阶调制格式的相干光通信系统中色散与非线性补偿算法的研究[D].北京邮电大学,2014.
-[3]与相关程序结合进一步加深理解。
-Fan Q, Zhou G, Gui T, Lu C, Lau AP. Advancing theoretical understanding and practical performance of signal processing for nonlinear optical communications through machine learning. Nature Communications. 2020 Jul 23;11(1):1-1.
-We first demonstrate performance gain in realistic experimental settings using the deep neural network-based digital backpropagation (DNN-based DBP) architecture. We further extended DNN-based DBP to PDM and WDM systems with dynamic polarization-state estimation. In addition, the optimized DNN based DBP configurations reveal subtle mathematical structures that guide us to analyze the interplay between CD, nonlinearity, and noise.
-Why is the input data structured like this? For the DBP methods？It is hard for me to read.
-? The results show that 121 taps and 128 samples per input, i.e., 512 total input vectors are optimal settings across most experimental setups studied in our work.
-? The whole batch of 6 + 16 + 6 = 28 inputs are processed together, while the output of the middle 16 vectors is used to calculate the cost function and update the parameters of the neural network.
-
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/ssfm-yu-dbp/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">
-                        放大器机理
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-02-20</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-error">
-            #科研日常
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            Fiber Optics Manual
-理想模型和实际系统的差距
-如何弥补这个差距
-修正测量参数
-提升系统整体准确率
-Population inversion ensures that the probability of stimulated emission (giving gain) remains higher than that of stimulated absorption.
-Ions in the lower level can absorb energy to become ions in the upper state. The probability of this occurring is weighted by the absorption cross section, σa(λ)\sigma_a(\lambda)σa​(λ). Similarly, ions in the upper level can be stimulated to return to the lower level, releasing a photon by stimulated emission. The probability of this occurring is weighted by the emission cross section, σe(λ)\sigma_e(\lambda)σe​(λ).Ions in the upper level can also return to the lower level spontaneously, releasing a photon by spontaneous emission. The probability of spontaneous emission is proportional to the minverse of the lifetime in the upper state.
-
-The spectral dependence of amplifier gain is a weighted combination of the gain and absorption cross sections where the weighting depends on the populations of the upper and lower levels.
-GdB(λ)=4.343(Nˉ2σe(λ)+Nˉ1σa(λ))ΓsL− IntrinsicLosses G_{dB}(\lambda)=4.343\left(\bar{N}_{2}\sigma_{e}(\lambda)+\bar{N}_{1}\sigma_{a}(\lambda)\right) \Gamma_{s} L-\text { IntrinsicLosses }
-GdB​(λ)=4.343(Nˉ2​σe​(λ)+Nˉ1​σa​(λ))Γs​L− IntrinsicLosses 
-where Γs\Gamma_{s}Γs​ indicates the effective overlap factor between signal and ion populations, Nˉ2\bar{N}_{2}Nˉ2​ indicates upper level, Nˉ1\bar{N}_{1}Nˉ1​ indicates lower level. Note that the ion populations will vary along the length of the amplifier. However, because gain is a multiplicative effect and proportional to the exponential-power of the gain and absorption coefficients, the gain can be calculated directly from the longitudinal average of the upper and lower level populations, as indicated by the top-bars on the populations in the above equation.
-For a full model, the radial inversion profile should be calculated self-consistently with the signal and pump waves at enough points along the fiber to represent the longitudinal dependence of spatial hole burning.
-Basic Simulation Setup
-The modular nature of VPIcomponentMaker Fiber Optics makes complex topologies and designs possible, simply by interconnecting modules.
-
-
-The DopedFiber module includes sophisticated numerical techniques to solve for the steady-state equilibrium of signals, pumps and noise.
-Doped Fiber
-The model is based on the bidirectional propagation equations for signals and multilevel rate equations for ion populations. The emission and absorption spectra can be specified in terms of cross sections or Giles parameters. The model includes erbium/ytterbium energy transfer, cross-relaxation effects, homogeneous upconversion, pair-induced quenching (except thulium-doped amplifier), excited-state absorption, homogeneous and inhomogeneous broadening, Rayleigh scattering, and Kerr nonlinearity. The model is resolved in both the longitudinal and transverse directions.
-The gain and absorption characteristics of the dopant ions within the glass host as a function of optical frequency can be specified using cross sections or Giles parameters. The Giles parameters, which represent the gain and absorption of the fiber per unit length, are generally easier to obtain experimentally and are often provided by manufacturers. The relationship between the gain and absorption per unit length and cross sections can be reached.
-Each saturation factor should correspond to the lifetime of spontaneous transition between levels.
-Rate Equations
-The rate equations describe how the population inversion depends on powers of the signals and pumps propagating in the fiber.
-In the Effective Overlap Approximation, the overlap between optical mode and excited ions is assumed to be independent of optical power and equal to the overlap between the mode and total dopant distribution. This approximation is valid if the dopant ions are well confined to the center of the optical mode and the intensity changes insignificantly over the transverse dopant profile. In this case, the solution of the steady-state rate equations for a two-level laser medium is given by:
-f2(z)≡nˉ2nˉt=∑kPk∗α12khfkζ1+∑kPk∗(α12k+g21k)hfkζf_{2}(z) \equiv \frac{\bar{n}_{2}}{\bar{n}_{t}}=\frac{\sum_{k} \frac{P_{k}^{*} \alpha_{12}^{k}}{h f_{k} \zeta}}{1+\sum_{k} \frac{P_{k}^{*}\left(\alpha_{12}^{k}+g_{21}^{k}\right)}{h f_{k} \zeta}}
-f2​(z)≡nˉt​nˉ2​​=1+∑k​hfk​ζPk∗​(α12k​+g21k​)​∑k​hfk​ζPk∗​α12k​​​
-Propagation Equations
-The propagation equations describing a spatial evolution of the optical fields propagating along the EDF. (what&#39;s the result?)
-uk±dPks±dz=[gkf2(z)−αkf1(z)]Pks±−lkPks±u_{k}^{\pm} \frac{d P_{k}^{s \pm}}{d z}=\left[g_{k} f_{2}(z)-\alpha_{k} f_{1}(z)\right] P_{k}^{s \pm}-l_{k} P_{k}^{s \pm}
-uk±​dzdPks±​​=[gk​f2​(z)−αk​f1​(z)]Pks±​−lk​Pks±​
-uk±dPkas±dz=[gkf2(z)−αkf1(z)]Pkase±+2gkf2(z)MhfkΔfk−lkPkase±+ηkPkase∓u_{k}^{\pm} \frac{d P_{k}^{a s \pm}}{d z}=\left[g_{k} f_{2}(z)-\alpha_{k} f_{1}(z)\right] P_{k}^{a s e \pm}+2 g_{k} f_{2}(z) M h f_{k} \Delta f_{k}-l_{k} P_{k}^{a s e \pm}+\eta_{k} P_{k}^{a s e \mp}
-uk±​dzdPkas±​​=[gk​f2​(z)−αk​f1​(z)]Pkase±​+2gk​f2​(z)Mhfk​Δfk​−lk​Pkase±​+ηk​Pkase∓​
-Transient Dynamics of a Single EDFA
-16 channels are transmitted. At the time moment t=0.2 ms the channels 9-16 are dropped. The decreased EDFA input power due to the channel dropping leads to an increase of the inversion level (for constant pumping) followed by an increase of the output power of the remaining channels. At the time moment t=0.7 ms the channels 9-16 are restored. This causes a second power transient followed by restoration of all output channel powers to the initial state. Duration of both drop and restore events is 0.1 ms.
-
-Dynamics of Electronically Gain-Clamped EDFA
-
-Modeling erbium-doped fiber amplifiers.
-Giles CR, Desurvire E. Journal of lightwave technology. 1991 Feb;9(2):271-83.
-PROPAGATION AND RATE EQUATION
-We can think of light in the amplifier to be propagating as a number of optical beams of frequency bandwidth Δvk\Delta v_kΔvk​ centered at the optical wavelength vkv_kvk​.
-Rate equations describe the effects of absorption, stimulated emission, and spontaneous emission on the populations of the ground and metastable states.
-SPATIAL-MODE MODELING IN ERBIUM AMPLIFIER
-ik(r)i_k(r)ik​(r):the normalized intensity distribution of the fundamental mode (LP01LP_01LP0​1). (?The modes of the pump and signal.)
-The fiber absorption and gain spectra:
-αk=σakΓknt\alpha_k = \sigma_{ak}\Gamma_kn_t
-αk​=σak​Γk​nt​
-gk=σekΓkntg_k = \sigma_{ek}\Gamma_kn_t
-gk​=σek​Γk​nt​
-The overlap integral between the dopant and optical mode:
-Γk=∫02π∫0bik(r,ϕ)rdrdϕ\Gamma_{k}=\int_{0}^{2 \pi} \int_{0}^{b} i_{k}(r, \phi) r d r d \phi
-Γk​=∫02π​∫0b​ik​(r,ϕ)rdrdϕ
-Written in terms of these new parameters, the amplifier propagation
-equation becomes
-dPkdz=αk+gk∗ΓkPk∫02π∫0bn2(r,ϕ,z)ntikrdrdϕ−(αk+lk)Pk+gk∗ΓkmhνkΔνk∫02π∫0bn2(r,ϕ,z)ntikrdrdϕ.\begin{aligned}
-\frac{d P_{k}}{d z}=&amp;amp; \frac{\alpha_{k}+g_{k}^{*}}{\Gamma_{k}} P_{k} \int_{0}^{2 \pi} \int_{0}^{b} \frac{n_{2}(r, \phi, z)}{n_{t}} i_{k} r d r d \phi-\left(\alpha_{k}+l_{k}\right) P_{k} \\
-&amp;amp;+\frac{g_{k}^{*}}{\Gamma_{k}} m h \nu_{k} \Delta \nu_{k} \int_{0}^{2 \pi} \int_{0}^{b} \frac{n_{2}(r, \phi, z)}{n_{t}} i_{k} r d r d \phi .
-\end{aligned}
-dzdPk​​=​Γk​αk​+gk∗​​Pk​∫02π​∫0b​nt​n2​(r,ϕ,z)​ik​rdrdϕ−(αk​+lk​)Pk​+Γk​gk∗​​mhνk​Δνk​∫02π​∫0b​nt​n2​(r,ϕ,z)​ik​rdrdϕ.​
-An additional loss term lkl_klk​ has been added to the propagation equation to account for excess fiber loss.
-n2(r,ϕ,z)=nt∑kτσakhvkPkik1+∑k(σak+σek)hνkPkik.n_{2}(r, \phi, z)=n_{t} \frac{\sum_{k} \frac{\tau \sigma_{a k}}{h v_{k}} P_{k} i_{k}}{1+\sum_{k} \frac{\left(\sigma_{a k}+\sigma_{e k}\right)}{h \nu_{k}} P_{k} i_{k}} .
-n2​(r,ϕ,z)=nt​1+∑k​hνk​(σak​+σek​)​Pk​ik​∑k​hvk​τσak​​Pk​ik​​.
-Solutions to above equations are obtained by standard numerical integration techniques.
-NUMERICAL MODELING OF SPECTRAL PROPERTIES
-what&#39;s the difference?
-Simulation of Dynamic Effects in EDFAs
-Amplifier modules used in modern WDM optical telecommunication systems should
-suppress gain variations that may result from nonstationary perturbations of the amplifier input power. The power changes can appear because of the network reconfiguration, protection switching or fiber cuts.
-A typical question is &#39;how fast and how good is the gain recovery?&#39;.
-∂N2∂t=−N2τ−∑jukhvkA∂Pk∂z\frac{\partial N_{2}}{\partial t}=-\frac{N_{2}}{\tau}-\sum_{j} \frac{u_{k}}{h v_{k} A} \frac{\partial P_{k}}{\partial z}
-∂t∂N2​​=−τN2​​−j∑​hvk​Auk​​∂z∂Pk​​
-EDFA基础知识
-EDFA能级跃迁数学模型
-基本知识
-980nm作为泵浦波长，具有更小的噪声系数和更高的泵浦效率。1480nm泵浦可以获得更高的泵浦功率。
-对应一定的泵浦功率，EDF有一最大增益长度。
-饱和输出功率，定义为增益相对于小信号增益降低3dB时的输出信号功率。小信号增益是线性的，随输入光功率增大，EDFA进入增益饱和区。
-对于EDFA，放大的自发辐射是噪声的主要来源。NF具有3dB的量子极限。
-密集波分复用(DWDM)光通信系统和未来的全光通信系统对EDFA 的性能要求越来越高，与第一代 EDFA 主要要求功率放大不同，下一代 EDFA 的要求更加全面，其功能也更加完善。这些主要表现在具有克服瞬态效应、宽带及其平坦、在线监控、低功耗、噪声系在数低、输出功率大、低成本等特点。
-瞬态效应
-工作在实际通信线路上的EDFA,在输入光功率突然变大/变小的时刻,如果泵浦输出功率不能及时跟随输入变化而变小/变大,则掺铒光纤( Erbium Doped Fibe,EDF)中反转离子数仍保持在变化前的水平,会导致剩余通道的增益突然变小/变大,这种增益跃变经多级EDFA级联而积累,会引起线路阻塞或产生误码。如果输入光功率迅速增大,则产生时的光浪涌,经级联放大后,峰值功率可达数瓦,可能损坏通信设备的光/电(O/E)转换器及光连接器端面。
-超短脉冲激光器
-被动锁模掺饵光纤激光器
-在净色散为正的色散管理激光器中，通过调节激光器的参数，如泵浦功率和偏振条件，可以在同一台激光器中输出色散管理孤子，自相似子及耗散孤子。不同的脉冲种类可以通过光谱进行区分。
-通过色散补偿技术，成功地在通信波段设计出全光纤耗散孤子超短脉冲光纤激光器，脉宽达到了 78.9 fs，能量 4.6 nJ，峰值功率超过 50 kW，该峰值功率可以和普通的啁啾放大系统相比拟。
-实验得到了 128  fs  的超短脉冲，这是在光纤负色散区得到的最短脉冲。得益于脉冲的超短脉宽，虽然激光器工作在负色散区，但是脉冲没有凯利边带。
-光纤激光器的被动锁模方法
-光纤激光器不仅可以利用传统的锁模方法实现锁模例如饱和吸收体等，还可以利用强的非线性效应如自相位调制，交叉相位调制，构成非线性偏振旋转机制锁模。
-基本原理：假设初始脉冲是线偏振态，通过一个四分之一波片后变为椭圆偏振态，椭圆偏振光可以认为是强度不同的两个偏振方向正交的线性偏振分量的叠加。这两个偏振分量在光纤中传输时，由于受到光纤的非线性效应作用（包括自相位调制和交叉相位调制），产生大小不同的非线性相移，从而使脉冲偏振态发生变化。由于偏振态的变化和光强有关，所以脉冲中心部分的变化量大于两翼处，再调节半波片使得脉冲中心的高强度部分能透过起偏器，则两翼的低强度部分会被起偏器阻止，这样就形成了等效的可饱和吸收体，从而可以实现锁模功能。
-光纤激光器中的脉冲特性受非线性及色散的影响很大。金兹堡-朗道方程是在非线性薛定谔方程的基础上，增加一些激光器内的物理效应，如增益饱和，饱和吸收体，及其它高阶项等，该方程的实用条件是假设脉冲在腔内的变化不大：
-iψz+D2ψtt+ψ∣ψ∣2=iδψ+iβψtt+iεψ∣ψ∣2+iμψ∣ψ∣4i \psi_{z}+\frac{D}{2} \psi_{t t}+\psi|\psi|^{2}=i \delta \psi+i \beta \psi_{t t}+i \varepsilon \psi|\psi|^{2}+i \mu \psi|\psi|^{4}
-iψz​+2D​ψtt​+ψ∣ψ∣2=iδψ+iβψtt​+iεψ∣ψ∣2+iμψ∣ψ∣4
-β=goωg2∣β2∣\beta=\frac{g_{o}}{\omega_{g}^{2}\left|\beta_{2}\right|}
-β=ωg2​∣β2​∣go​​
-δ=Lgo+ln⁡∣θcos⁡2α3cos⁡α∣\delta=L g_{o}+\ln \left|\theta \cos 2 \alpha_{3} \cos \alpha\right|
-δ=Lgo​+ln∣θcos2α3​cosα∣
-ε=−13sin⁡2α2tan⁡α,μ=−19sin⁡22α32cos⁡2α,α=2α2−α1−α3\varepsilon=-\frac{1}{3} \sin 2 \alpha_{2} \tan \alpha, \mu=-\frac{1}{9} \frac{\sin ^{2} 2 \alpha_{3}}{2 \cos ^{2} \alpha}, \alpha=2 \alpha_{2}-\alpha_{1}-\alpha_{3}
-ε=−31​sin2α2​tanα,μ=−91​2cos2αsin22α3​​,α=2α2​−α1​−α3​
-ψ\psiψ是光场振幅, z  和 t 表示传播距离和时间，D 是腔内总色散，β2\beta_2β2​是增益介质二阶色散大小，g0g_0g0​是线性增益，ωg\omega_gωg​是增益带宽，α1\alpha_1α1​,α2\alpha_2α2​和α3\alpha_3α3​表示波片 1,2,3 的本征轴和起偏器偏振方向的夹角。在负色散和非线性的平衡作用下，产生孤子脉冲。当耗散效应较强无法忽略时，金兹堡-朗道方程的解是耗散孤子脉冲和自相似子脉冲。
-论证
-调研
-相敏参量放大
-全光信号处理 逻辑门：数学模型
-解耦
-C+L 满载 非参数化 高精度仿真 效率问题（考虑SRS 光纤的传输计算耗时）
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/fang-da-qi-ji-guang-qi-deng-ji-li-diao-yan/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/">
-                        光纤通信系统GN模型
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-02-16</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-success">
-            #科研日常
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            非线性光纤光学
-光纤模式
-纤芯和包层折射率分别为n1n_1n1​和n2n_2n2​，归一化频率定义为
-V=k0a(n12−n22)1/2V = k_{0} a(n_{1}^{2} - n_{2}^{2}  )^{1/2} 
-V=k0​a(n12​−n22​)1/2
-式中k0=2π/λk_0=2\pi/\lambdak0​=2π/λ，a为纤芯半径，λ\lambdaλ为光波波长。若V &amp;lt; 2.405则为单模。
-光纤损耗
-
-主要因素是材料吸收（如OH−OH^-OH−）和瑞利散射。瑞利散射是由于制造过程中沉积到熔石英中的随机密度变化引起的，导致了折射率本身的起伏，使光向各个方向散射，主要作用在短波长区。
-光纤色散
-当一束电磁波与电介质的束缚电子相互作用时，介质的响应通常与光波频率有关，这种特性称为色散，它表明折射率n(ω)n(\omega)n(ω)对频率的依赖关系。
-
-偏振膜色散
-单模光纤可以维持沿两正交方向偏振的简并模。在光纤的形状为严格的圆柱形、材料为各向同性的理想条件
-下，x  方向偏振态的模式不会与正交的 y 方向偏振态的模耦合。然而，由于其实际形状略偏离圆柱形以及材料各向异性的彶小起伏，破坏了模式简并，导致了两个偏振态的混合。在数学上，模传输常数β\betaβ 对于x , y 方向偏振模稍有不同，光纤的这个性质称为模式双折射。随机的模式双折射导致了无归偏振光。
-非线性效应
-光纤中的最低阶非线性效应起源于三阶电极化率，导致折射率与光强有关（光幅度的平方）。
-自相位调制SPM
-光场在光纤内传输时光场本身引起的附加的非线性相移。
-交叉相位调整XPM
-XPM指的是由不同波长、传输方向或偏振态的脉冲共同传输时，一种光场引起的另一种光场的非线性相移。
-受激拉曼散射SRS
-一幅简单的量子力学图像对 SRS和 SBS 都是适用的。一个人射场的光子（通常称为泵浦）的湮灭，产生了一个下移斯托克斯频率的光子和保持能量与动量守恒的另一个具有恰当能量与动量的声子。
-四波混频FWM
-参量过程起源于光场作用下介质中束缚电子的非线性响应。
-特定的频率和折射率，以满足相位匹配条件。常见的有产生三次谐波，或者是对称的上下边带。
-非线性薛定谔方程推导
-麦克斯韦方程组到波动方程到亥姆霍兹方程到非线性薛定谔方程
-电位移矢量 感应电极化强度 线性极化率 三阶极化率
-GN模型
-假设发射信号为高斯分布
-单span非线性噪声功率谱密度解析式
-对发射端的功率谱密度进行一定形式的积分，就可以得到非线性噪声的功率谱密度，对于今后衡量非线性噪声的大小以及信道均衡都是有很大意义的。
-Poggiolini P, Bosco G, Carena A, Curri V, Jiang Y, Forghieri F. The GN-model of fiber non-linear propagation and its applications. Journal of lightwave technology. 2013 Dec 17;32(4):694-721.
-In networking, a greenfield deployment is the installation and configuration of a network where none existed before, for example in a new office. A brownfield deployment, in contrast, is an upgrade or addition to an existing network and uses some legacy components.
-THE advent of coherent-detection systems supported by digital-signal-processing (DSP) has made it possible to carry out electronic fiber chromatic-dispersion (CD) compensation. This in turn has permitted to avoid optical dispersion compensation, or dispersion management (DM), thus allowing the exploitation of the so-called **&#39;uncompensated&#39; transmission (UT) **technique.
-The GN-model reference formula (GNRF) provides GNLI(f)G_{\mathrm{NLI}}(f)GNLI​(f), that is, the PSD of NLI at the end of the link.
-The NLI PSD generated at a frequency f, that is GNLI(f)G_{\mathrm{NLI}}(f)GNLI​(f), is the integrated result of all the &#39;infinitesimal&#39; non-degenerate FWM products occurring among any three spectral components of the transmitted signal, located at f1, f2 and f3 = (f1 + f2 − f).
-
-Whether the non-linear phenomena taxonomy formerly used for DM systems, such as SPM, XPM, and XPolM, can still be related to UT systems as represented through the GN-model.A possible alternative taxonomy was proposed, consisting of three categories: self-channel interference (SCI), cross-channel interference (XCI) and multi-channel interference (MCI).
-We introduce here an alternative model which coincides with the GN-model over each single span but makes the further approximation of completely neglecting coherent interference among NLI generated in different spans. Assuming a transparent and homogeneous link, the IGNRF greatly simplifies to:
-GNLIinc⁡(f)=1627γ2Leff2Ns∫−∞∞∫−∞∞GWDM(f1)GWDM(f2)GWDM(f1+f2−f)ρ(f1,f2,f)df1 df2\begin{array}{l}
-G_{\mathrm{NLI}}^{\operatorname{inc}}(f)=\frac{16}{27} \gamma^{2} L_{\mathrm{eff}}^{2} N_{s} \\
-\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} G_{\mathrm{WDM}}\left(f_{1}\right) G_{\mathrm{WDM}}\left(f_{2}\right) G_{\mathrm{WDM}}\left(f_{1}+f_{2}-f\right) \\
-\rho\left(f_{1}, f_{2}, f\right) \mathrm{d} f_{1} \mathrm{~d} f_{2}
-\end{array}
-GNLIinc​(f)=2716​γ2Leff2​Ns​∫−∞∞​∫−∞∞​GWDM​(f1​)GWDM​(f2​)GWDM​(f1​+f2​−f)ρ(f1​,f2​,f)df1​ df2​​
-In essence, the IGN-model can be expected to practically coincide with the GN-model for systems with a large number of channels, that make use of a substantial part of the C-band.
-The difference between OSNR and SNR.
-There are still approximated closed-form GN formalution.
-Nyquist WDM
-通过频谱压缩的方式使信号的频谱宽度等于信号的宽度，从而达到了频谱极限。发送端将单个子载波通过数字滤波或者光学滤波方式将信号在频率内整形为近似矩阵，因此在频域内的多个子载波可以以无间隔的方式并行传输。
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/guang-xian-tong-xin-xi-tong-gn-mo-xing/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/yue-du/">
-                        阅读
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-02-06</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-banana">
-            #漫谈
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            加西亚·马尔克斯
-《霍乱时期的爱情》
-在他背后，就在她的耳朵跟前响起了一个声音，只有她一个人才能在嘈杂的人声中分辨得清的声音：
-“对于戴王冠的仙女来说，这里可不是什么好地方。”
-她回过头来一看，在离自己的眼睛两巴掌远的地方，看见了两只冷若冰霜的眼睛，一张苍白的脸，两片因胆怯而咬紧了的嘴唇，就跟那天在望大弥撒时他第一次和她近在咫尺的情况一模一样，有所不同的只是热恋的激情变成了不满的严峻。一刹那间，她发觉自己上了个天大的当，惊讶的在心里自问，怎么可能让一个如此冷酷无情的魔鬼长年累月地占据了自己的芳心。她仅仅来得及想：“我的上帝哟，真是个可怜虫！”阿萨里勉强一笑，开口想说点什么，试图跟她一起走，但她把手一挥，把他从自己的生活里抹去了：
-“不必了，”她说，“忘掉吧。”
-
-读
-两个人的爱情故事，年轻时纯真地热恋，但女方选择了更为实际的道路，与一个地位显赫、家庭富有的医生结婚，度过了柴米油盐酱醋茶的琐碎生活。而男方生活失去了重心，过上了寻花觅柳的风流生活和不断追逐地位相平衡的一种生活。之后俩人年近八十了，女方的丈夫去世，两人间又掀起了热恋，并且是跨过了琐碎的点滴、老夫老妻的热恋。
-爱与性的探讨，文字之中无限的可能性。需要细腻的心思才能体味。
-马尔克斯以巧妙的语言叙述出人心的感受，并且有魔幻现实主义色彩（当然这部应该是较为写实的），令我着迷。
-
-《一桩事先张扬的凶杀案》
-“圣地亚哥·纳萨尔被杀的那一天，清晨五点半就起了床，去迎候主教乘坐的船。”
-圣地亚哥·纳萨尔被杀死，却依然捧着自己的肠子内脏绕了一圈回了家，摔倒了还会抖落内脏上的尘土，甚至还和路上的人打了招呼。
-他只描述奇迹，却不肯说谁是圣徒。
-给我一个偏见，我可以撬动整个地球。
-最后几秒钟死者的母亲关上的死者逃生的前门，维卡里奥两兄弟竭力地希望有人能阻止他们行凶。
-马尔克斯强大的叙事能力，在多个时间段叙述一件事情，互为补充。
-川端康成
-古都
-心流
-你感觉自己完完全全在为这件事情本身而努力，就连自身也都因此显得很遥远。时光飞逝。你觉得自己的每一个动作、想法都如行云流水一般发生、发展。你觉得自己全神贯注，所有的能力被发挥到极致。
-自己的技巧水平要与所面临挑战的难度相匹配，要有较为明确的目标。要使自己处在一个尽量舒服的环境里，清除杂念，深呼吸、冥想。有使自己兴奋的反馈。
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/yue-du/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/">
-                        Acadmic English
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-01-28</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/UOTm9fTA0/" class="post-tag i-tag
-                            i-tag-other_2">
-            #科研日常
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                        <a href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/" class="post-feature-image" style="background-image:url(https://cubewatermelon.github.io/post-images/xue-zhu-ying-yu.png) ">
-                        </a>
-                        
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            Reading, writing, listening and speaking are all important.
-Style: lessons in clarity and grace
-6 Emphasis
-If you consistently write sentences whose subjects/topics name a few central characters and join them to strong verbs, you will likely get the rest of the sentence right, and in the process create a passage that is both cohesive and coherent.
-The general principle is to carry the reader from simplicity to complexity.
-The technical terms should be stated explicitly, and appear at the ends of their sentences.
-
-Just as we look at the first few words of a sentence for point of view, we look to the last few words for emphasis. You can revise a sentence to emphasize particular words that you want readers to hear stressed and thereby note as particularly significant.
-
-Global warming could raise sea levels to a point where much of the world&#39;s low-lying coastal areas would disappear, according to most atmospheric scientists.
-🚩According to most atmospheric scientists, global warming could raise sea levels to a point where much of the world&#39;s low-lying coastal areas would disappear.
-
-You can easily check whether you have stressed the right words by reading your sentences aloud: As you speak the last few words, raise your voice and tap the table with your fingers. If you’ve stressed the wrong words, your voice and table thumping will feel wrong:
-It is sometimes possible to represent a complex idea in a simple sentence, but more often you cannot represent it in that kind of sentence.
-If you&#39;ve stressed the right words, your voice and table thumping will feel right:
-🚩It is sometimes possible to represent a complex idea in a simple sentence, but more OFten you can NOT.
-
-Some editors discourage all there is/there are constructions, but using them lets you shift a subject to the right to emphasize it. Experienced writers commonly begin a paragraph with there to introduce new topics and concepts that they develop in sentences that follow.
-There are several syntactic devices that let you manage where in a sentence you locate units of new information.
-A passive verb lets you flip a subject and object.
-Some claim that our genes influence active aspects of behavior that we think are learned. Our genes, for example, seem to determine . . .
-🚩Some claim that aspects of behavior that we think are learned are in fact influenced passive by our genes. Our genes, for example, seem to determine . . .
-That passage now “hangs together” not for just one reason, but for three:
-
-Its topics consistently focus on physicians and diagnosis.
-Running through it are strings of words that focus on the themes of (1) tests, (2) mental conditions, and (3) a new problem.
-And no less important, the opening sentence helps us notice those themes by emphasizing them at its end.
-In recent years, researchers have made great strides in the early and accurate diagnosis of Alzheimer&#39;s disease, but those diagnoses have raised a new problem about informing those most at risk who show no symptoms of it. Not too long ago, when a physician examined an older patient who seemed out of touch with reality, she had to guess whether that person had Alzheimer&#39;s or was only senile. In the past few years, however, physicians have been able to use new and more reliable tests focusing on genetic clues. But in the accuracy of these new tests lies the risk of another kind of human tragedy: physicians may be able to predict Alzheimer&#39;s long before its overt appearance, but such an early diagnosis could ps ychologically devastate an apparently healthy person.
-
-7 Motivation
-Not only will we struggle through clotted sentences, but we’ll use our prior knowledge to fill in gaps, correct lapses in logic, and make sense of a tangled organization.
-
-Shared context.
-Problem [conditions + cost].
-Solution/Main Point/Claim.
-Make sure the first word of the first sentence after the shared context is but, however, or some other word indicating that you will challenge that shared context. If you don’t explicitly signal the contrast between the shared context and the problem, readers may miss it.
-Does the cost appropriately answer So what?
-For a practical problem the key is to state its costs so clearly that readers will ask not So what? but What do we do?
-
-8 Global Coherence
-Put the point sentence at the end of the short opening segment; make it the last sentence that your reader reads before starting the longer, more complex segment that follows.
-
-To write a document that readers will think is coherent, open every unit—section, subsection, and the whole—with a short, easily grasped introductory segment. At the end of that opening segment, put a sentence
-that states both the point of the unit and the key concepts that follow.
-
-Readers are more likely to judge as clear any unit of writing that opens with a short segment that they can easily grasp and that frames the longer and more complex segment that follows.
-In a simple sentence, that short, easily grasped segment is a subject/topic. Compare these two:
-🚩1a. Resistance in Nevada against its use as a waste disposal site has been heated.
-1b. Nevada has heatedly resisted its use as a waste disposal site.
-2b. Historians are reassessing Columbus&#39; role in world history, because
-they know more about pre-Columbian civilizations and how European colonization destroyed their societies by inflicting on them devastating diseases.
-In (2b), the opening clause states the main point of the sentence, its most important claim: Historians are reassessing Columbus&#39; role... That claim
-is then supported by the longer and more complex clause that follows.
-9 Concision
-You write more clearly when you match your characters and actions to your subjects and verbs, when you get the right characters into topics and the right words under stress, when you motivate readers with well-crafted introductions, and when you frame your paragraphs, sections, and documents to help readers grasp their global coherence.
-Imagine someone trying to learn the rules for playing the game of chess.
-Learn implies trying, rules implies playing the game, chess is a game. So more concisely,
-Imagine learning the rules of chess.
-
-You need some metadiscourse in everything you write, especially metadiscourse that guides readers through your text, words such as first, second, therefore, on the other hand, and so on. You also need some metadiscourse that hedges your certainty, words such as perhaps, seems, could, and so on. The risk is in using too many.
-
-10 Shape
-In this lesson, I focus on how to write sentences that are not only long and complex but also clear and shapely.
-
-Readers read most easily when you quickly get them to the subject of your main clause and then past that subject to its verb and object. Avoid long introductory phrases and clauses, long subjects, and interruptions between
-subjects and verbs and between verbs and objects.
-
-
-Rule of Thumb 1: Get to the subject quickly.
-
-Since most undergraduate students change their major fields of study at least once during their college careers, first-year students who are not certain about the program of studies they want to pursue should not load up their schedules to meet requirements for a particular program.
-🚩First-year students should not load up their schedules with requirements for a particular program if they are not certain about the program of studies they want to pursue, because most change their major fields of study at least once during their college careers.
-
-Rule of Thumb 2: Get to the verb and object quickly.
-
-🚩In a long sentence, put at its end the newest and most important information that you want your reader to remember.
-Some scientists, because they write in a style that is impersonal and objective, do not easily communicate with laypeople.
-🚩Since some scientists write in a style that is impersonal and objective, they do not easily communicate with laypeople. This lack of communication damages . . .
-A company that focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs is likely to earn the loyalty of its employees.
-🚩A company is likely to earn the loyalty of its employees when it focuses on hiring the best personnel and then trains them not just for the work they are hired to do but for higher-level jobs.
-If you are confused by a sprawling sentence when you read, focus on the relative pronouns who, which, and that. Pause a moment to figure out what each one refers to.
-When you have to write a long sentence, don&#39;t just add one phrase or clause after another, willy-nilly. Particularly avoid tacking one relative clause onto another onto another. Try extending the line of a sentence with
-resumptive, summative, and free modifiers.
-Coordination lets you extend the line of a sentence more gracefully than by tacking on one element to another. When you can coordinate, try to order the elements so that they go from shorter to longer, from simpler to more complex.
-We should devote a few final words to a matter that reaches beyond the techniques of research to the connections between objective research and those subjective values that reflect our deepest ethical choices and strongest intellectual commitments.
-When you use one of these conjunctions, however, be sure to put the and, but, or (n)or before a word that is coordinate with what follows the both, not only, and (n)either.
-When you punctuate carefully, you not only help readers understand a complex sentence more easily, but you enhance your own image as a good writer.
-They should precede the same part of speech:
-🚩When you punctuate carefully, you not only help readers understand a complex sentence more easily, but enhance your own image as a good writer.
-Ordinarily, we coordinate elements only of the same grammatical structure: clause and clause, prepositional phrase andprepositional phrase, and so on.
-We respond to coordination best when the elements are coordinate not only in grammar but also in thought. Some inexperienced writers coordinate by just joining one element to another with and:
-Grade inflation is a problem at many universities, and it leads to a devaluation of good grades earned by hard work and will not be solved simply by grading harder.
-Those ands obscure the relationships among those claims:
-🚩Grade inflation is a problem at many universities, because it devalues good grades that were earned by hard work, but it will not be solved simply by grading harder.
-Example
-We also systematically benchmark methods of selecting relevant input for higher efficiency, achieving 4x gains in speed and memory, while retaining 92% of the results.
-We are benchmarking our performance against external criteria.
-Promise: a declaration or assurance that one will do a particular thing or that a particular thing will happen.
-Those principles are easy to state but hard to follow, because you have to inch your way through every sentence you write, cutting here, compressing there, and that&#39;s labor intensive.
-I can offer no principle that tells you when to replace a phrase with a word, much less give you the word.
-Now that we see what the sentence says, we can make it still more direct.
-But in boiling down that original paragraph to a quarter of its original length, I&#39;ve bleached out its garrulous charm, a tradeoff that many readers would reject.
-Leonardo da Vinci was a man of powerful intellect, driven by [i.e., Leonardo was driven by] an insatiable curiosity and haunted by a vision of artistic perfection.
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/xue-zhu-ying-yu/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/hello-gridea/">
-                        Hello Gridea
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2018-12-12</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/P660K6oZo/" class="post-tag i-tag
-                            i-tag-other_2">
-            #Gridea
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                        <a href="https://cubewatermelon.github.io/post/hello-gridea/" class="post-feature-image" style="background-image:url(https://cubewatermelon.github.io/post-images/hello-gridea.png) ">
-                        </a>
-                        
-                            <div class="post-content">
-                                
-                                    <div class="post-content-abstract">
-                                        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-
-                                    </div>
-                                    
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/hello-gridea/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
-            
-                <!-- 翻页 -->
-                
-                </div>
-                <!--  -->
-                <div class="main-container-middle"></div>
-                <!--  -->
-                <div id="sidebar" class="main-container-right">
-
-                    <!-- 个人信息 -->
-                    
-    <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1614680338007)">
-        </div>
-        <h1 class="id_card-title">
-            Firo&#39;s Daily
-        </h1>
-        <h2 class="id_card-description">
-            唯有不断前进
-        </h2>
-        <!--  -->
-        <div class="id_card-sns">
-            <!-- github -->
-            
-                <a href="https://github.com/cubewatermelon" target="_blank" rel="noopener noreferrer"><i
-                class="fa fa-github"></i></a>
-                
-                    <!-- twitter -->
-                    
-                            <!-- weibo -->
-                            
-                                    <!-- facebook -->
-                                    
-
-        </div>
-    </div>
+        <div class="pagination-container">
     
-
-                        <!-- 公告栏 -->
-                        
-
-                </div>
-            </div>
+    
+</div>
 
 
-
-            <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://cubewatermelon.github.io/atom.xml" target="_blank">RSS</a>
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">唯有不断前进</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/cubewatermelon" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://cubewatermelon.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
 <script>
@@ -715,12 +466,6 @@ Leonardo da Vinci was a man of powerful intellect, driven by [i.e., Leonardo was
 </script>
 
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
+</div>
 </body>
-
 </html>

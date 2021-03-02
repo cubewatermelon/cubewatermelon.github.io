@@ -1,298 +1,334 @@
 <html>
-
 <head>
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>
-    漫谈 | Firo&#39;s Daily
-</title>
-<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1614680338007">
-<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> -->
-<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+<title>漫谈 | Firo&#39;s Daily</title>
+
+<link rel="shortcut icon" href="https://cubewatermelon.github.io/favicon.ico?v=1614699993575">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cubewatermelon.github.io/styles/main.css">
-<!-- js -->
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cubewatermelon.github.io/media/js/jquery.sticky-sidebar.min.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<style>
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 </head>
-
 <body>
-    <div class="main">
-        <div class="header">
-    <div class="nav">
-        <div class="logo">
-            <a href="https://cubewatermelon.github.io">
-                <img class="avatar" src="https://cubewatermelon.github.io/images/avatar.png?v=1614680338007" alt="">
-            </a>
-            <div class="site-title">
-                <h1>
-                    Firo&#39;s Daily
-                </h1>
-            </div>
+<div class="main gt-bg-theme-color-first">
+    <div class="main-content">
+        <style>
+    /* 导航栏样式 */
+    .navbar {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-brand {
+        display: inline-block;
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
+
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        text-decoration: none;
+    }
+
+    .navbar-nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .navbar-collapse {
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+
+    .navbar-toggler:hover,
+    .navbar-toggler:focus {
+        text-decoration: none;
+    }
+
+    @media (min-width: 992px) {
+        .navbar-expand-lg {
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+        }
+
+        .navbar-expand-lg .navbar-nav {
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        .navbar-expand-lg .navbar-collapse {
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        }
+
+        .navbar-expand-lg .navbar-toggler {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        #navbarSupportedContent {
+            display: none;
+        }
+    }
+</style>
+<nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Firo&#39;s Daily
         </div>
-        <span class="menu-btn fa fa-align-justify"></span>
-        <div class="menu-container">
-            <ul>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
                 
-                    
-                            <li>
-                                <a href="/" class="menu">
-                                    首页
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/archives" class="menu">
-                                    归档
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/tags" class="menu">
-                                    标签
-                                </a>
-                            </li>
-                            
-                                
-                    
-                            <li>
-                                <a href="/post/about" class="menu">
-                                    关于
-                                </a>
-                            </li>
-                            
-                                
-            </ul>
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/post/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
         </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1614699993575"
+                action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #漫谈
+            </h2>
+        </div>
+        <div class="post-list-container">
+    <div class="post-inner">
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/yue-du/">
+                            <span class="post-title gt-c-content-color-first">阅读</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>读点书吧。</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-02-06 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag">
+                                # 漫谈
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/yue-du/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/yue-du.jpg')">
+                    </a>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">
+                            <span class="post-title gt-c-content-color-first">你是自由的</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-01-28 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag">
+                                # 漫谈
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/jin-ji-de-ju-ren.png')">
+                    </a>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://cubewatermelon.github.io/post/man-tan/">
+                            <span class="post-title gt-c-content-color-first">哦，阿瑟</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2021-01-27 ·
+                        </time>
+                        
+                            <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag">
+                                # 漫谈
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://cubewatermelon.github.io/post/man-tan/" class="post-feature-image"
+                       style="background-image: url('https://cubewatermelon.github.io/post-images/man-tan.png')">
+                    </a>
+                
+            </div>
+        
     </div>
 </div>
-
-<script>
-    $(document).ready(function() {
-        $(".menu-btn").click(function() {
-            $(".menu-container").slideToggle();
-        });
-        $(window).resize(function() {
-
-            if (window.matchMedia('(min-width: 960px)').matches) {
-                $(".menu-container").css('display', 'block')
-            } else {
-                $(".menu-container").css('display', 'none')
-            }
-
-        });
-    });
-</script>
-
-            <div id="main-content" class="post-container main-container">
-                <div id="content" class="main-container-left">
-                    
-    <div class="i-card">
-        <b>标签：#
-        漫谈</b>
-    </div>
+        <div class="pagination-container">
     
+    
+</div>
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">唯有不断前进</div>
+    <div class="social-container">
         
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/yue-du/">
-                        阅读
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-02-06</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-other_2">
-            #漫谈
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            加西亚·马尔克斯
-《霍乱时期的爱情》
-在他背后，就在她的耳朵跟前响起了一个声音，只有她一个人才能在嘈杂的人声中分辨得清的声音：
-“对于戴王冠的仙女来说，这里可不是什么好地方。”
-她回过头来一看，在离自己的眼睛两巴掌远的地方，看见了两只冷若冰霜的眼睛，一张苍白的脸，两片因胆怯而咬紧了的嘴唇，就跟那天在望大弥撒时他第一次和她近在咫尺的情况一模一样，有所不同的只是热恋的激情变成了不满的严峻。一刹那间，她发觉自己上了个天大的当，惊讶的在心里自问，怎么可能让一个如此冷酷无情的魔鬼长年累月地占据了自己的芳心。她仅仅来得及想：“我的上帝哟，真是个可怜虫！”阿萨里勉强一笑，开口想说点什么，试图跟她一起走，但她把手一挥，把他从自己的生活里抹去了：
-“不必了，”她说，“忘掉吧。”
-
-读
-两个人的爱情故事，年轻时纯真地热恋，但女方选择了更为实际的道路，与一个地位显赫、家庭富有的医生结婚，度过了柴米油盐酱醋茶的琐碎生活。而男方生活失去了重心，过上了寻花觅柳的风流生活和不断追逐地位相平衡的一种生活。之后俩人年近八十了，女方的丈夫去世，两人间又掀起了热恋，并且是跨过了琐碎的点滴、老夫老妻的热恋。
-爱与性的探讨，文字之中无限的可能性。需要细腻的心思才能体味。
-马尔克斯以巧妙的语言叙述出人心的感受，并且有魔幻现实主义色彩（当然这部应该是较为写实的），令我着迷。
-
-《一桩事先张扬的凶杀案》
-“圣地亚哥·纳萨尔被杀的那一天，清晨五点半就起了床，去迎候主教乘坐的船。”
-圣地亚哥·纳萨尔被杀死，却依然捧着自己的肠子内脏绕了一圈回了家，摔倒了还会抖落内脏上的尘土，甚至还和路上的人打了招呼。
-他只描述奇迹，却不肯说谁是圣徒。
-给我一个偏见，我可以撬动整个地球。
-最后几秒钟死者的母亲关上的死者逃生的前门，维卡里奥两兄弟竭力地希望有人能阻止他们行凶。
-马尔克斯强大的叙事能力，在多个时间段叙述一件事情，互为补充。
-川端康成
-古都
-心流
-你感觉自己完完全全在为这件事情本身而努力，就连自身也都因此显得很遥远。时光飞逝。你觉得自己的每一个动作、想法都如行云流水一般发生、发展。你觉得自己全神贯注，所有的能力被发挥到极致。
-自己的技巧水平要与所面临挑战的难度相匹配，要有较为明确的目标。要使自己处在一个尽量舒服的环境里，清除杂念，深呼吸、冥想。有使自己兴奋的反馈。
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/yue-du/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
             
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">
-                        你是自由的
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-01-28</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-warning">
-            #漫谈
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                        <a href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/" class="post-feature-image" style="background-image:url(https://cubewatermelon.github.io/post-images/jin-ji-de-ju-ren.png) ">
-                        </a>
-                        
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            进击的巨人
-唯有不断前进
-自由
-肯尼说，人都是沉迷于什么，执着于什么，都是某样东西的奴隶，所以才撑得下去，所以才不断前进。埃尔文团长执着于世界的真相，甚至比人类的胜利重要，为了这个“欲望”将无数士兵送入地狱。但是在距离真相咫尺的最后关头却放弃了自己的欲望，或者说不再被欲望羁绊，更加自由了，成为了墙内人类了解世界真相的最后一块沉重的垫脚石。
-进击的巨人，或者艾伦的执念是拯救三笠、艾尔敏还有大家，他又该如何做呢。
-永生之酒 Baccaon！
-精妙的叙事技巧，讲述了跨越两百年的不死者争斗，以及一场涉及多方势力的火车混战。
-电锯人
-自由恶魔-藤本树
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/jin-ji-de-ju-ren/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
+                <a href="https://github.com/cubewatermelon" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
             
-            <article class="post i-card">
-                <h2 class="post-title">
-                    <a href="https://cubewatermelon.github.io/post/man-tan/">
-                        哦，阿瑟
-                    </a>
-                </h2>
-                <div class="post-info">
-                    <time class="post-time">2021-01-27</time>
-                    
-                        <a href="https://cubewatermelon.github.io/tag/Qu7KGCLVc/" class="post-tag i-tag
-                            i-tag-banana">
-            #漫谈
-        </a>
-                        
-                </div>
-                <div class="post-article">
-                    
-                        <a href="https://cubewatermelon.github.io/post/man-tan/" class="post-feature-image" style="background-image:url(https://cubewatermelon.github.io/post-images/man-tan.png) ">
-                        </a>
-                        
-                            <div class="post-content">
-                                
-                                        <div class="post-content-content">
-                                            Grand Theft Auto 5
-GTA5轻松的游戏氛围让人容易打下去，即使脑子比较疲惫。开各种载具、打打杀杀，有拖车拉货也有跑车追逐，可以在酒馆里玩飞镖也可以精心筹划抢劫大型银行，可以疯狂杀戮、暗杀、坐着潜艇直升机入侵军事基地，还得在FIB的胁迫下恐怖袭击，在洛圣都无法无天也可以有正常的生活，游戏玩法十分丰富，在几乎与真实世界相同的洛圣都里，无所不能。
-GTA5的故事模式记录了小富由街头小混混到成熟混混的成长，麦克的报应，老崔的，额，就是癫狂，还有老崔和麦克的所谓和解。老崔的癫狂，小富的义气活力，麦克的复杂，三人一狗满足了玩家几乎所有的犯罪幻想。小富由一个年轻的黑人街头混混逐步成长，他也给家里弄的干干净净；麦克陷于家庭的困境，沾花惹草的阿曼达，肥宅无用儿子，一心成名的女儿；老崔一心一意的“癫狂”，不在乎任何事情，和老年人谈恋爱，也有自己要坚守的兄弟原则。
-What remains of Edith Finch
-交互式的电影，第九艺术的代表。Giant Sparrow.
-每个故事都有其独特的玩法，演出十分精彩，然而许多人的去世玩下来感觉好多摸不着头脑（名字也根本记不住）。可能这就是被诅咒的死亡吧。
-Molly:变成猫追逐鸟儿，变成老鹰狩猎兔子，变成鲨鱼捕食鱼儿，变成蛇杀死自己。好饿啊。
-Calvin:荡秋千直到飞翔。
-Barbara:漫画的视角体验芭芭拉的鬼屋惊魂。
-Lewis:不断切鱼的精神病小子，左手想象，右手切鱼。王冠戴在头上，头落在地上。
-Sam:和女儿狩猎鹿，却因为逞能被鹿撞下山崖。
-Gus:在狂风中放风筝。
-Gregory:在澡缸中戏水，在想象力的欢乐中去世。
-Walter:因芭芭拉之死而终日在地下室度过，每天一罐桃子罐头。
-Red Dead Redemption II
-当我们把杰克“接”回来之后，我（阿瑟）和大家一起围在火堆旁，哈维尔弹着吉他，大家一起唱着歌，我知道我得写点什么了。荒野大镖客，令人沉浸的故事，有血有肉的时代环境，游戏艺术莫过如此。
-阿瑟去世了，筋疲力尽后望着日出，以他的救赎使得约翰和阿比盖尔与小杰克可以幸福地活下去（几年）。范帮早该解散让大家各谋生路去了，但是达奇这个疯子又怎么会愿意呢，他只想进行西部时代最后的疯狂，而且要拉所有人一起陪葬，他一直都有他的god damn plan，去进行所谓的“最后一票”，然后大家一起去塔希提（大溪地，居然华侨很多，高更也是在这里；看样阿瑟对那个画家的建议被采纳了）种芒果。
-大表哥2真的是开放世界之神，在这个世界真的几乎可以干所有那个时代的事情，而且精彩的故事模式也将玩家深深地带入到那个世界之中，伤感的音乐以及顶级的画面。在之前，我去银行从来是抢劫，但是约翰进银行就是贷款了（信用借贷起步真早），而且约翰还得在牧场里挤奶、铲粪、修围栏等等，一天才赚3刀。
-这个游戏我最爱的兄弟第一是查尔斯，第二是兰尼。也正如阿瑟所说，查尔斯不用装，他就是个好人；而我，时时在好人与坏人之间伪装徘徊，不知道自己是什么。兰尼也是个好人，而且还十分年轻，非常地积极，想要做出成就，帮助他人，他的死全怪迈卡老贼。查尔斯的陪伴也是约翰活下来后最重要的了，帮约翰保卫牧场安全，说实话，他为了安全找来保镖押送房屋建材的时候我真是十分感动，查尔斯确实是全心全意地在为他人考虑，还帮忙把房子建起来了。
-还有就是英雄迟暮的感觉，阿瑟是范帮第一工具人了，而且各方面也都是最强的（射击，搏斗，执行力等等），但是肺结核严重了之后连骂迈卡都骂不上劲了，眼看着他排挤自己，颠倒黑白。何西阿应该也是这样吧，年纪很大了，游戏前期还带着阿瑟去打猎，骗钱啥的，后期感觉确实是没有精力了，在范帮也说不上什么话了。难受。
-
-                                        </div>
-                                        
-                                            <a class="btn btn-text" href="https://cubewatermelon.github.io/post/man-tan/">Read More ~</a>
-                            </div>
-                </div>
-            </article>
+        
             
-                <!-- 翻页 -->
-                
-                </div>
-                <!--  -->
-                <div class="main-container-middle"></div>
-                <!--  -->
-                <div id="sidebar" class="main-container-right">
-
-                    <!-- 个人信息 -->
-                    
-    <div class="id_card i-card">
-        <div class="id_card-avatar" style="background-image: url(https://cubewatermelon.github.io/images/avatar.png?v=1614680338007)">
-        </div>
-        <h1 class="id_card-title">
-            Firo&#39;s Daily
-        </h1>
-        <h2 class="id_card-description">
-            唯有不断前进
-        </h2>
-        <!--  -->
-        <div class="id_card-sns">
-            <!-- github -->
+        
             
-                <a href="https://github.com/cubewatermelon" target="_blank" rel="noopener noreferrer"><i
-                class="fa fa-github"></i></a>
-                
-                    <!-- twitter -->
-                    
-                            <!-- weibo -->
-                            
-                                    <!-- facebook -->
-                                    
-
-        </div>
+        
+            
+        
+            
+        
+            
+        
     </div>
-    
-
-                        <!-- 公告栏 -->
-                        
-
-                </div>
-            </div>
-
-
-
-            <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://cubewatermelon.github.io/atom.xml" target="_blank">RSS</a>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://cubewatermelon.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
 <script>
@@ -300,12 +336,6 @@ Red Dead Redemption II
 </script>
 
     </div>
-    <script>
-        $('#sidebar').stickySidebar({
-            topSpacing: 80,
-            // bottomSpacing: 60
-        });
-    </script>
+</div>
 </body>
-
 </html>
