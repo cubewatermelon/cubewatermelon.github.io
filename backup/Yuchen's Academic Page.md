@@ -2,10 +2,21 @@
 <img  src="https://github.com/user-attachments/assets/b8ce8213-b979-4dc7-b052-4cec955a697a" width="200" />
 </p>
 <p align = "center"><strong>Yuchen Song / 宋裕琛</strong></p>  
-I'm currently pursuing the Ph.D. degree with the School of Electronic Engineering, BUPT.  Supervised by Prof. Danshi Wang.
-<a href="https://see.bupt.edu.cn/info/1051/2196.htm">王丹石</a>
+I'm currently pursuing the Ph.D. degree with the School of Electronic Engineering, BUPT.  Supervised by Prof. Danshi Wang
+<a href="https://see.bupt.edu.cn/info/1051/2196.htm">王丹石</a>.  
 
-My primary research interests include optical performance modeling and optimization in wideband optical networks, digital twin networks, physics-informed machine learning, and large models for optical networks. 
+My primary research interests include
+- Optical performance modeling and optimization in wideband optical networks
+- Digital twin networks
+- Physics-informed machine learning
+- Large models for optical networks
+
+<h3> Education </h3>  
+
+- Sept. 2020 — June 2025: Ph.D. in Electronic Science and Technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications (expected)
+- Sept. 2016 — June 2020: B. Sc. in Electromagnetic fields and wireless technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications
+- Sept. 2012 — June 2016: Zibo No.4 High School of Shandong Province
+
 <h3> Publications</h3>  
 <a href="https://scholar.google.com.hk/citations?user=WKfnMBcAAAAJ&hl=en">Google_scholar</a>  
 
@@ -24,8 +35,3 @@ My primary research interests include optical performance modeling and optimizat
 - <strong>Yuchen Song</strong>, Yao Zhang, Chunyu Zhang, Jin Li, Min Zhang, and Danshi Wang, "PINN for Power Evolution Prediction and Raman Gain Spectrum Identification in C+ L-Band Transmission System," in Optical Fiber Communications Conference and Exhibition (OFC) 2023, oral. 
 - <strong>Yuchen Song</strong>, Danshi Wang, Qirui Fan, Xiaotian Jiang, Xiao Luo, and Min Zhang, "Physics-Informed Neural Operator for Fast and Scalable Optical Fiber Channel Modelling in Multi-Span Transmission," in 2022 European Conference on Optical Communication (ECOC), poster. 
 - <strong>Yuchen Song</strong>, et al, Neural Operator for Optical Fiber Channel Modeling: A Hybrid Physics and Data Driven Approach, Photonics Global Conference (PGC 2023), oral. 
-<h3> Education </h3>  
-
-- Sept. 2020 — June 2025: Ph.D. in Electronic Science and Technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications (expected)
-- Sept. 2016 — June 2020: B. Sc. in Electromagnetic fields and wireless technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications
-- Sept. 2012 — June 2016: Zibo No.4 High School of Shandong Province
