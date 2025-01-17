@@ -3,5 +3,6 @@
     "subTitle":"欢迎来到宋裕琛的博客！",
     "avatarUrl":"https://github.githubassets.com/favicons/favicon.svg",
     "email":"songyc@bupt.edu.cn",
-    "GMEEK_VERSION":"last"
+    "GMEEK_VERSION":"last",
+    "allHead":"<script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>"
 }
