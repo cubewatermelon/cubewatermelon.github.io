@@ -3,7 +3,7 @@
 </p>
 <p align = "center"><strong>Yuchen Song / 宋裕琛</strong></p>  
 I'm currently pursuing the Ph.D. degree with the School of Electronic Engineering, BUPT.  Supervised by Prof. Danshi Wang
-<a href="https://see.bupt.edu.cn/info/1051/2196.htm">王丹石</a>.  
+<a href="https://see.bupt.edu.cn/info/1051/2196.htm">王丹石</a> （强烈欢迎报考咨询）.  
 
 My primary research interests include
 - Optical performance modeling and optimization in wideband optical networks
@@ -20,8 +20,9 @@ My primary research interests include
 <h3> Publications</h3>  
 <a href="https://scholar.google.com.hk/citations?user=WKfnMBcAAAAJ&hl=en">Google_scholar</a>  
 
+- <strong>Yuchen Song</strong>, Min Zhang, Yao Zhang, Yan Shi, Shikui Shen, Xiongyan Tang, Shanguo Huang, and Danshi Wang, "Lifecycle Management of Optical Networks with Dynamic-Updating Digital Twin: A Hybrid Data-Driven and Physics-Informed Approach". <strong>IEEE Journal on Selected Areas in Communications</strong> Early Access (2025).​
 - <strong>Yuchen Song</strong>, Min Zhang, Xiaotian Jiang, Fan Zhang, Cheng Ju, Shanguo Huang, Alan Pak Tao Lu, and Danshi Wang, "SRS-Net: A Universal Solution for Stimulated Raman Scattering in Nonlinear Fibre-Optic Systems Using Physics-Informed Neural Networks". <strong>Communications Engineering</strong> 3, 109 (2024).​
-- <strong>Yuchen Song</strong>, Yao Zhang, Anni Zhou, Yan Shi, Shikui Shen, Xiongyan Tang, Jin Li, Min Zhang, and Danshi Wang. "Synergistic Interplay of Large Language Model and Digital Twin for Autonomous Optical Networks: Field Demonstrations." <strong>IEEE Communications Magazine</strong>, Accepted (2024).
+- <strong>Yuchen Song</strong>, Yao Zhang, Anni Zhou, Yan Shi, Shikui Shen, Xiongyan Tang, Jin Li, Min Zhang, and Danshi Wang. "Synergistic Interplay of Large Language Model and Digital Twin for Autonomous Optical Networks: Field Demonstrations." <strong>IEEE Communications Magazine</strong>, Early Access (2025).
 - <strong>Yuchen Song</strong>, and Min Zhang, and Yao Zhang, and Yan Shi, and SHikui Shen, and Bingli Guo, and Shanguo Huang, and Danshi Wang , "Implementing Digital Twin in Field-Deployed Optical Networks: Uncertain Factors, Operational Guidance, and Field-Trial Demonstration", <strong>IEEE Network Magazine</strong> 38, 38-45 (2024).
 - <strong>Yuchen Song</strong>, Danshi Wang, Jun Qin, Jin Li, Han Ye, Zhiguo Zhang, Xue Chen, Min Zhang, and Anthony C Boucouvalas, "Physical Information-Embedded Deep Learning for Forward Prediction and Inverse Design of Nanophotonic Devices," <strong>Journal of Lightwave Technology</strong> 39, 6498-6508 (2021). 
 - <strong>Yuchen Song</strong>, Qirui Fan, Chao Lu, Danshi Wang, and Alan Pak Tao Lau, "Efficient three-step amplifier configuration algorithm for dynamic C+ L-band links in presence of stimulated Raman scattering," <strong>Journal of Lightwave Technology</strong> 41, 1445-1453 (2022). 
