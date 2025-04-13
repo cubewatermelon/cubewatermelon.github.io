@@ -7,16 +7,15 @@ I'm currently pursuing the Ph.D. degree with the School of Electronic Engineerin
 
 My primary research interests include
 - Optical performance modeling and optimization in wideband optical networks
-- Digital twin networks
+- Digital twin of optical networks (DTON)
 - Physics-informed machine learning
 - Large models for optical networks
 
-
-
+![Image](https://github.com/user-attachments/assets/51986fb6-cebf-4dfd-b967-8ec3e8db34ca)
 <h3> Education </h3>  
 
 - Sept. 2020 — June 2025: Ph.D. in Electronic Science and Technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications (expected)
-- Sept. 2016 — June 2020: B. Sc. in Electromagnetic fields and wireless technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications
+- Sept. 2016 — June 2020: B. Sc. in Electromagnetic fields and wireless technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications （原光电信息学院）
 - Sept. 2012 — June 2016: Zibo No.4 High School of Shandong Province
 
 <h3> Publications</h3>  
