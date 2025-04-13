@@ -37,3 +37,5 @@ My primary research interests include
 - <strong>Yuchen Song</strong>, Yao Zhang, Chunyu Zhang, Jin Li, Min Zhang, and Danshi Wang, "PINN for Power Evolution Prediction and Raman Gain Spectrum Identification in C+ L-Band Transmission System," in Optical Fiber Communications Conference and Exhibition (OFC) 2023, oral. 
 - <strong>Yuchen Song</strong>, Danshi Wang, Qirui Fan, Xiaotian Jiang, Xiao Luo, and Min Zhang, "Physics-Informed Neural Operator for Fast and Scalable Optical Fiber Channel Modelling in Multi-Span Transmission," in 2022 European Conference on Optical Communication (ECOC), poster. 
 - <strong>Yuchen Song</strong>, et al, Neural Operator for Optical Fiber Channel Modeling: A Hybrid Physics and Data Driven Approach, Photonics Global Conference (PGC 2023), oral. 
+
+![Image](https://github.com/user-attachments/assets/92911e81-51c6-4829-9014-e944013d6d57)
