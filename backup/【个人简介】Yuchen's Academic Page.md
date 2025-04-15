@@ -11,7 +11,8 @@ My primary research interests include
 - Physics-informed machine learning
 - Large models for optical networks
 
-![Image](https://github.com/user-attachments/assets/51986fb6-cebf-4dfd-b967-8ec3e8db34ca)
+![Image](https://github.com/user-attachments/assets/972b9dce-9e96-41f4-aee4-3c669f7383ca)
+
 <h3> Education </h3>  
 
 - Sept. 2020 — June 2025: Ph.D. in Electronic Science and Technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications (expected)
@@ -38,4 +39,4 @@ My primary research interests include
 - <strong>Yuchen Song</strong>, Danshi Wang, Qirui Fan, Xiaotian Jiang, Xiao Luo, and Min Zhang, "Physics-Informed Neural Operator for Fast and Scalable Optical Fiber Channel Modelling in Multi-Span Transmission," in 2022 European Conference on Optical Communication (ECOC), poster. 
 - <strong>Yuchen Song</strong>, et al, Neural Operator for Optical Fiber Channel Modeling: A Hybrid Physics and Data Driven Approach, Photonics Global Conference (PGC 2023), oral. 
 
-![Image](https://github.com/user-attachments/assets/92911e81-51c6-4829-9014-e944013d6d57)
+![Image](https://github.com/user-attachments/assets/5c3dcc3c-7932-422d-9cd5-cf47f10337e1)
