@@ -34,6 +34,8 @@
 - Estaran J, Rios-Müller R, Mestre M, Jorge F, Mardoyan H, Konczykowska A, Dupuy J-Y, Bigo S. **_Artificial neural networks for linear and non-linear impairment mitigation in high-baudrate IM/DD systems_**.  ECOC 2016; 42nd European Conference on Optical Communication; 2016: VDE; 2016. p. 1-3.
 - Ming H, Chen X, Fang X, Zhang L, Li C, Zhang F. **_Ultralow Complexity Long Short-Term Memory Network for Fiber Nonlinearity Mitigation in Coherent Optical Communication Systems_**. Journal of Lightwave Technology 2022, 40(8): 2427-2434. LSTM低复杂度补偿
 - Freire PJ, Napoli A, Spinnler B, Costa N, Turitsyn SK, Prilepsky JE. **_Neural Networks-Based Equalizers for Coherent Optical Transmission: Caveats and Pitfalls_**. IEEE Journal of Selected Topics in Quantum Electronics 2022, 28(4): 1-23. 好文，点明了PRBS训练集的影响，指出了jail window效应的形成原因
+- Shu L, Li J, Wan Z, Zhang W, Fu S, Xu K. **_Overestimation trap of artificial neural network: learning the rule of PRBS_**.  2018 European Conference on Optical Communication (ECOC); 2018: IEEE; 2018. p. 1-3. 好文，可视化地展示了PRBS生成的训练集的影响，非常直观的结果证明了自己的结论
+- Eriksson TA, Bülow H, Leven A. **_Applying neural networks in optical communication systems: possible pitfalls_**. IEEE Photonics Technology Letters 2017, 29(23): 2091-2094. 研究了PRBS的影响
 - Zhang S, Yaman F, Nakamura K, Inoue T, Kamalov V, Jovanovski L, Vusirikala V, Mateo E, Inada Y, Wang T. **_Field and lab experimental demonstration of nonlinear impairment compensation using neural networks_**. Nat Commun 2019, 10(1): 3033. 将非线性补偿的物理信息与神经网络结合
 - Häger C, Pfister HD. **_Physics-Based Deep Learning for Fiber-Optic Communication Systems_**. arXiv preprint arXiv:201014258 2020. 神经网络结构与DBP有相似之处，符合实际结构的DBP
 - Fan Q, Zhou G, Gui T, Lu C, Lau APT. **_Advancing theoretical understanding and practical performance of signal processing for nonlinear optical communications through machine learning_**. Nature Communications 2020, 11(1): 1-11. 详细的实验，深度学习带来了理论上的理解
@@ -46,13 +48,38 @@
 - Tao Z, Zhao Y, Fan Y, Dou L, Hoshida T, Rasmussen JC. **_Analytical Intrachannel Nonlinear Models to Predict the Nonlinear Noise Waveform_**. Journal of Lightwave Technology 2015, 33(10): 2111-2119.
 
 ### 宽波段数值方法
-- Leibrich J, Rosenkranz W. **_Efficient numerical simulation of multichannel WDM transmission systems limited by XPM_**. IEEE Photonics Technology Letters 2003, 15(3): 395-397. 类似VPI软件中应用的平均场方法，有参数化信号
-- Serena P, Lasagni C, Musetti S, Bononi A. **_On Numerical Simulations of Ultra-Wideband Long-Haul Optical Communication Systems_**. Journal of Lightwave Technology 2020, 38(5): 1019-1031. 有比较详细的数值分析
+- Yu T, Reimer W, Grigoryan V, Menyuk C. A mean field approach for simulating wavelength-division multiplexed systems. IEEE Photonics Technology Letters 2000, 12(4): 443-445. 类似VPI软件中应用的平均场方法，有参数化信号
+- Leibrich J, Rosenkranz W. **_Efficient numerical simulation of multichannel WDM transmission systems limited by XPM_**. IEEE Photonics Technology Letters 2003, 15(3): 395-397. 类似平均场方法
+- Serena P, Lasagni C, Musetti S, Bononi A. **_On Numerical Simulations of Ultra-Wideband Long-Haul Optical Communication Systems_**. Journal of Lightwave Technology 2020, 38(5): 1019-1031. 有比较详细的数值分析，类似于super-channel组合方法
 - Sinkin OV, Holzlöhner R, Zweck J, Menyuk CR. **_Optimization of the split-step Fourier method in modeling optical-fiber communications systems_**. Journal of lightwave technology 2003, 21(1): 61.
 - Tao Z, Yan W, Liu L, Li L, Oda S, Hoshida T, Rasmussen JC. **_Simple Fiber Model for Determination of XPM Effects_**. Journal of Lightwave Technology 2011, 29(7): 974-986.
 - Vannucci A, Serena P, Bononi A. **_The RP method: A new tool for the iterative solution of the nonlinear Schrödinger equation_**. Journal of Lightwave Technology 2002, 20(7): 1102. 微扰方法，在各种推导中应用
+- Pilori D, Cantono M, Carena A, Curri V. **_FFSS: The fast fiber simulator software_**.  2017 19th International Conference on Transparent Optical Networks (ICTON); 2017: IEEE; 2017. p. 1-4. 没找到软件或者代码
+- Musetti S, Serena P, Bononi A. **_On the Accuracy of Split-Step Fourier Simulations for Wideband Nonlinear Optical Communications_**. Journal of Lightwave Technology 2018, 36(23): 5669-5677. 数值分析比较详尽
 
-### PPE
+### 深度学习用于光纤信道时域波形建模
+- O’Shea TJ, Roy T, West N. Approximating the void: Learning stochastic channel models from observation with variational generative adversarial networks.  2019 International Conference on Computing, Networking and Communications (ICNC); 2019: IEEE; 2019. p. 681-686. GAN也是一个思路
+- Yang H, Niu Z, Zhao H, Xiao S, Hu W, Yi L. **_Fast and accurate waveform modeling of long-haul multi-channel optical fiber transmission using a hybrid model-data driven scheme_**. Journal of Lightwave Technology 2022, 40(14): 4571-4580. 线性和非线性以解耦的方式处理
+- Yang H, Niu Z, Xiao S, Fang J, Liu Z, Fainsin D, Yi L. **_Fast and Accurate Optical Fiber Channel Modeling using Generative Adversarial Network_**. Journal of Lightwave Technology 2020: 1-1.
+- Zhang N, Yang H, Niu Z, Zheng L, Chen C, Xiao S, Yi L. **_Transformer-based Long Distance Fiber Channel Modeling for Optical OFDM Systems_**. Journal of Lightwave Technology 2022: 1-11. 新兴结构
+
+### 光链路端到端学习
+- Aoudia FA, Hoydis J. **_End-to-end learning of communications systems without a channel model_**.  2018 52nd Asilomar Conference on Signals, Systems, and Computers; 2018: IEEE; 2018. p. 298-303.
+- Karanov B, Chagnon M, Thouin F, Eriksson TA, Bülow H, Lavery D, Bayvel P, Schmalen L. **_End-to-end Deep Learning of Optical Fiber Communications_**. Journal of Lightwave Technology 2018, PP(99): 1-1. 当时这个端到端优化的思路一出也是十分新奇
+
+### 光放大器建模
+- Rapp L, Eiselt M. **_Optical Amplifiers for Multi–Band Optical Transmission Systems_**. Journal of Lightwave Technology 2022, 40(6): 1579-1589.
+- 
+### 光链路其余损伤
+- Mecozzi A, Shtaif M. **_The statistics of polarization-dependent loss in optical communication systems_**. IEEE Photonics Technology Letters 2002, 14(3): 313-315. 偏振相关衰减PDL
+- Rahman T, Napoli A, Rafique D, Spinnler B, Kuschnerov M, Lobato I, Clouet B, Bohn M, Okonkwo C, de Waardt H. **_On the mitigation of optical filtering penalties originating from ROADM cascade_**. IEEE Photonics Technology Letters 2013, 26(2): 154-157. 滤波损伤
+
+### 光传输容量整体分析
+- Alvarado A, Fehenberger T, Chen B, Willems FMJ. **_Achievable Information Rates for Fiber Optics: Applications and Computations_**. Journal of Lightwave Technology 2018, 36(2): 424-439.
+- Essiambre R-J, Kramer G, Winzer PJ, Foschini GJ, Goebel B. **_Capacity limits of optical fiber networks_**. Journal of Lightwave Technology 2010, 28(4): 662-701. 基础知识大全
+
+
+### PPE 纵向光功率演化监测
 - Sasai T, Takahashi M, Nakamura M, Yamazaki E, Kisaka Y. **_Linear Least Squares Estimation of Fiber-Longitudinal Optical Power Profile_**. Journal of Lightwave Technology 2024, 42(6): 1955-1965.
 - Sasai T, Yamazaki E, Kisaka Y. **_Performance Limit of Fiber-Longitudinal Power Profile Estimation Methods_**. Journal of Lightwave Technology 2023, 41(11): 3278-3289.
 - Sena M, Emmerich R, Shariati B, Santos C, Napoli A, Fischer JK, Freund R. **_DSP-Based Link Tomography for Amplifier Gain Estimation and Anomaly Detection in C+ L-Band Systems_**. Journal of Lightwave Technology 2022, 40(11): 3395-3405.
@@ -85,6 +112,8 @@
 - Estaran J, Rios-Müller R, Mestre M, Jorge F, Mardoyan H, Konczykowska A, Dupuy J-Y, Bigo S. **_Artificial neural networks for linear and non-linear impairment mitigation in high-baudrate IM/DD systems_**.  ECOC 2016; 42nd European Conference on Optical Communication; 2016: VDE; 2016. p. 1-3.
 - Ming H, Chen X, Fang X, Zhang L, Li C, Zhang F. **_Ultralow Complexity Long Short-Term Memory Network for Fiber Nonlinearity Mitigation in Coherent Optical Communication Systems_**. Journal of Lightwave Technology 2022, 40(8): 2427-2434. LSTM低复杂度补偿
 - Freire PJ, Napoli A, Spinnler B, Costa N, Turitsyn SK, Prilepsky JE. **_Neural Networks-Based Equalizers for Coherent Optical Transmission: Caveats and Pitfalls_**. IEEE Journal of Selected Topics in Quantum Electronics 2022, 28(4): 1-23. 好文，点明了PRBS训练集的影响，指出了jail window效应的形成原因
+- Shu L, Li J, Wan Z, Zhang W, Fu S, Xu K. **_Overestimation trap of artificial neural network: learning the rule of PRBS_**.  2018 European Conference on Optical Communication (ECOC); 2018: IEEE; 2018. p. 1-3. 好文，可视化地展示了PRBS生成的训练集的影响，非常直观的结果证明了自己的结论
+- Eriksson TA, Bülow H, Leven A. **_Applying neural networks in optical communication systems: possible pitfalls_**. IEEE Photonics Technology Letters 2017, 29(23): 2091-2094. 研究了PRBS的影响
 - Zhang S, Yaman F, Nakamura K, Inoue T, Kamalov V, Jovanovski L, Vusirikala V, Mateo E, Inada Y, Wang T. **_Field and lab experimental demonstration of nonlinear impairment compensation using neural networks_**. Nat Commun 2019, 10(1): 3033. 将非线性补偿的物理信息与神经网络结合
 - Häger C, Pfister HD. **_Physics-Based Deep Learning for Fiber-Optic Communication Systems_**. arXiv preprint arXiv:201014258 2020. 神经网络结构与DBP有相似之处，符合实际结构的DBP
 - Fan Q, Zhou G, Gui T, Lu C, Lau APT. **_Advancing theoretical understanding and practical performance of signal processing for nonlinear optical communications through machine learning_**. Nature Communications 2020, 11(1): 1-11. 详细的实验，深度学习带来了理论上的理解
@@ -97,13 +126,38 @@
 - Tao Z, Zhao Y, Fan Y, Dou L, Hoshida T, Rasmussen JC. **_Analytical Intrachannel Nonlinear Models to Predict the Nonlinear Noise Waveform_**. Journal of Lightwave Technology 2015, 33(10): 2111-2119.
 
 ### 宽波段数值方法
-- Leibrich J, Rosenkranz W. **_Efficient numerical simulation of multichannel WDM transmission systems limited by XPM_**. IEEE Photonics Technology Letters 2003, 15(3): 395-397. 类似VPI软件中应用的平均场方法，有参数化信号
-- Serena P, Lasagni C, Musetti S, Bononi A. **_On Numerical Simulations of Ultra-Wideband Long-Haul Optical Communication Systems_**. Journal of Lightwave Technology 2020, 38(5): 1019-1031. 有比较详细的数值分析
+- Yu T, Reimer W, Grigoryan V, Menyuk C. A mean field approach for simulating wavelength-division multiplexed systems. IEEE Photonics Technology Letters 2000, 12(4): 443-445. 类似VPI软件中应用的平均场方法，有参数化信号
+- Leibrich J, Rosenkranz W. **_Efficient numerical simulation of multichannel WDM transmission systems limited by XPM_**. IEEE Photonics Technology Letters 2003, 15(3): 395-397. 类似平均场方法
+- Serena P, Lasagni C, Musetti S, Bononi A. **_On Numerical Simulations of Ultra-Wideband Long-Haul Optical Communication Systems_**. Journal of Lightwave Technology 2020, 38(5): 1019-1031. 有比较详细的数值分析，类似于super-channel组合方法
 - Sinkin OV, Holzlöhner R, Zweck J, Menyuk CR. **_Optimization of the split-step Fourier method in modeling optical-fiber communications systems_**. Journal of lightwave technology 2003, 21(1): 61.
 - Tao Z, Yan W, Liu L, Li L, Oda S, Hoshida T, Rasmussen JC. **_Simple Fiber Model for Determination of XPM Effects_**. Journal of Lightwave Technology 2011, 29(7): 974-986.
 - Vannucci A, Serena P, Bononi A. **_The RP method: A new tool for the iterative solution of the nonlinear Schrödinger equation_**. Journal of Lightwave Technology 2002, 20(7): 1102. 微扰方法，在各种推导中应用
+- Pilori D, Cantono M, Carena A, Curri V. **_FFSS: The fast fiber simulator software_**.  2017 19th International Conference on Transparent Optical Networks (ICTON); 2017: IEEE; 2017. p. 1-4. 没找到软件或者代码
+- Musetti S, Serena P, Bononi A. **_On the Accuracy of Split-Step Fourier Simulations for Wideband Nonlinear Optical Communications_**. Journal of Lightwave Technology 2018, 36(23): 5669-5677. 数值分析比较详尽
 
-### PPE
+### 深度学习用于光纤信道时域波形建模
+- O’Shea TJ, Roy T, West N. Approximating the void: Learning stochastic channel models from observation with variational generative adversarial networks.  2019 International Conference on Computing, Networking and Communications (ICNC); 2019: IEEE; 2019. p. 681-686. GAN也是一个思路
+- Yang H, Niu Z, Zhao H, Xiao S, Hu W, Yi L. **_Fast and accurate waveform modeling of long-haul multi-channel optical fiber transmission using a hybrid model-data driven scheme_**. Journal of Lightwave Technology 2022, 40(14): 4571-4580. 线性和非线性以解耦的方式处理
+- Yang H, Niu Z, Xiao S, Fang J, Liu Z, Fainsin D, Yi L. **_Fast and Accurate Optical Fiber Channel Modeling using Generative Adversarial Network_**. Journal of Lightwave Technology 2020: 1-1.
+- Zhang N, Yang H, Niu Z, Zheng L, Chen C, Xiao S, Yi L. **_Transformer-based Long Distance Fiber Channel Modeling for Optical OFDM Systems_**. Journal of Lightwave Technology 2022: 1-11. 新兴结构
+
+### 光链路端到端学习
+- Aoudia FA, Hoydis J. **_End-to-end learning of communications systems without a channel model_**.  2018 52nd Asilomar Conference on Signals, Systems, and Computers; 2018: IEEE; 2018. p. 298-303.
+- Karanov B, Chagnon M, Thouin F, Eriksson TA, Bülow H, Lavery D, Bayvel P, Schmalen L. **_End-to-end Deep Learning of Optical Fiber Communications_**. Journal of Lightwave Technology 2018, PP(99): 1-1. 当时这个端到端优化的思路一出也是十分新奇
+
+### 光放大器建模
+- Rapp L, Eiselt M. **_Optical Amplifiers for Multi–Band Optical Transmission Systems_**. Journal of Lightwave Technology 2022, 40(6): 1579-1589.
+- 
+### 光链路其余损伤
+- Mecozzi A, Shtaif M. **_The statistics of polarization-dependent loss in optical communication systems_**. IEEE Photonics Technology Letters 2002, 14(3): 313-315. 偏振相关衰减PDL
+- Rahman T, Napoli A, Rafique D, Spinnler B, Kuschnerov M, Lobato I, Clouet B, Bohn M, Okonkwo C, de Waardt H. **_On the mitigation of optical filtering penalties originating from ROADM cascade_**. IEEE Photonics Technology Letters 2013, 26(2): 154-157. 滤波损伤
+
+### 光传输容量整体分析
+- Alvarado A, Fehenberger T, Chen B, Willems FMJ. **_Achievable Information Rates for Fiber Optics: Applications and Computations_**. Journal of Lightwave Technology 2018, 36(2): 424-439.
+- Essiambre R-J, Kramer G, Winzer PJ, Foschini GJ, Goebel B. **_Capacity limits of optical fiber networks_**. Journal of Lightwave Technology 2010, 28(4): 662-701. 基础知识大全
+
+
+### PPE 纵向光功率演化监测
 - Sasai T, Takahashi M, Nakamura M, Yamazaki E, Kisaka Y. **_Linear Least Squares Estimation of Fiber-Longitudinal Optical Power Profile_**. Journal of Lightwave Technology 2024, 42(6): 1955-1965.
 - Sasai T, Yamazaki E, Kisaka Y. **_Performance Limit of Fiber-Longitudinal Power Profile Estimation Methods_**. Journal of Lightwave Technology 2023, 41(11): 3278-3289.
 - Sena M, Emmerich R, Shariati B, Santos C, Napoli A, Fischer JK, Freund R. **_DSP-Based Link Tomography for Amplifier Gain Estimation and Anomaly Detection in C+ L-Band Systems_**. Journal of Lightwave Technology 2022, 40(11): 3395-3405.
@@ -199,6 +253,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>Estaran J, Rios-Müller R, Mestre M, Jorge F, Mardoyan H, Konczykowska A, Dupuy J-Y, Bigo S. <strong><em>Artificial neural networks for linear and non-linear impairment mitigation in high-baudrate IM/DD systems</em></strong>.  ECOC 2016; 42nd European Conference on Optical Communication; 2016: VDE; 2016. p. 1-3.</li>
 <li>Ming H, Chen X, Fang X, Zhang L, Li C, Zhang F. <strong><em>Ultralow Complexity Long Short-Term Memory Network for Fiber Nonlinearity Mitigation in Coherent Optical Communication Systems</em></strong>. Journal of Lightwave Technology 2022, 40(8): 2427-2434. LSTM低复杂度补偿</li>
 <li>Freire PJ, Napoli A, Spinnler B, Costa N, Turitsyn SK, Prilepsky JE. <strong><em>Neural Networks-Based Equalizers for Coherent Optical Transmission: Caveats and Pitfalls</em></strong>. IEEE Journal of Selected Topics in Quantum Electronics 2022, 28(4): 1-23. 好文，点明了PRBS训练集的影响，指出了jail window效应的形成原因</li>
+<li>Shu L, Li J, Wan Z, Zhang W, Fu S, Xu K. <strong><em>Overestimation trap of artificial neural network: learning the rule of PRBS</em></strong>.  2018 European Conference on Optical Communication (ECOC); 2018: IEEE; 2018. p. 1-3. 好文，可视化地展示了PRBS生成的训练集的影响，非常直观的结果证明了自己的结论</li>
+<li>Eriksson TA, Bülow H, Leven A. <strong><em>Applying neural networks in optical communication systems: possible pitfalls</em></strong>. IEEE Photonics Technology Letters 2017, 29(23): 2091-2094. 研究了PRBS的影响</li>
 <li>Zhang S, Yaman F, Nakamura K, Inoue T, Kamalov V, Jovanovski L, Vusirikala V, Mateo E, Inada Y, Wang T. <strong><em>Field and lab experimental demonstration of nonlinear impairment compensation using neural networks</em></strong>. Nat Commun 2019, 10(1): 3033. 将非线性补偿的物理信息与神经网络结合</li>
 <li>Häger C, Pfister HD. <strong><em>Physics-Based Deep Learning for Fiber-Optic Communication Systems</em></strong>. arXiv preprint arXiv:201014258 2020. 神经网络结构与DBP有相似之处，符合实际结构的DBP</li>
 <li>Fan Q, Zhou G, Gui T, Lu C, Lau APT. <strong><em>Advancing theoretical understanding and practical performance of signal processing for nonlinear optical communications through machine learning</em></strong>. Nature Communications 2020, 11(1): 1-11. 详细的实验，深度学习带来了理论上的理解</li>
@@ -213,13 +269,43 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ul>
 <h3>宽波段数值方法</h3>
 <ul>
-<li>Leibrich J, Rosenkranz W. <strong><em>Efficient numerical simulation of multichannel WDM transmission systems limited by XPM</em></strong>. IEEE Photonics Technology Letters 2003, 15(3): 395-397. 类似VPI软件中应用的平均场方法，有参数化信号</li>
-<li>Serena P, Lasagni C, Musetti S, Bononi A. <strong><em>On Numerical Simulations of Ultra-Wideband Long-Haul Optical Communication Systems</em></strong>. Journal of Lightwave Technology 2020, 38(5): 1019-1031. 有比较详细的数值分析</li>
+<li>Yu T, Reimer W, Grigoryan V, Menyuk C. A mean field approach for simulating wavelength-division multiplexed systems. IEEE Photonics Technology Letters 2000, 12(4): 443-445. 类似VPI软件中应用的平均场方法，有参数化信号</li>
+<li>Leibrich J, Rosenkranz W. <strong><em>Efficient numerical simulation of multichannel WDM transmission systems limited by XPM</em></strong>. IEEE Photonics Technology Letters 2003, 15(3): 395-397. 类似平均场方法</li>
+<li>Serena P, Lasagni C, Musetti S, Bononi A. <strong><em>On Numerical Simulations of Ultra-Wideband Long-Haul Optical Communication Systems</em></strong>. Journal of Lightwave Technology 2020, 38(5): 1019-1031. 有比较详细的数值分析，类似于super-channel组合方法</li>
 <li>Sinkin OV, Holzlöhner R, Zweck J, Menyuk CR. <strong><em>Optimization of the split-step Fourier method in modeling optical-fiber communications systems</em></strong>. Journal of lightwave technology 2003, 21(1): 61.</li>
 <li>Tao Z, Yan W, Liu L, Li L, Oda S, Hoshida T, Rasmussen JC. <strong><em>Simple Fiber Model for Determination of XPM Effects</em></strong>. Journal of Lightwave Technology 2011, 29(7): 974-986.</li>
 <li>Vannucci A, Serena P, Bononi A. <strong><em>The RP method: A new tool for the iterative solution of the nonlinear Schrödinger equation</em></strong>. Journal of Lightwave Technology 2002, 20(7): 1102. 微扰方法，在各种推导中应用</li>
+<li>Pilori D, Cantono M, Carena A, Curri V. <strong><em>FFSS: The fast fiber simulator software</em></strong>.  2017 19th International Conference on Transparent Optical Networks (ICTON); 2017: IEEE; 2017. p. 1-4. 没找到软件或者代码</li>
+<li>Musetti S, Serena P, Bononi A. <strong><em>On the Accuracy of Split-Step Fourier Simulations for Wideband Nonlinear Optical Communications</em></strong>. Journal of Lightwave Technology 2018, 36(23): 5669-5677. 数值分析比较详尽</li>
 </ul>
-<h3>PPE</h3>
+<h3>深度学习用于光纤信道时域波形建模</h3>
+<ul>
+<li>O’Shea TJ, Roy T, West N. Approximating the void: Learning stochastic channel models from observation with variational generative adversarial networks.  2019 International Conference on Computing, Networking and Communications (ICNC); 2019: IEEE; 2019. p. 681-686. GAN也是一个思路</li>
+<li>Yang H, Niu Z, Zhao H, Xiao S, Hu W, Yi L. <strong><em>Fast and accurate waveform modeling of long-haul multi-channel optical fiber transmission using a hybrid model-data driven scheme</em></strong>. Journal of Lightwave Technology 2022, 40(14): 4571-4580. 线性和非线性以解耦的方式处理</li>
+<li>Yang H, Niu Z, Xiao S, Fang J, Liu Z, Fainsin D, Yi L. <strong><em>Fast and Accurate Optical Fiber Channel Modeling using Generative Adversarial Network</em></strong>. Journal of Lightwave Technology 2020: 1-1.</li>
+<li>Zhang N, Yang H, Niu Z, Zheng L, Chen C, Xiao S, Yi L. <strong><em>Transformer-based Long Distance Fiber Channel Modeling for Optical OFDM Systems</em></strong>. Journal of Lightwave Technology 2022: 1-11. 新兴结构</li>
+</ul>
+<h3>光链路端到端学习</h3>
+<ul>
+<li>Aoudia FA, Hoydis J. <strong><em>End-to-end learning of communications systems without a channel model</em></strong>.  2018 52nd Asilomar Conference on Signals, Systems, and Computers; 2018: IEEE; 2018. p. 298-303.</li>
+<li>Karanov B, Chagnon M, Thouin F, Eriksson TA, Bülow H, Lavery D, Bayvel P, Schmalen L. <strong><em>End-to-end Deep Learning of Optical Fiber Communications</em></strong>. Journal of Lightwave Technology 2018, PP(99): 1-1. 当时这个端到端优化的思路一出也是十分新奇</li>
+</ul>
+<h3>光放大器建模</h3>
+<ul>
+<li>Rapp L, Eiselt M. <strong><em>Optical Amplifiers for Multi–Band Optical Transmission Systems</em></strong>. Journal of Lightwave Technology 2022, 40(6): 1579-1589.</li>
+<li></li>
+</ul>
+<h3>光链路其余损伤</h3>
+<ul>
+<li>Mecozzi A, Shtaif M. <strong><em>The statistics of polarization-dependent loss in optical communication systems</em></strong>. IEEE Photonics Technology Letters 2002, 14(3): 313-315. 偏振相关衰减PDL</li>
+<li>Rahman T, Napoli A, Rafique D, Spinnler B, Kuschnerov M, Lobato I, Clouet B, Bohn M, Okonkwo C, de Waardt H. <strong><em>On the mitigation of optical filtering penalties originating from ROADM cascade</em></strong>. IEEE Photonics Technology Letters 2013, 26(2): 154-157. 滤波损伤</li>
+</ul>
+<h3>光传输容量整体分析</h3>
+<ul>
+<li>Alvarado A, Fehenberger T, Chen B, Willems FMJ. <strong><em>Achievable Information Rates for Fiber Optics: Applications and Computations</em></strong>. Journal of Lightwave Technology 2018, 36(2): 424-439.</li>
+<li>Essiambre R-J, Kramer G, Winzer PJ, Foschini GJ, Goebel B. <strong><em>Capacity limits of optical fiber networks</em></strong>. Journal of Lightwave Technology 2010, 28(4): 662-701. 基础知识大全</li>
+</ul>
+<h3>PPE 纵向光功率演化监测</h3>
 <ul>
 <li>Sasai T, Takahashi M, Nakamura M, Yamazaki E, Kisaka Y. <strong><em>Linear Least Squares Estimation of Fiber-Longitudinal Optical Power Profile</em></strong>. Journal of Lightwave Technology 2024, 42(6): 1955-1965.</li>
 <li>Sasai T, Yamazaki E, Kisaka Y. <strong><em>Performance Limit of Fiber-Longitudinal Power Profile Estimation Methods</em></strong>. Journal of Lightwave Technology 2023, 41(11): 3278-3289.</li>
