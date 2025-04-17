@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Wed, 16 Apr 2025 09:40:05 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Thu, 17 Apr 2025 09:04:07 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
 - Wu D, Wang X, Qiao Y, Wang Z, Jiang J, Cui S, Wang F. **_NetLLM: Adapting Large Language Models for Networking_**.  Proceedings of the ACM SIGCOMM 2024 Conference; 2024; 2024. p. 661-678. 顶会
 - Maatouk A, Ayed F, Piovesan N, De Domenico A, Debbah M, Luo Z-Q. **_Teleqna: A benchmark dataset to assess large language models telecommunications knowledge._** arXiv preprint arXiv:231015051 2023. 通信数据集
 - Xu S, Thomas CK, Hashash O, Muralidhar N, Saad W, Ramakrishnan N. **_Large multi-modal models (LMMs) as universal foundation models for AI-native wireless systems_**. arXiv preprint arXiv:240201748 2024. 多模态
@@ -14,8 +14,17 @@
 - Du J, Lin T, Jiang C, Yang Q, Bader CF, Han Z. **_Distributed Foundation Models for Multi-Modal Learning in 6G Wireless Networks_**. IEEE Wireless Communications 2024, 31(3): 20-30.
 - Chen Z, Zhang Z, Yang Z. Big AI Models for 6G Wireless Networks: Opportunities, Challenges, and Research Directions. IEEE Wireless Communications 2024, 31(5): 164-172.
 
+### 数理基础大模型
+- Subramanian S, Harrington P, Keutzer K, Bhimji W, Morozov D, Mahoney MW, Gholami A. **_Towards foundation models for scientific machine learning: Characterizing scaling and transfer behavior_**. Advances in Neural Information Processing Systems 2024, 36. 科学计算大模型，分析了不同因素的影响
+- Ye Z, Huang X, Chen L, Liu H, Wang Z, Dong B. **_Pdeformer: Towards a foundation model for one-dimensional partial differential equations_**. arXiv preprint arXiv:240212652 2024. 用符号的形式表征了PDE
+- Hao Z, Su C, Liu S, Berner J, Ying C, Su H, Anandkumar A, Song J, Zhu J. **_Dpot: Auto-regressive denoising operator transformer for large-scale pde pre-training_**. arXiv preprint arXiv:240303542 2024. 好文
+- Wang S, Seidman JH, Sankaran S, Wang H, Pappas GJ, Perdikaris P. **_Bridging Operator Learning and Conditioned Neural Fields: A Unifying Perspective_**. arXiv preprint arXiv:240513998 2024. 好文，借鉴了DeepONet结构思想，开源代码运行比较顺畅
+- Hang Z, Ma Y, Wu H, Wang H, Long M. **_Unisolver: PDE-Conditional Transformers Are Universal PDE Solvers_**. arXiv preprint arXiv:240517527 2024. 原理上感觉比较科学
+- Herde M, Raonić B, Rohner T, Käppeli R, Molinaro R, de Bézenac E, Mishra S. Poseidon: Efficient Foundation Models for PDEs. arXiv preprint arXiv:240519101 2024.
+- Hao Z, Wang Z, Su H, Ying C, Dong Y, Liu S, Cheng Z, Song J, Zhu J. Gnot: A general neural operator transformer for operator learning.  International Conference on Machine Learning; 2023: PMLR; 2023. p. 12556-12569.
+
 ### 时序基础大模型
-- Bommasani R, Hudson DA, Adeli E, Altman R, Arora S, von Arx S, Bernstein MS, Bohg J, Bosselut A, Brunskill E. **_On the opportunities and risks of foundation models_**. arXiv preprint arXiv:210807258 2021.
+- Bommasani R, Hudson DA, Adeli E, Altman R, Arora S, von Arx S, Bernstein MS, Bohg J, Bosselut A, Brunskill E. **_On the opportunities and risks of foundation models_**. arXiv preprint arXiv:210807258 2021. 基础模型
 - Chang C, Peng W-C, Chen T-F. **_Llm4ts: Two-stage fine-tuning for time-series forecasting with pre-trained llms_**. arXiv preprint arXiv:230808469 2023.
 - Jin M, Wang S, Ma L, Chu Z, Zhang JY, Shi X, Chen P-Y, Liang Y, Li Y-F, Pan S. **_Time-llm: Time series forecasting by reprogramming large language models_**. arXiv preprint arXiv:231001728 2023.
 - Xu M, Yin W, Cai D, Yi R, Xu D, Wang Q, Wu B, Zhao Y, Yang C, Wang S. **_A survey of resource-efficient llm and multimodal foundation models_**. arXiv preprint arXiv:240108092 2024.
@@ -24,7 +33,22 @@
 - Li C, Gan Z, Yang Z, Yang J, Li L, Wang L, Gao J. **_Multimodal foundation models: From specialists to general-purpose assistants_**. Foundations and Trends® in Computer Graphics and Vision 2024, 16(1-2): 1-214.
  -Liang Y, Wen H, Nie Y, Jiang Y, Jin M, Song D, Pan S, Wen Q. **_Foundation Models for Time Series Analysis: A Tutorial and Survey_**.  Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining; 2024. pp. 6555-6565.
 
+### 可能有用的大模型领域洞察
+- Xiao C, Cai J, Zhao W, Zeng G, Han X, Liu Z, Sun M. **_Densing Law of LLMs_**. arXiv preprint arXiv:241204315 2024. 探讨了大模型能力密度的关系，从讨论角度上说比较有启发
+- Michaud EJ, Liao I, Lad V, Liu Z, Mudide A, Loughridge C, Guo ZC, Kheirkhah TR, Vukelić M, Tegmark M. **_Opening the AI Black Box: Distilling Machine-Learned Algorithms into Code_**. Entropy 2024, 26(12). 将算法转化为代码的初步讨论
+- Farquhar S, Kossen J, Kuhn L, Gal Y. **_Detecting hallucinations in large language models using semantic entropy_**. Nature 2024, 630(8017): 625-630. 大模型回答是否靠谱的语义上的分析
+- Marcondes D, Simonis A, Barrera J. **_Back to basics to open the black box_**. Nature Machine Intelligence 2024, 6(5): 498-501. 评论
 
+### 大模型和基础设施
+- Qian K, Xi Y, Cao J, Gao J, Xu Y, Guan Y, Fu B, Shi X, Zhu F, Miao R. **_Alibaba HPN: A Data Center Network for Large Language Model Training_**. Traffic 2024, 1: 2. 分析了大模型在训练过程中的一些流量特征，包含了大模型的一些基础知识
+- Hu Q, Ye Z, Wang Z, Wang G, Zhang M, Chen Q, Sun P, Lin D, Wang X, Luo Y. **_Characterization of large language model development in the datacenter_**.  21st USENIX Symposium on Networked Systems Design and Implementation (NSDI 24); 2024; 2024. p. 709-729.
+- Poutievski L, Mashayekhi O, Ong J, Singh A, Tariq M, Wang R, Zhang J, Beauregard V, Conner P, Gribble S, Kapoor R, Kratzer S, Li N, Liu H, Nagaraj K, Ornstein J, Sawhney S, Urata R, Vicisano L, Yasumura K, Zhang S, Zhou J, Vahdat A. **_Jupiter evolving_**.  Proceedings of the ACM SIGCOMM 2022 Conference; 2022. pp. 66-85.
+- Liu H, Urata R, Yasumura K, Zhou X, Bannon R, Berger J, Dashti P, Jouppi N, Lam C, Li S, Mao E, Nelson D, Papen G, Tariq M, Vahdat A. **_Lightwave Fabrics: At-Scale Optical Circuit Switching for Datacenter and Machine Learning Systems_**.  Proceedings of the ACM SIGCOMM 2023 Conference; 2023. pp. 499-515.
+
+### 大模型与科学发现
+- Romera-Paredes, B., Barekatain, M., Novikov, A., Balog, M., Kumar, M.P., Dupont, E., Ruiz, F.J., Ellenberg, J.S., Wang, P., Fawzi, O. and Kohli, P., 2024. **_Mathematical discoveries from program search with large language models_**. Nature, 625(7995), pp.468-475. 通过大模型的不断选择迭代代码库实现算法的升级
+- Du M, Chen Y, Wang Z, Nie L, Zhang D. **_LLM4ED: Large Language Models for Automatic Equation Discovery_**. arXiv preprint arXiv:240507761 2024.
+- Ma P, Wang T-H, Guo M, Sun Z, Tenenbaum JB, Rus D, Gan C, Matusik W. **_LLM and Simulation as Bilevel Optimizers: A New Paradigm to Advance Physical Scientific Discovery_**. arXiv preprint arXiv:240509783 2024.
 。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</guid><pubDate>Wed, 16 Apr 2025 03:30:57 +0000</pubDate></item><item><title>【论文列表】物理信息深度学习（数据物理混合驱动方法）</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-wu-li-xin-xi-shen-du-xue-xi-%EF%BC%88-shu-ju-wu-li-hun-he-qu-dong-fang-fa-%EF%BC%89.html</link><description>### AI4Science
 - Wang H, Fu T, Du Y, Gao W, Huang K, Liu Z, Chandak P, Liu S, Van Katwyk P, Deac A, Anandkumar A, Bergen K, Gomes CP, Ho S, Kohli P, Lasenby J, Leskovec J, Liu TY, Manrai A, Marks D, Ramsundar B, Song L, Sun J, Tang J, Velickovic P, Welling M, Zhang L, Coley CW, Bengio Y, Zitnik M. **_Scientific discovery in the age of artificial intelligence_**. Nature 2023, 620(7972): 47-60. 科学发现综述
 - Karniadakis GE, Kevrekidis IG, Lu L, Perdikaris P, Wang S, Yang L. **_Physics-informed machine learning_**. Nature Reviews Physics 2021.
