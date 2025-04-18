@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Fri, 18 Apr 2025 09:59:45 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Fri, 18 Apr 2025 10:01:22 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
 - Wu D, Wang X, Qiao Y, Wang Z, Jiang J, Cui S, Wang F. **_NetLLM: Adapting Large Language Models for Networking_**.  Proceedings of the ACM SIGCOMM 2024 Conference; 2024; 2024. p. 661-678. 顶会
 - Maatouk A, Ayed F, Piovesan N, De Domenico A, Debbah M, Luo Z-Q. **_Teleqna: A benchmark dataset to assess large language models telecommunications knowledge._** arXiv preprint arXiv:231015051 2023. 通信数据集
 - Xu S, Thomas CK, Hashash O, Muralidhar N, Saad W, Ramakrishnan N. **_Large multi-modal models (LMMs) as universal foundation models for AI-native wireless systems_**. arXiv preprint arXiv:240201748 2024. 多模态
@@ -139,10 +139,13 @@
 
 ### 光放大器建模
 - Rapp L, Eiselt M. **_Optical Amplifiers for Multi–Band Optical Transmission Systems_**. Journal of Lightwave Technology 2022, 40(6): 1579-1589.
-- 
+- Perin JK, Kahn JM, Downie JD, Hurley J, Bennett K. **_Importance of Amplifier Physics in Maximizing the Capacity of Submarine Links_**. Journal of Lightwave Technology 2019, 37(9): 2076-2085. 包含EDFA的基本原理介绍，基本特性数据
+
 ### 光链路其余损伤
 - Mecozzi A, Shtaif M. **_The statistics of polarization-dependent loss in optical communication systems_**. IEEE Photonics Technology Letters 2002, 14(3): 313-315. 偏振相关衰减PDL
 - Rahman T, Napoli A, Rafique D, Spinnler B, Kuschnerov M, Lobato I, Clouet B, Bohn M, Okonkwo C, de Waardt H. **_On the mitigation of optical filtering penalties originating from ROADM cascade_**. IEEE Photonics Technology Letters 2013, 26(2): 154-157. 滤波损伤
+- Mahajan A, Christodoulopoulos K, Martínez R, Spadaro S, Muñoz R. **_Modeling EDFA gain ripple and filter penalties with machine learning for accurate QoT estimation_**. Journal of Lightwave Technology 2020, 38(9): 2616-2629. EDFA增益和滤波效应
+
 
 ### 光传输容量整体分析
 - Alvarado A, Fehenberger T, Chen B, Willems FMJ. **_Achievable Information Rates for Fiber Optics: Applications and Computations_**. Journal of Lightwave Technology 2018, 36(2): 424-439.
