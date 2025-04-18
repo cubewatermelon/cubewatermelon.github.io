@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Fri, 18 Apr 2025 03:12:50 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Fri, 18 Apr 2025 09:59:45 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
 - Wu D, Wang X, Qiao Y, Wang Z, Jiang J, Cui S, Wang F. **_NetLLM: Adapting Large Language Models for Networking_**.  Proceedings of the ACM SIGCOMM 2024 Conference; 2024; 2024. p. 661-678. 顶会
 - Maatouk A, Ayed F, Piovesan N, De Domenico A, Debbah M, Luo Z-Q. **_Teleqna: A benchmark dataset to assess large language models telecommunications knowledge._** arXiv preprint arXiv:231015051 2023. 通信数据集
 - Xu S, Thomas CK, Hashash O, Muralidhar N, Saad W, Ramakrishnan N. **_Large multi-modal models (LMMs) as universal foundation models for AI-native wireless systems_**. arXiv preprint arXiv:240201748 2024. 多模态
@@ -168,7 +168,6 @@
 - Ferrari A, Filer M, Balasubramanian K, Yin Y, Le Rouzic E, Kundrát J, Grammel G, Galimberti G, Curri V. _**GNPy: an open source application for physical layer aware open optical networks.**_ Journal of Optical Communications and Networking 2020, 12(6): C31. 开源工具
 - Carena A, Bosco G, Curri V, Jiang Y, Poggiolini P, Forghieri F. _**EGN model of non-linear fiber propagation.**_ Optics express 2014, 22(13): 16335-16362.
 
-
 ### Why GN model?
 - Carena A, Bosco G, Curri V, Poggiolini P, Taiba MT, Forghieri F. **_Statistical characterization of PM-QPSK signals after propagation in uncompensated fiber links_**.  36th European Conference and Exhibition on Optical Communication; 2010: IEEE; 2010. p. 1-3. 色散未补偿相干链路中信号传输的高斯分布
 - Poggiolini P, Bosco G, Carena A, Cigliutti R, Curri V, Forghieri F, Pastorelli R, Piciaccia S. **_The LOGON strategy for low-complexity control plane implementation in new-generation flexible networks_**.  2013 Optical Fiber Communication Conference and Exposition and the National Fiber Optic Engineers Conference (OFC/NFOEC); 2013: IEEE; 2013. p. 1-3. GN模型推论之LOGO大法
@@ -200,10 +199,8 @@
 - Golani O, Elson D, Lavery D, Galdino L, Killey R, Bayvel P, Shtaif M. **_Experimental characterization of nonlinear interference noise as a process of intersymbol interference_**. Optics letters 2018, 43(5): 1123-1126.
 
 ### EDFA动态性
-- Bolshtyansky M, Cowle G. **_Spectral hole burning in EDFA under various channel load conditions_**.  2009 Conference on Optical Fiber Communication; 2009: IEEE; 2009. p. 1-3.
-- Zhu S, Gutterman CL, Mo W, Li Y, Zussman G, Kilper DC. **_Machine learning based prediction of erbium-doped fiber WDM line amplifier gain spectra_**.  2018 European Conference on Optical Communication (ECOC); 2018: IEEE; 2018. p. 1-3.
-- Mahajan A, Christodoulopoulos K, Martínez R, Spadaro S, Muñoz R. **_Modeling EDFA gain ripple and filter penalties with machine learning for accurate QoT estimation_**. Journal of Lightwave Technology 2020, 38(9): 2616-2629.
-- Perin JK, Kahn JM, Downie JD, Hurley J, Bennett K. **_Importance of Amplifier Physics in Maximizing the Capacity of Submarine Links_**. Journal of Lightwave Technology 2019, 37(9): 2076-2085.
+- Bolshtyansky M, Cowle G. **_Spectral hole burning in EDFA under various channel load conditions_**.  2009 Conference on Optical Fiber Communication; 2009: IEEE; 2009. p. 1-3. 掺铒光纤放大烧孔效应
+- Zhu S, Gutterman CL, Mo W, Li Y, Zussman G, Kilper DC. **_Machine learning based prediction of erbium-doped fiber WDM line amplifier gain spectra_**.  2018 European Conference on Optical Communication (ECOC); 2018: IEEE; 2018. p. 1-3. EDFA增益建模
 - Yankov MP, de Moura UC, Ros FD. **_Power Evolution Modeling and Optimization of Fiber Optic Communication Systems With EDFA Repeaters_**. Journal of Lightwave Technology 2021, 39(10): 3154-3161.
 - Yankov MP, Kaminski PM, Hansen HE, Da Ros F. **_SNR optimization of multi-span fiber optic communication systems employing EDFAs with non-flat gain and noise figure_**. Journal of Lightwave Technology 2021, 39(21): 6824-6832.
 - Yu J, Zhu S, Gutterman CL, Zussman G, Kilper DC. **_Machine-learning-based EDFA gain estimation [Invited]_**. Journal of Optical Communications and Networking 2021, 13(4): B83.
@@ -213,6 +210,7 @@
 ### 光链路参数识别
 - D’Amico A, Straullu S, Borraccini G, London E, Bottacchi S, Piciaccia S, Tanzi A, Nespola A, Galimberti G, Swail S. **_Enhancing lightpath QoT computation with machine learning in partially disaggregated optical networks_**. IEEE Open Journal of the Communications Society 2021, 2: 564-574.
 - Morette N, de Jauregui Ruiz IF, Hafermann H, Pointurier Y. **_On the Robustness of a ML-based Method for QoT Tool Parameter Refinement in Partially Loaded Networks_**.  Optical Fiber Communication Conference; 2022: Optica Publishing Group; 2022. p. M3F. 1.
+
 ### Fiber bend loss 光纤弯折
 - Wang P, Wang Q, Farrell G, Rajan G, Freir T, Cassidy J. **_Investigation of macrobending losses of standard single mode fiber with small bend radii_**. Microwave and Optical Technology Letters. 2007 Sep;49(9):2133-8.
 - Faustini L, Martini G. **_Bend loss in single-mode fibers_**. Journal of lightwave technology. 1997 Apr;15(4):671-9.。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-guang-xing-neng-fang-zhen.html</guid><pubDate>Fri, 17 Jan 2025 14:20:38 +0000</pubDate></item><item><title>文字随想</title><link>https://cubewatermelon.github.io/post/wen-zi-sui-xiang.html</link><description>## 马尔克斯
