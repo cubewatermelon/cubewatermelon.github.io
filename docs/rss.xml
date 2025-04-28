@@ -1,34 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Tue, 22 Apr 2025 09:42:18 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】总体框架</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</link><description>&lt;table border='0' cellpadding='0' cellspacing='0' width='393' style='width: 295pt;'&gt; &lt;colgroup&gt;&lt;col width='134' style='mso-width-source:userset;mso-width-alt:4573;width:101pt'&gt; &lt;col width='259' style='mso-width-source:userset;mso-width-alt:8840;width:194pt'&gt; &lt;/colgroup&gt;&lt;tbody&gt;&lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' width='134' style='height:13.9pt;width:101pt'&gt;方向&lt;/td&gt;
-            &lt;td width='259' style='width:194pt'&gt;技术点&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td rowspan='13' height='247' style='height:180.7pt'&gt;光纤通信系统&lt;/td&gt;
-            &lt;td&gt;多波段传输系统&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;多波段传输效应分析&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;dsp相关工作&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;神经网络用于损伤补偿&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;传输过程中各种非线性&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;宽波段数值方法&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;深度学习用于光纤信道时域波形建模&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;光链路端到端学习&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;光放大器建模&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;光链路其余损伤&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;光传输容量整体分析&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;ppe 纵向光功率演化监测&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;通密一体&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td rowspan='6' height='114' style='height:83.4pt'&gt;光性能仿真&lt;/td&gt;
-            &lt;td&gt;gaussian noise (gn) model 高斯噪声模型&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;why gn model?&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;时域微扰模型&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;edfa动态性&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;光链路参数识别&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;fiber bend loss 光纤弯折&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td rowspan='5' height='95' style='height:69.5pt'&gt;物理信息深度学习（数据物理混合驱动方法）&lt;/td&gt;
-            &lt;td&gt;ai4science&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;物理信息神经网络pinn&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;神经算子结构网络&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;光网络物理信息嵌入&lt;/td&gt;
-        &lt;/tr&gt; &lt;tr height='19' style='height:13.9pt'&gt;         &lt;td height='19' style='height:13.9pt'&gt;物理信息与深度学习结合可以借鉴的角度&lt;/td&gt;
-        &lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</guid><pubDate>Tue, 22 Apr 2025 02:55:41 +0000</pubDate></item><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Mon, 28 Apr 2025 09:50:12 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>【论文列表】总体框架</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</link><description>### 光纤通信系统
+- **多波段传输系统**
+- **多波段传输效应分析**
+- **DSP相关工作**
+- **神经网络用于损伤补偿**
+- **传输过程中各种非线性**
+- **宽波段数值方法**
+- **深度学习用于光纤信道时域波形建模**
+- **光链路端到端学习**
+- **光放大器建模**
+- **光链路其余损伤**
+- **光传输容量整体分析**
+- **PPE 纵向光功率演化监测**
+- **通密一体**
+
+### 光性能仿真
+- **Gaussian Noise (GN)   model 高斯噪声模型**
+- **Why GN model?**
+- **时域微扰模型**
+- **EDFA动态性**
+- **光链路参数识别**
+- **Fiber bend loss 光纤弯折**
+
+### 物理信息深度学习（数据物理混合驱动方法）
+- **AI4Science**
+- **物理信息神经网络PINN**
+- **神经算子结构网络**
+- **光网络物理信息嵌入**
+- **物理信息与深度学习结合可以借鉴的角度**
+。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</guid><pubDate>Tue, 22 Apr 2025 02:55:41 +0000</pubDate></item><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
 - Wu D, Wang X, Qiao Y, Wang Z, Jiang J, Cui S, Wang F. **_NetLLM: Adapting Large Language Models for Networking_**.  Proceedings of the ACM SIGCOMM 2024 Conference; 2024; 2024. p. 661-678. 顶会
 - Maatouk A, Ayed F, Piovesan N, De Domenico A, Debbah M, Luo Z-Q. **_Teleqna: A benchmark dataset to assess large language models telecommunications knowledge._** arXiv preprint arXiv:231015051 2023. 通信数据集
 - Xu S, Thomas CK, Hashash O, Muralidhar N, Saad W, Ramakrishnan N. **_Large multi-modal models (LMMs) as universal foundation models for AI-native wireless systems_**. arXiv preprint arXiv:240201748 2024. 多模态
