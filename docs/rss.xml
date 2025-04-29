@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Mon, 28 Apr 2025 16:11:24 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>《一本书读懂华为光网络》学习笔记</title><link>https://cubewatermelon.github.io/post/%E3%80%8A-yi-ben-shu-du-dong-hua-wei-guang-wang-luo-%E3%80%8B-xue-xi-bi-ji.html</link><description>### 基础知识
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Tue, 29 Apr 2025 02:48:35 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>《一本书读懂华为光网络》学习笔记</title><link>https://cubewatermelon.github.io/post/%E3%80%8A-yi-ben-shu-du-dong-hua-wei-guang-wang-luo-%E3%80%8B-xue-xi-bi-ji.html</link><description>### 基础知识
 
 ### 器件系统。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%8A-yi-ben-shu-du-dong-hua-wei-guang-wang-luo-%E3%80%8B-xue-xi-bi-ji.html</guid><pubDate>Mon, 28 Apr 2025 09:54:43 +0000</pubDate></item><item><title>【论文列表】总体框架</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</link><description>### 光纤通信系统
 - **多波段传输系统**
@@ -30,7 +30,10 @@
 - **神经算子结构网络**
 - **光网络物理信息嵌入**
 - **物理信息与深度学习结合可以借鉴的角度**
-。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</guid><pubDate>Tue, 22 Apr 2025 02:55:41 +0000</pubDate></item><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 无线通信大模型
+。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html</guid><pubDate>Tue, 22 Apr 2025 02:55:41 +0000</pubDate></item><item><title>【论文列表】通信行业大模型</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html</link><description>### 光通信大模型
+- Abishek, A., Adanza, D., Alemany, P., Gifre, L., Casellas, R., Martínez, R., Muñoz, R. and Vilalta, R., 2025. **End-to-end transport network digital twins with cloud-native SDN controllers and generative AI**. Journal of Optical Communications and Networking, 17(7), pp.C70-C81. DT和LLM在SDN中部署的概述，有比较详细的NDT故事，着重添加了网络层（IP层）的相关部分，并在自己的网络控制器TeraFlow中部署；有比较详细的各个功能的介绍，尤其是LLM和intent相关；是很多前述论文的集合体
+- 
+### 无线通信大模型
 - Wu D, Wang X, Qiao Y, Wang Z, Jiang J, Cui S, Wang F. **_NetLLM: Adapting Large Language Models for Networking_**.  Proceedings of the ACM SIGCOMM 2024 Conference; 2024; 2024. p. 661-678. 顶会
 - Maatouk A, Ayed F, Piovesan N, De Domenico A, Debbah M, Luo Z-Q. **_Teleqna: A benchmark dataset to assess large language models telecommunications knowledge._** arXiv preprint arXiv:231015051 2023. 通信数据集
 - Xu S, Thomas CK, Hashash O, Muralidhar N, Saad W, Ramakrishnan N. **_Large multi-modal models (LMMs) as universal foundation models for AI-native wireless systems_**. arXiv preprint arXiv:240201748 2024. 多模态
@@ -65,7 +68,7 @@
  -Liang Y, Wen H, Nie Y, Jiang Y, Jin M, Song D, Pan S, Wen Q. **_Foundation Models for Time Series Analysis: A Tutorial and Survey_**.  Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining; 2024. pp. 6555-6565.
 
 ### 可能有用的大模型领域洞察
-- Xiao C, Cai J, Zhao W, Zeng G, Han X, Liu Z, Sun M. **_Densing Law of LLMs_**. arXiv preprint arXiv:241204315 2024. 探讨了大模型能力密度的关系，从讨论角度上说比较有启发
+- Xiao C, Cai J, Zhao W, Zeng G, Han X, Liu Z, Sun M. **_Densing Law of LLMs_**. arXiv preprint arXiv:241204315 2024. 探讨了大模型能力密度的关系，从训练模型大小、轮数、数据量大小、参数量大小等可讨论角度上说比较有启发
 - Michaud EJ, Liao I, Lad V, Liu Z, Mudide A, Loughridge C, Guo ZC, Kheirkhah TR, Vukelić M, Tegmark M. **_Opening the AI Black Box: Distilling Machine-Learned Algorithms into Code_**. Entropy 2024, 26(12). 将算法转化为代码的初步讨论
 - Farquhar S, Kossen J, Kuhn L, Gal Y. **_Detecting hallucinations in large language models using semantic entropy_**. Nature 2024, 630(8017): 625-630. 大模型回答是否靠谱的语义上的分析
 - Marcondes D, Simonis A, Barrera J. **_Back to basics to open the black box_**. Nature Machine Intelligence 2024, 6(5): 498-501. 评论
