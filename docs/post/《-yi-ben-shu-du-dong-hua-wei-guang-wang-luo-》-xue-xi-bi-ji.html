@@ -10,13 +10,13 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="### 基础知识
-
-### 器件系统。">
+<meta name="description" content="## 基础知识
+OSI七层网络架构
+- 物理层（Physical Layer）：比特。">
 <meta property="og:title" content="《一本书读懂华为光网络》学习笔记">
-<meta property="og:description" content="### 基础知识
-
-### 器件系统。">
+<meta property="og:description" content="## 基础知识
+OSI七层网络架构
+- 物理层（Physical Layer）：比特。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://cubewatermelon.github.io/post/%E3%80%8A-yi-ben-shu-du-dong-hua-wei-guang-wang-luo-%E3%80%8B-xue-xi-bi-ji.html">
 <meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
@@ -77,8 +77,23 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h3>基础知识</h3>
-<h3>器件系统</h3></div>
+<div class="markdown-body" id="postBody"><h2>基础知识</h2>
+<p>OSI七层网络架构</p>
+<ul>
+<li>物理层（Physical Layer）：比特。</li>
+<li>数据链路层（Data Link Layer）：帧结构；MAC 子层负责分配硬件标识号，换机会跟踪网络上所有的 MAC 地址。LLC 子层处理帧的寻址以及流量控制。</li>
+<li>网络层（Network Layer）：路由器跨越多个网络移动数据包，每个数据包都包含一个帧 加上 一个 IP 地址信息的包装。</li>
+<li>传输层（Transport Layer）：TCP和UDP</li>
+<li>会话层（Session Layer）</li>
+<li>表示层（Presentation Layer）：负责数据的格式，比如字符编码与转换，以及数据加密。</li>
+<li>应用层（Application Layer）</li>
+</ul>
+<h2>器件系统</h2>
+<h3>波分信号流</h3>
+<p>物理体现即物理通路；设计体现在系统规划和业务讨论中经常用到；根据增益和衰减完成对信号流的调测。</p>
+<ul>
+<li>低速信号光功率较高所带来的非线性串扰可能导致高速信号性能较差（中断R_LOF告警）</li>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
