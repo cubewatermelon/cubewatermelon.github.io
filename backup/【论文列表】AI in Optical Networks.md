@@ -6,6 +6,7 @@
 - Khan FN, Fan Q, Lu C, Lau AP. **_An optical communication's perspective on machine learning and its applications_**. Journal of Lightwave Technology. 2019 Feb 3;37(2):493-516. 非常有条理的经典文章，图片非常丰富
 - Saif WS, Esmail MA, Ragheb AM, Alshawi TA, Alshebeili SA. **_Machine learning techniques for optical performance monitoring and modulation format identification: A survey_**. IEEE Communications Surveys & Tutorials. 2020 Sep 1;22(4):2839-82. 光性能监测OPM survey
 - Panayiotou, T., Michalopoulou, M. and Ellinas, G., 2023. **_Survey on machine learning for traffic-driven service provisioning in optical networks_**. IEEE Communications Surveys & Tutorials, 25(2), pp.1412-1443. 光网络中的流量业务预测方面
+- Khan FN. **_Non-technological barriers: the last frontier towards AI-powered intelligent optical networks. Nature Communications_**. 2024 Jul 17;15(1):5995.  为什么AI技术历经近十年的交叉研究仍然无法在商业光网络中大规模部署？本质上可能真是那么几个不是很技术的原因导致的。陈旧的系统和繁杂的流程、成本、数据、可解释性、责任问题。
 
 ### 非线性补偿/符号判决
 - Layec P, Ghazisaeidi A, Charlet G, Antona JC, Bigo S. **_Generalized maximum likelihood for cross-polarization modulation effects compensation_**. Journal of Lightwave Technology. 2015 Apr 1;33(7):1300-7. 该团队有很多光网络实际问题的探讨
