@@ -13,7 +13,7 @@ My primary research interests include
 
 ![Image](https://github.com/user-attachments/assets/972b9dce-9e96-41f4-aee4-3c669f7383ca)
 
-本博客中还有【科研感受】栏目，努力分享了读博期间对如何进行不同科研项目工作的个人经验总结，欢迎指正；【论文列表】栏目总结了不同领域方向上不同技术点阅读过的感觉有用的好文章，为了方便阅读查找，各个方向和技术点在【论文列表】整体框架里有罗列。锐意更新中~欢迎阅读、评论、交流！
+本博客中还有【科研感受】栏目，分享了读博期间对如何进行不同科研项目工作的个人经验总结，欢迎指正；【论文列表】栏目总结了不同领域方向上不同技术点阅读过的感觉有用的好文章，为了方便阅读查找，各个方向和技术点在【论文列表】整体框架里有罗列。锐意更新中~欢迎阅读、评论、交流！
 <h3> Education </h3>  
 
 - Sept. 2020 — June 2025: Ph.D. in Electronic Science and Technology, School of Electronic Engineering, Beijing University of Posts and Telecommunications (expected)
