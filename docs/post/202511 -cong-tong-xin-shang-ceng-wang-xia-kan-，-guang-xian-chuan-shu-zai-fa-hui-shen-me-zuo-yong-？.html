@@ -10,13 +10,55 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="光网络因为云厂商成为流量高地以后总体是向标准化方向演进的。">
-<meta property="og:title" content="产业视角">
-<meta property="og:description" content="光网络因为云厂商成为流量高地以后总体是向标准化方向演进的。">
+<meta name="description" content="- 从通信视角来看，我们倾注很多心血研究的光纤通信只是一个透明管道，被视为物理层
+### 通信上层基础知识
+- 在通信网络中，通过IP来识别我们需要通信的对象；如果我们是微信电话（走互联网，而传统的电话走“语音网”），请求从应用层发出，通过传输层走TCP/UDP协议，再到网络层（IP层）由路由器转发到数据链路层汇聚节点的交换机，这里面涉及网关、MAC地址与端口配对、子网等多个话题，最终达到最底层物理层的光缆
+- 在实际之中，通信网络可以被划分为：应用层、传输层、网络层、数据链路层和物理层，共五层
+1. 各种应用依赖不同协议，将所需传输数据进行编码、压缩，并开始与服务器交互
+2. 传输层将数据分为“段”进行传输，并根据收发设备的速率匹配问题进行流量控制，分为TCP和UDP两种传输模式
+3. 网络层将“数据段”加上收发方的IP地址+子网掩码，成为了“数据包”，根据IP进行逻辑寻址和路由，具体传输时以“帧结构”发送
+4. 数据链路层对网络层的数据传输进行控制和校验
+5. 物理层的底层信号为bits
+- 在TCP/IP网络中，数据是以数据包形式传输，其中头部（Header）包含源/目的 IP、端口、协议类型（TCP/UDP）、序列号、校验和等控制信息，载荷（Payload）包含实际传输的数据（如 HTTP 请求体、图片、文本等）
+- HTTP是明文传输，而HTTPS是加密传输
+### 新兴技术
+1. RDMA
+- RDMA技术实现了两个节点之间数据缓冲区数据的直接传递（类似可以直接进行计算机间内存数据的搬移）
+- 新兴的RDMA技术是跳过了传输信息在内核态的复值，而是直接到网卡处理，降低了CPU的占用率和时延；但是需要新的RDMA网卡，一般用于小节点互联系统
+- 本质来说RDMA是一种将通信数据处理卸载到支持RDMA技术的网卡的技术，数据处理完全由网卡引擎完成，无需主机系统参与
+2. PCDN
+- PCDN利用家宽做内容分发
+- 
+### 遗留
+1. 以太网和IP网络基本原理，它们是如何与实际的传输系统相对应的
+2. RDMA具体的应用场景。">
+<meta property="og:title" content="202511 从通信上层往下看，光纤传输在发挥什么作用？">
+<meta property="og:description" content="- 从通信视角来看，我们倾注很多心血研究的光纤通信只是一个透明管道，被视为物理层
+### 通信上层基础知识
+- 在通信网络中，通过IP来识别我们需要通信的对象；如果我们是微信电话（走互联网，而传统的电话走“语音网”），请求从应用层发出，通过传输层走TCP/UDP协议，再到网络层（IP层）由路由器转发到数据链路层汇聚节点的交换机，这里面涉及网关、MAC地址与端口配对、子网等多个话题，最终达到最底层物理层的光缆
+- 在实际之中，通信网络可以被划分为：应用层、传输层、网络层、数据链路层和物理层，共五层
+1. 各种应用依赖不同协议，将所需传输数据进行编码、压缩，并开始与服务器交互
+2. 传输层将数据分为“段”进行传输，并根据收发设备的速率匹配问题进行流量控制，分为TCP和UDP两种传输模式
+3. 网络层将“数据段”加上收发方的IP地址+子网掩码，成为了“数据包”，根据IP进行逻辑寻址和路由，具体传输时以“帧结构”发送
+4. 数据链路层对网络层的数据传输进行控制和校验
+5. 物理层的底层信号为bits
+- 在TCP/IP网络中，数据是以数据包形式传输，其中头部（Header）包含源/目的 IP、端口、协议类型（TCP/UDP）、序列号、校验和等控制信息，载荷（Payload）包含实际传输的数据（如 HTTP 请求体、图片、文本等）
+- HTTP是明文传输，而HTTPS是加密传输
+### 新兴技术
+1. RDMA
+- RDMA技术实现了两个节点之间数据缓冲区数据的直接传递（类似可以直接进行计算机间内存数据的搬移）
+- 新兴的RDMA技术是跳过了传输信息在内核态的复值，而是直接到网卡处理，降低了CPU的占用率和时延；但是需要新的RDMA网卡，一般用于小节点互联系统
+- 本质来说RDMA是一种将通信数据处理卸载到支持RDMA技术的网卡的技术，数据处理完全由网卡引擎完成，无需主机系统参与
+2. PCDN
+- PCDN利用家宽做内容分发
+- 
+### 遗留
+1. 以太网和IP网络基本原理，它们是如何与实际的传输系统相对应的
+2. RDMA具体的应用场景。">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://cubewatermelon.github.io/post/chan-ye-shi-jiao.html">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/202511%20-cong-tong-xin-shang-ceng-wang-xia-kan-%EF%BC%8C-guang-xian-chuan-shu-zai-fa-hui-shen-me-zuo-yong-%EF%BC%9F.html">
 <meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
-<title>产业视角</title>
+<title>202511 从通信上层往下看，光纤传输在发挥什么作用？</title>
 
 
 
@@ -49,7 +91,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1 class="postTitle">产业视角</h1>
+<h1 class="postTitle">202511 从通信上层往下看，光纤传输在发挥什么作用？</h1>
 <div class="title-right">
     <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
@@ -57,7 +99,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         </svg>
     </a>
     
-    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/8" target="_blank" class="btn btn-invisible circle" title="Issue">
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/17" target="_blank" class="btn btn-invisible circle" title="Issue">
         <svg class="octicon" width="16" height="16">
             <path id="pathIssue" fill-rule="evenodd"></path>
         </svg>
@@ -73,47 +115,46 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>光网络因为云厂商成为流量高地以后总体是向标准化方向演进的。网络和设备更开放和透明后，可以研究的问题也会越来越多，不管去哪都不要仅仅被热点绑定，要深度参与到这个进程中识别先机，将来有一席之地</p>
-<h3>下一代光网络AI ON</h3>
-<p>面向AI时代光网络将加速迈向AI ON（AI Optical Network, AI光网），以“5A”品质的联接为AI发展与繁荣构筑坚实底座，实现AI应用无处不在，AI算力无处不在，AI原生无处不在。</p>
-<ul>
-<li>Awareness：感知业务流量特征、流向特点等，识别业务类型，理解业务带宽、时延、可靠性等需求。</li>
-<li>Always On Demand：实时按需提供差异化的联接，比如更细化的套餐。</li>
-<li>Assurance：确定性、可保障网络。</li>
-<li>Autonomous O&amp;M：行主动优化，实现网络自愈。</li>
-<li>AI Native：在网络的终端、设备、管控系统三方面构建全栈内生AI能力。例如通过在ONT/FTTR上内置AI算力，基于终端侧小模型，实现应用类型识别、设备性能提升等。</li>
+<div class="markdown-body" id="postBody"><ul>
+<li>从通信视角来看，我们倾注很多心血研究的光纤通信只是一个透明管道，被视为物理层</li>
 </ul>
-<p><a href="https://www.huawei.com/cn/news/2025/3/towards-ai-on" rel="nofollow">AI ON相关连接</a></p>
-<h3>F5G-A全光目标网</h3>
+<h3>通信上层基础知识</h3>
 <ul>
-<li>3个网络能力：10Gbps泛在接入，城域网1毫秒超低时延和骨干网99.9999%超高可靠性。</li>
-<li>4个网络架构：骨干网400G、800G OTN联接数据中心，城域网100G OTN延伸到站点，接入网50G PON到家庭和企业，万兆联接到每个房间。</li>
-<li>FTTR正从联接功能延伸到智慧家庭应用（FTTR+X），即FTTR网络和多种智慧家庭应用的融合，帮助运营商拓宽家庭宽带业务边界。</li>
-<li>业界首款智能OLT产品MA5800T支持2T每槽位超大容量和智能引擎。</li>
-<li>Alps-WDM方案将100G/200G OTN部署到城域边缘，端到端的全光交换实现业务一跳直达，用户ms上云，助力运营商打造极简架构和极致体验的城域网络。</li>
+<li>在通信网络中，通过IP来识别我们需要通信的对象；如果我们是微信电话（走互联网，而传统的电话走“语音网”），请求从应用层发出，通过传输层走TCP/UDP协议，再到网络层（IP层）由路由器转发到数据链路层汇聚节点的交换机，这里面涉及网关、MAC地址与端口配对、子网等多个话题，最终达到最底层物理层的光缆</li>
+<li>在实际之中，通信网络可以被划分为：应用层、传输层、网络层、数据链路层和物理层，共五层</li>
 </ul>
-<p><a href="https://carrier.huawei.com/cn/news/Green-All-Optical-Network-Forum" rel="nofollow">相关连接</a></p>
-<h3>通信大模型</h3>
 <ol>
-<li><a href="https://www.huawei.com/cn/news/2024/2/telecomfoundationmodel-copilots-agents" rel="nofollow">Net Master</a></li>
+<li>各种应用依赖不同协议，将所需传输数据进行编码、压缩，并开始与服务器交互</li>
+<li>传输层将数据分为“段”进行传输，并根据收发设备的速率匹配问题进行流量控制，分为TCP和UDP两种传输模式</li>
+<li>网络层将“数据段”加上收发方的IP地址+子网掩码，成为了“数据包”，根据IP进行逻辑寻址和路由，具体传输时以“帧结构”发送</li>
+<li>数据链路层对网络层的数据传输进行控制和校验</li>
+<li>物理层的底层信号为bits</li>
 </ol>
 <ul>
-<li>支撑运营商智能化目标，面向不同角色，提供智能语言交互能力，提升员工知识水平和工作效率；面向不同运营运维场景，提供智能体应用，分析拆解复杂流程，编排操作方案，确保用户体验和满意度。</li>
-<li>在敏捷业务发放案例中，通过放号助手的多模态精准评估，实现了快速用户放号；在用户体验保障案例中，通过大模型的寻优能力，实现了多目标体验保障；在辅助排障场景下，跨流程的质差分析和对话辅助处理，显著改善了故障处理效率。</li>
-<li>集成了华为数据通信领域超过500亿语料和1万多名网络专家的经验，具备强大的语义理解能力。支持知识问答、交互式业务分析与辅助决策，能够显著提升MSP伙伴的网络运维效率。</li>
-<li><strong>Multi-agent架构</strong></li>
-<li>其一是故障管理场景：在故障识别阶段，通信大模型结合高精度数字孪生，实现对多层多维网络数据的精准感知；在故障诊断阶段，基于大模型的思维链智能分析能力，可以快速诊断出故障根因，大幅减少告警。针对软调类故障，智能体FaultSpirit可以自主调用工具或接口，完成修复闭环；针对硬件类故障，Copilot可以提供精准的故障信息和修复建议，指导站点工程师快速完成故障修复，将工单处理时长大幅缩短。</li>
-<li>其二是无线网络优化场景：多目标意图融合框架，可以综合考虑节能、性能、体验等多个目标，将速率、干扰、覆盖、能耗等要素融合分析，基于大模型和RAN数字孪生系统，自主生成节能和体验双优策略，从而达到多目标综合效益最大化。智能体OptimSpirit通过实时网络管理和策略自闭环，实现网络节能增益和边缘速率的提升，将网络的能力发挥到极致。</li>
-<li>其三是企业园区业务使能场景：在企业园区专网的开通环节，智能体ProvSpirit快速理解用户意图，自动生成SLA配置，实现免入园开通，开通时长大幅缩减，助力企业用户快、准、稳的业务发放。面对跨专业的复杂园区网络，通过构建运营大屏与中小屏协同运维方式，从单人单域运维转变为单人全域运维，实现跨域问题分钟级定界，MTTR降低，帮助企业提升数智化运维能力。</li>
-<li>面向智能运维场景，打造了CompSpirit（投诉处理Agent）和AssurSpirit（故障处理Agent）创新应用。通过AI大模型技术实现投诉/故障的智能诊断并实现故障处理E2E自动化，降低了电信从业人员的技能要求，大幅度提升运营商告警分析自动化率以及故障处理效率；面向网络优化场景，打造OptimSpirit（网络优化Agent）创新应用。能够感知毫秒级多维质差数据，通过AI大模型技术自动生成优化策略并实现自主调优，使能运营商网络的调优效率从小时级提高到分钟级，大幅度提升网络流量的利用率；面向体验经营场景，打造HCEMate宽带装维Copilot创新应用，协同AssurSpirit和OptimSpirit形成家宽体验保障解决方案。从业务部署到体验优化及故障处理，实现端到端的用户体验保障，使能家宽业务营销成功率大幅提升的同时降低用户投诉率。</li>
-<li>AI大模型是解决“海量、重复、复杂”的电信业务场景的关键抓手，是自智网络持续夯实L3，迈向L4的关键使能技术。</li>
+<li>在TCP/IP网络中，数据是以数据包形式传输，其中头部（Header）包含源/目的 IP、端口、协议类型（TCP/UDP）、序列号、校验和等控制信息，载荷（Payload）包含实际传输的数据（如 HTTP 请求体、图片、文本等）</li>
+<li>HTTP是明文传输，而HTTPS是加密传输</li>
 </ul>
-<h3>从上层往下看，光纤通信在发挥什么作用？ - OSI七层网络通信架构与光传输</h3>
+<h3>新兴技术</h3>
+<ol>
+<li>RDMA</li>
+</ol>
 <ul>
-<li>从通信视角来看，我们倾注很多心血研究的光纤通信只是一个透明管道，被视为物理层</li>
-<li>在通信网络中，通过IP来识别我们需要通信的对象；如果我们是微信电话（走互联网，而传统的电话走“语音网”），请求从应用层发出，通过传输层走TCP/UDP协议，再到网络层（IP层）由路由器转发到数据链路层汇聚节点的交换机，这里面涉及网关、MAC地址与端口配对、子网等多个话题，最终达到最底层物理层的光缆</li>
+<li>RDMA技术实现了两个节点之间数据缓冲区数据的直接传递（类似可以直接进行计算机间内存数据的搬移）</li>
 <li>新兴的RDMA技术是跳过了传输信息在内核态的复值，而是直接到网卡处理，降低了CPU的占用率和时延；但是需要新的RDMA网卡，一般用于小节点互联系统</li>
-</ul></div>
+<li>本质来说RDMA是一种将通信数据处理卸载到支持RDMA技术的网卡的技术，数据处理完全由网卡引擎完成，无需主机系统参与</li>
+</ul>
+<ol start="2">
+<li>PCDN</li>
+</ol>
+<ul>
+<li>PCDN利用家宽做内容分发</li>
+<li></li>
+</ul>
+<h3>遗留</h3>
+<ol>
+<li>以太网和IP网络基本原理，它们是如何与实际的传输系统相对应的</li>
+<li>RDMA具体的应用场景</li>
+</ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
