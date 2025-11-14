@@ -10,13 +10,9 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="### PPO（Proximal Policy Optimization，近端策略优化）
-- 使用高质量的数据集对预训练的大模型进行有监督微调 (SFT)，使其具备基本的指令遵循能力，得到一个基准策略模型 $\pi_{\text{SFT}}$
-- 收集大量的人类偏好数据，即对于同一个 Prompt，让人类对模型生成的不同回答进行评分或比较；基于这些人类偏好，训练一个奖励模型 (RM) $r_{\phi}(\mathbf{x}, \mathbf{y})$。">
+<meta name="description" content="大型语言模型 (LLM) 的后训练 (Post-training) 通常依赖于两种主流范式：监督微调(Supervised Fine-Tuning, SFT) 和强化学习 (Reinforcement Learning, RL)。">
 <meta property="og:title" content="2025-11 大模型强化学习微调技术RLHF">
-<meta property="og:description" content="### PPO（Proximal Policy Optimization，近端策略优化）
-- 使用高质量的数据集对预训练的大模型进行有监督微调 (SFT)，使其具备基本的指令遵循能力，得到一个基准策略模型 $\pi_{\text{SFT}}$
-- 收集大量的人类偏好数据，即对于同一个 Prompt，让人类对模型生成的不同回答进行评分或比较；基于这些人类偏好，训练一个奖励模型 (RM) $r_{\phi}(\mathbf{x}, \mathbf{y})$。">
+<meta property="og:description" content="大型语言模型 (LLM) 的后训练 (Post-training) 通常依赖于两种主流范式：监督微调(Supervised Fine-Tuning, SFT) 和强化学习 (Reinforcement Learning, RL)。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://cubewatermelon.github.io/post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html">
 <meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
@@ -77,7 +73,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h3>PPO（Proximal Policy Optimization，近端策略优化）</h3>
+<div class="markdown-body" id="postBody"><p>大型语言模型 (LLM) 的后训练 (Post-training) 通常依赖于两种主流范式：监督微调(Supervised Fine-Tuning, SFT) 和强化学习 (Reinforcement Learning, RL)。SFT 主要通过模仿高质量的专家数据来学习，而 RL 则通过与环境的交互和反馈进行探索性学习。</p>
+<h3>PPO（Proximal Policy Optimization，近端策略优化）</h3>
 <ul>
 <li>使用高质量的数据集对预训练的大模型进行有监督微调 (SFT)，使其具备基本的指令遵循能力，得到一个基准策略模型 $\pi_{\text{SFT}}$
 </li>
@@ -133,6 +130,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ul>
 <h3>On-Policy RL Meets Off-Policy Experts: Harmonizing SFT and RL via Dynamic Weighting (CHORD)</h3>
 <ul>
+<li>先进行 SFT 再进行 RL (SFT-then-RL)是常用混合后训练方法，虽然直观，但在实践中常常表现不佳，甚至不如单纯的 RL。其根本原因在于，来自外部专家的“离策略(off-policy)”数据可能会严重干扰模型在 SFT 阶段已经建立的内部模式，导致模型性能下降，并可能在后续的 RL 阶段陷入过拟合</li>
 <li>CHORD 的核心思想是在强化学习过程中，动态融合专家数据（SFT），通过 全局权重 μ + token 级别权重 φ 的双重控制机制，在模仿与探索之间实现平衡</li>
 <li>CHORD 算法通过在 GRPO loss 中引入 SFT loss，实现动态混合训练</li>
 <li>通过在训练过程中逐步 衰减 μ，实现从模仿专家到自主探索的过渡</li>
