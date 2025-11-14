@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="### PPO（Proximal Policy Optimization，近端策略优化）
+- 使用高质量的数据集对预训练的大模型进行有监督微调 (SFT)，使其具备基本的指令遵循能力，得到一个基准策略模型 $\pi_{\text{SFT}}$
+- 收集大量的人类偏好数据，即对于同一个 Prompt，让人类对模型生成的不同回答进行评分或比较；基于这些人类偏好，训练一个奖励模型 (RM) $r_{\phi}(\mathbf{x}, \mathbf{y})$。">
+<meta property="og:title" content="2025-11 大模型强化学习微调技术RLHF">
+<meta property="og:description" content="### PPO（Proximal Policy Optimization，近端策略优化）
+- 使用高质量的数据集对预训练的大模型进行有监督微调 (SFT)，使其具备基本的指令遵循能力，得到一个基准策略模型 $\pi_{\text{SFT}}$
+- 收集大量的人类偏好数据，即对于同一个 Prompt，让人类对模型生成的不同回答进行评分或比较；基于这些人类偏好，训练一个奖励模型 (RM) $r_{\phi}(\mathbf{x}, \mathbf{y})$。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>2025-11 大模型强化学习微调技术RLHF</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">2025-11 大模型强化学习微调技术RLHF</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/20" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h3>PPO（Proximal Policy Optimization，近端策略优化）</h3>
+<ul>
+<li>使用高质量的数据集对预训练的大模型进行有监督微调 (SFT)，使其具备基本的指令遵循能力，得到一个基准策略模型 $\pi_{\text{SFT}}$
+</li>
+<li>收集大量的人类偏好数据，即对于同一个 Prompt，让人类对模型生成的不同回答进行评分或比较；基于这些人类偏好，训练一个奖励模型 (RM) $r_{\phi}(\mathbf{x}, \mathbf{y})$。这个模型的作用是预测人类会对任何给定的模型回答 $\mathbf{y}$ 打出多高的“奖励”分数<br>
+具体运行方式</li>
+</ul>
+<ol>
+<li>模型 $\pi_{\theta}$ 在 Prompt 上生成回答（采样）。</li>
+<li>奖励模型 $r_{\phi}$ 对生成的回答进行评分（计算奖励）。</li>
+<li>PPO 使用这个奖励分数作为回报，通过近端策略优化目标函数来更新模型的参数 $\theta$。</li>
+</ol>
+<ul>
+<li>为了防止模型在最大化奖励的过程中偏离原始 SFT 模型太远（导致生成不连贯或怪异的文本），PPO 的目标函数中加入了一个 KL 散度惩罚项，确保新策略 $\pi_{\theta}$ 与基准策略 $\pi_{\text{SFT}}$ 保持“接近”。</li>
+</ul>
+<h3>DPO（Direct Preference Optimization，直接偏好优化）</h3>
+<ul>
+<li>基本流程与PPO类似，最大区别在于直接使用人类偏好数据 $(\mathbf{x}, \mathbf{y}_w, \mathbf{y}_l)$，其中 $\mathbf{y}_w$ 是优选回答，$\mathbf{y}_l$ 是劣选回答，<strong>通过数据的比较实现微调过程的加速</strong>，加速在算力不足时非常重要</li>
+<li>它将复杂的强化学习问题转化为了一个简单的、稳定的分类优化问题，避免了训练奖励模型时可能出现的误差累积和 PPO 训练中复杂的采样和梯度估计</li>
+<li>其中优化回答和劣选回答的权重也不一定一直为1/0，可以根据分数赋予权重</li>
+</ul>
+<h3>GRPO (Group Relative Policy Optimization，广义相对策略优化或群组相对策略优化)</h3>
+<ul>
+<li>前面这三种RL微调方法的本质理论差别其实在于“损失函数”，在于整体数学理论的引导</li>
+<li>GRPO 完全移除了 Critic 网络。它不是通过 Critic 来估计优势函数，而是采用群组相对优势估计</li>
+<li>具体步骤</li>
+</ul>
+<ol>
+<li>对于同一个 Prompt $\mathbf{x}$，模型 $\pi_{\text{old}}$ 采样生成一个包含 $G$ 个候选回答的群组 ${\mathbf{y}_1, \mathbf{y}_2, \ldots, \mathbf{y}_G}$。</li>
+<li>使用奖励模型 (RM) 对这 $G$ 个回答分别进行评分，得到奖励 ${R_1, R_2, \ldots, R_G}$。</li>
+<li>计算这个群组的平均奖励 $\text{Avg}(R_{\text{group}})$ 作为基准线 (Baseline)。</li>
+<li>计算每个回答的优势函数 $\hat{A}_i$：$$\hat{A}<em>i = R_i - \text{Avg}(R</em>{\text{group}})$$</li>
+</ol>
+<ul>
+<li>优势函数 $\hat{A}_i$ 不再是基于模型预测的绝对值，而是相对于同一 Prompt 下其他回答的相对好坏。如果回答 $\mathbf{y}_i$ 比同一批次的平均水平好，则 $\hat{A}_i &amp;gt; 0$；反之则 $\hat{A}_i &amp;lt; 0$。</li>
+<li>关键在于每一轮Group之间的比较</li>
+</ul>
+<h3>GRPO (Generalized Relative Policy Optimization，广义相对策略优化)</h3>
+<ul>
+<li>DPO/GRPO（作为无 RM 偏好优化时）： 可以直接从偏好数据 $(\mathbf{y}_w, \mathbf{y}_l)$ 中优化策略，避免了奖励模型的误差。在这种情况下，GRPO 可以被视为 DPO 的一个更广义或替代性的损失函数，它仍然基于最大化优选回答的对数概率与劣选回答的对数概率之差。</li>
+<li>KL 散度作为惩罚项或约束项被加入到优化目标中，确保模型在最大化奖励的同时，不能离原始策略太远，避免策略崩塌</li>
+</ul>
+<h3>Group Sequence Policy Optimization (GSPO)</h3>
+<ul>
+<li>将策略优化从代币级别（Token-level）提升到序列级别（Sequence-level）</li>
+<li>GSPO 定义了序列级别的重要性比率，直接基于整个序列的似然比 $\frac{\pi_{\theta}(\mathbf{y}|\mathbf{x})}{\pi_{\text{old}}(\mathbf{y}|\mathbf{x})}$（通常会进行长度归一化以减少方差）。这种方法将优化目标与奖励信号（奖励通常是针对整个序列的）更紧密地对齐，且提供了更稳定的离策略（Off-Policy）更新信号</li>
+<li>GSPO 的序列级方法，只依赖于整个序列的似然，这对于代币级别的专家激活变化具有更高的容忍度和鲁棒性，从而固有地解决了 MoE 模型 RL 训练的稳定性问题</li>
+</ul>
+<h3>DAPO (Decoupled Clip and Dynamic sAmpling Policy Optimization，解耦裁剪与动态采样策略优化)</h3>
+<ul>
+<li>传统的 PPO 和 GRPO 使用对称裁剪范围 $[\mathbf{1}-\epsilon, \mathbf{1}+\epsilon]$ (例如 $\epsilon=0.2$) 来限制新旧策略的比率。研究发现，这种对称限制容易导致策略熵坍塌（Entropy Collapse），即模型过于确信某些答案而缺乏探索性</li>
+<li>DAPO 将裁剪范围解耦，使用非对称的裁剪界限 $[\mathbf{1}-\epsilon_{\text{low}}, \mathbf{1}+\epsilon_{\text{high}}]$。它保持较低的下限 $\epsilon_{\text{low}}$ (如 0.2)，以防止模型将低概率动作的概率降至 0。它提高上限 $\epsilon_{\text{high}}$ (如 0.28，即 Clip-Higher)，允许模型在奖励为正的方向上进行更大胆的策略更新，从而鼓励探索和多样性，有效防止熵坍塌</li>
+<li>动态采样：在生成（采样）阶段，如果一个 Prompt 的所有生成结果的奖励（或准确率）都相同（例如都为 1 或都为 0），则将该 Prompt 过滤掉</li>
+</ul>
+<h3>On-Policy RL Meets Off-Policy Experts: Harmonizing SFT and RL via Dynamic Weighting (CHORD)</h3>
+<ul>
+<li>CHORD 的核心思想是在强化学习过程中，动态融合专家数据（SFT），通过 全局权重 μ + token 级别权重 φ 的双重控制机制，在模仿与探索之间实现平衡</li>
+<li>CHORD 算法通过在 GRPO loss 中引入 SFT loss，实现动态混合训练</li>
+<li>通过在训练过程中逐步 衰减 μ，实现从模仿专家到自主探索的过渡</li>
+<li>CHORD-ϕ 通过 token-wise 权重函数 φ 动态控制每个专家 token 的梯度贡献</li>
+<li><a href="https://swift.readthedocs.io/zh-cn/latest/Instruction/GRPO/AdvancedResearch/CHORD.html" rel="nofollow">https://swift.readthedocs.io/zh-cn/latest/Instruction/GRPO/AdvancedResearch/CHORD.html</a></li>
+</ul></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+<script>MathJax = {tex: {inlineMath: [["$", "$"]]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</html>
