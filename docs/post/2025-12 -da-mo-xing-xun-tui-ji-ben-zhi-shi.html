@@ -126,7 +126,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>有了 KV Cache： 工程师发现，在生成过程中，前文 Token 的 Key（键）向量和 Value（值）向量是固定不变的。</p>
 <p>做法： 把已经计算过的 Token 的 K 和 V 向量直接存在显存里。</p>
 <p>结果： 生成新词时，只需要计算当前这一个词的 K 和 V，然后去缓存里“找”旧的向量直接拼起来用。</p>
-<p>KV Cache 的本质就是“空间换时间”： 工程师通过在显存中开辟巨大的缓存空间，避免了重复的数学计算，从而将大模型的吐字速度（TPOT）维持在一个人类阅读可以接受的舒适区间</p></div>
+<p>KV Cache 的本质就是“空间换时间”： 工程师通过在显存中开辟巨大的缓存空间，避免了重复的数学计算，从而将大模型的吐字速度（TPOT）维持在一个人类阅读可以接受的舒适区间</p>
+<h2>训练技术</h2>
+<ul>
+<li>目前主流的做法不是单纯的DP、PP或TP，而是 ZeRO (Zero Redundancy Optimizer) 或者是 PyTorch 官方的 FSDP (Fully Sharded Data Parallel)</li>
+<li>ZeRO/FSDP在逻辑上还是数据并行（每张卡处理不同的数据），但显存里不存完整模型；与前三种的区别是它是存储优化。它不需要修改模型的数学计算逻辑（不像 TP 要拆矩阵），对代码侵入性小</li>
+<li>目前主流的 8 卡 A100 (80GB) 或 8 卡 H100 (80GB) 服务器为例（总显存 640GB），可以支撑约30B模型的全量微调（每 1B（10 亿）参数大约需要 20GB 显存），通过极致优化还可以微调更大模型</li>
+<li></li>
+</ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
