@@ -132,7 +132,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>目前主流的做法不是单纯的DP、PP或TP，而是 ZeRO (Zero Redundancy Optimizer) 或者是 PyTorch 官方的 FSDP (Fully Sharded Data Parallel)</li>
 <li>ZeRO/FSDP在逻辑上还是数据并行（每张卡处理不同的数据），但显存里不存完整模型；与前三种的区别是它是存储优化。它不需要修改模型的数学计算逻辑（不像 TP 要拆矩阵），对代码侵入性小</li>
 <li>目前主流的 8 卡 A100 (80GB) 或 8 卡 H100 (80GB) 服务器为例（总显存 640GB），可以支撑约30B模型的全量微调（每 1B（10 亿）参数大约需要 20GB 显存），通过极致优化还可以微调更大模型</li>
-<li></li>
+</ul>
+<h2>快速估算大模型训练推理算力需求</h2>
+<ul>
+<li>显存 G</li>
+<li>算力TFLOPs</li>
 </ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
