@@ -29,7 +29,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <style>
 .avatar {transition: 0.8s;width:64px;height:64px;object-fit: cover;}
 .avatar:hover{transform: scale(1.15) rotate(360deg);}
-#header h1 a{color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;font-family:Monaco;margin-left:8px;}
+.title-left a{color:inherit;text-decoration:none;vertical-align: bottom;font-size:40px;font-weight: bold;font-family:Monaco;margin-left:8px;}
 .title-right{display:flex;margin:auto 0 0 auto;}
 .title-right button{margin-right:8px;padding:16px;}
 .title-right .circle{padding: 14px 16px;}
@@ -55,8 +55,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
 <body>
     <div id="header">
-<h1>
-    <img src="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg" class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">Yuchen's Blog</a></h1>
+<div class="title-left">
+    <img src="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg" class="avatar circle" id="avatarImg" alt="avatar"><a class="blogTitle">Yuchen's Blog</a></div>
 <div class="title-right">
     <a href="https://cubewatermelon.github.io/tag.html" id="buttonSearch" class="btn btn-invisible circle" title="搜索">
         <svg class="octicon" width="16" height="16" >
@@ -82,7 +82,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <nav class="SideNav border">
 <a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-ge-ren-jian-jie-%E3%80%91Yuchen%27s%20Academic%20Page.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop1" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop1" d=""></path>
         </svg>
         <span class="listTitle">【个人简介】Yuchen&#39;s Academic Page</span>
     </div>
@@ -93,7 +93,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">2025-12 大模型训推基本知识</span>
     </div>
@@ -104,7 +104,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">2025-11 大模型强化学习微调技术RLHF</span>
     </div>
@@ -115,7 +115,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/202511%20-cong-tong-xin-shang-ceng-wang-xia-kan-%EF%BC%8C-guang-xian-chuan-shu-zai-fa-hui-shen-me-zuo-yong-%EF%BC%9F.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">202511 从通信上层往下看，光纤传输在发挥什么作用？</span>
     </div>
@@ -126,7 +126,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91AI%20exploration.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】AI exploration</span>
     </div>
@@ -137,7 +137,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zi-dong-jia-shi-guang-wang-luo.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】自动驾驶光网络</span>
     </div>
@@ -148,7 +148,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91AI%20in%20Optical%20Networks.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】AI in Optical Networks</span>
     </div>
@@ -159,7 +159,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-xue-xi-bi-ji-%E3%80%91-guang-wang-luo.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【学习笔记】光网络</span>
     </div>
@@ -170,7 +170,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zong-ti-kuang-jia.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】总体框架</span>
     </div>
@@ -181,7 +181,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-tong-xin-xing-ye-da-mo-xing.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】通信行业大模型</span>
     </div>
@@ -192,7 +192,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-wu-li-xin-xi-shen-du-xue-xi-%EF%BC%88-shu-ju-wu-li-hun-he-qu-dong-fang-fa-%EF%BC%89.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】物理信息深度学习（数据物理混合驱动方法）</span>
     </div>
@@ -203,7 +203,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/chan-ye-shi-jiao.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">产业视角</span>
     </div>
@@ -214,7 +214,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-guang-xian-tong-xin-xi-tong.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】光纤通信系统</span>
     </div>
@@ -225,7 +225,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-ke-yan-gan-shou-%E3%80%91-ru-he-jin-xing-ke-yan-xue-shu-yue-du.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【科研感受】如何进行科研学术阅读</span>
     </div>
@@ -236,7 +236,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     </div>
 </a><a class="SideNav-item d-flex flex-items-center flex-justify-between" href="post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-guang-xing-neng-fang-zhen.html">
     <div class="d-flex flex-items-center">
-        <svg class="SideNav-icon octicon" style="witdh:16px;height:16px"><path class="svgTop0" d=""></path>
+        <svg class="SideNav-icon octicon" style="width:16px;height:16px"><path class="svgTop0" d=""></path>
         </svg>
         <span class="listTitle">【论文列表】光性能仿真</span>
     </div>
@@ -264,7 +264,7 @@ if(""!=""){
     var startSite=new Date("");
     var diff=now.getTime()-startSite.getTime();
     var diffDay=Math.floor(diff/(1000*60*60*24));
-    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
 }
 </script></div>
 </body>
