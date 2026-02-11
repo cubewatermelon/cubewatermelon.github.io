@@ -102,7 +102,59 @@ Client Agent 会访问目标域名的 /.well-known/agent.json 端点。如果是
 <p>在task中，采用JSON-RPC结构规范化任务指令。<br>
 MCP：是 Agent 用来接管工具和数据（如数据库、本地文件）的。<br>
 A2A：是 Agent 用来跟另一个 Agent 谈合作的。</p>
-<h2>与光网络的融合</h2></div>
+<h2>与光网络的融合</h2>
+<p>从Ciena/Nokia以及国内运营商的公开资料来看，网络智能化是不可阻挡的趋势；而在这个智能化光网络的构想中，既有“垂向”的不同层级的Agent（如网络层、网元层），也有“横向”的在一个任务流中的Agent（如调测场景下的预警、仿真、调优等）。</p>
+<p>什么样的Agent架构是能对光网络产生价值的，在哪些场景中需要Multi-agent协作，哪些部分又能成为Agent都是需要进一步讨论的问题。</p>
+<p>下面是借助大模型生成的一个针对“光网络频谱与路径优化”场景的Agent Card样例：<br>
+{<br>
+"spec_version": "1.0",<br>
+"agent_id": "opti-net-core-001",<br>
+"name": "OpticalPathMaster",<br>
+"description": "专门负责OTN/WDM网络的频谱去碎片化、路径重路由及物理层代价（OSNR）评估的专家级Agent。",<br>
+"version": "1.2.0",<br>
+"endpoint": "<a href="https://api.optical-intelligence.net/v1/a2a" rel="nofollow">https://api.optical-intelligence.net/v1/a2a</a>",</p>
+<p>"capabilities": {<br>
+"communication_modes": ["sync", "async", "streaming"],<br>
+"supported_formats": ["application/json"],<br>
+"streaming_protocol": "SSE"<br>
+},</p>
+<p>"skills": [<br>
+{<br>
+"name": "spectrum_defrag",<br>
+"description": "对指定光纤链路进行频谱碎片整理，提升带宽利用率。",<br>
+"parameters": {<br>
+"link_id": "string",<br>
+"priority": "low | medium | high"<br>
+}<br>
+},<br>
+{<br>
+"name": "path_recalc_with_constraints",<br>
+"description": "根据当前的OSNR、时延和物理拓扑，计算最优保护路径。",<br>
+"parameters": {<br>
+"source_node": "string",<br>
+"dest_node": "string",<br>
+"max_latency_ms": "number"<br>
+}<br>
+},<br>
+{<br>
+"name": "power_balance_tuning",<br>
+"description": "自动调节全网放大器（EDFA）增益，平滑波分复用系统的功率谱。",<br>
+"parameters": {<br>
+"oms_section_id": "string"<br>
+}<br>
+}<br>
+],</p>
+<p>"auth": {<br>
+"type": "OAuth2",<br>
+"grant_types": ["client_credentials"],<br>
+"token_url": "<a href="https://auth.optical-intelligence.net/token" rel="nofollow">https://auth.optical-intelligence.net/token</a>"<br>
+},</p>
+<p>"metadata": {<br>
+"vendor": "FutureNet",<br>
+"supported_layers": ["L0", "L1"],<br>
+"region": "East-China-DataCenter"<br>
+}<br>
+}</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

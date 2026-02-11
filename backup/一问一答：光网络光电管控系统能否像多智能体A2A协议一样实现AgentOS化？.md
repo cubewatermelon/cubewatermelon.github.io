@@ -30,3 +30,61 @@ MCP：是 Agent 用来接管工具和数据（如数据库、本地文件）的�
 A2A：是 Agent 用来跟另一个 Agent 谈合作的。
 
 ## 与光网络的融合
+从Ciena/Nokia以及国内运营商的公开资料来看，网络智能化是不可阻挡的趋势；而在这个智能化光网络的构想中，既有“垂向”的不同层级的Agent（如网络层、网元层），也有“横向”的在一个任务流中的Agent（如调测场景下的预警、仿真、调优等）。
+
+什么样的Agent架构是能对光网络产生价值的，在哪些场景中需要Multi-agent协作，哪些部分又能成为Agent都是需要进一步讨论的问题。
+
+下面是借助大模型生成的一个针对“光网络频谱与路径优化”场景的Agent Card样例：
+{
+  "spec_version": "1.0",
+  "agent_id": "opti-net-core-001",
+  "name": "OpticalPathMaster",
+  "description": "专门负责OTN/WDM网络的频谱去碎片化、路径重路由及物理层代价（OSNR）评估的专家级Agent。",
+  "version": "1.2.0",
+  "endpoint": "https://api.optical-intelligence.net/v1/a2a",
+  
+  "capabilities": {
+    "communication_modes": ["sync", "async", "streaming"],
+    "supported_formats": ["application/json"],
+    "streaming_protocol": "SSE"
+  },
+
+  "skills": [
+    {
+      "name": "spectrum_defrag",
+      "description": "对指定光纤链路进行频谱碎片整理，提升带宽利用率。",
+      "parameters": {
+        "link_id": "string",
+        "priority": "low | medium | high"
+      }
+    },
+    {
+      "name": "path_recalc_with_constraints",
+      "description": "根据当前的OSNR、时延和物理拓扑，计算最优保护路径。",
+      "parameters": {
+        "source_node": "string",
+        "dest_node": "string",
+        "max_latency_ms": "number"
+      }
+    },
+    {
+      "name": "power_balance_tuning",
+      "description": "自动调节全网放大器（EDFA）增益，平滑波分复用系统的功率谱。",
+      "parameters": {
+        "oms_section_id": "string"
+      }
+    }
+  ],
+
+  "auth": {
+    "type": "OAuth2",
+    "grant_types": ["client_credentials"],
+    "token_url": "https://auth.optical-intelligence.net/token"
+  },
+
+  "metadata": {
+    "vendor": "FutureNet",
+    "supported_layers": ["L0", "L1"],
+    "region": "East-China-DataCenter"
+  }
+}
