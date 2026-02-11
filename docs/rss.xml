@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Mon, 29 Dec 2025 01:48:41 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>2025-12 大模型训推基本知识</title><link>https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html</link><description>## 推理时间分类
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Wed, 11 Feb 2026 02:41:27 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>2025-12 大模型训推基本知识</title><link>https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html</link><description>## 推理时间分类
 从按下回车键到看到完整的回答，推理时间主要可以拆解为以下两个个核心指标：TTFT和TPOT
 
 1. **首字延迟 (TTFT: Time to First Token)**
@@ -21,10 +21,8 @@
 - 本质来说RDMA是一种将通信数据处理卸载到支持RDMA技术的网卡的技术，数据处理完全由网卡引擎完成，无需主机系统参与
 2. PCDN
 - PCDN利用家宽做内容分发
-- 
-### 遗留
-1. 以太网和IP网络基本原理，它们是如何与实际的传输系统相对应的
-2. RDMA具体的应用场景。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/202511%20-cong-tong-xin-shang-ceng-wang-xia-kan-%EF%BC%8C-guang-xian-chuan-shu-zai-fa-hui-shen-me-zuo-yong-%EF%BC%9F.html</guid><pubDate>Sun, 09 Nov 2025 10:59:39 +0000</pubDate></item><item><title>【论文列表】AI exploration</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91AI%20exploration.html</link><description>我们想要的技术其实在计算机领域可能已经深入探索过
+- 利用了用户之间的“横向”流量传输，导致运营商的上下行流量减少，被OTT追捧，被运营商打压
+。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/202511%20-cong-tong-xin-shang-ceng-wang-xia-kan-%EF%BC%8C-guang-xian-chuan-shu-zai-fa-hui-shen-me-zuo-yong-%EF%BC%9F.html</guid><pubDate>Sun, 09 Nov 2025 10:59:39 +0000</pubDate></item><item><title>【论文列表】AI exploration</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91AI%20exploration.html</link><description>我们想要的技术其实在计算机领域可能已经深入探索过
 
 ### 大模型应用
 训练大模型通过API使用算法工具也是被广泛研究的一个领域，在大模型是NLP基础的情况下，其注定难以高效进行各种数学物理求解，在特定行业中（比如光网络），在可见的未来里工具调用将是很重要的一个能力，让LLM胜任各种专门工作，其如何调用以及与工具的交互实现高效使用是关键问题。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91AI%20exploration.html</guid><pubDate>Thu, 15 May 2025 07:04:16 +0000</pubDate></item><item><title>【论文列表】自动驾驶光网络</title><link>https://cubewatermelon.github.io/post/%E3%80%90-lun-wen-lie-biao-%E3%80%91-zi-dong-jia-shi-guang-wang-luo.html</link><description>### 总体架构
