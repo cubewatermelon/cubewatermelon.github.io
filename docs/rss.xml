@@ -1,12 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Wed, 11 Feb 2026 03:06:48 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>一问一答：光网络光电管控系统能否像多智能体A2A协议一样实现AgentOS化？</title><link>https://cubewatermelon.github.io/post/yi-wen-yi-da-%EF%BC%9A-guang-wang-luo-guang-dian-guan-kong-xi-tong-neng-fou-xiang-duo-zhi-neng-ti-A2A-xie-yi-yi-yang-shi-xian-AgentOS-hua-%EF%BC%9F.html</link><description>## 谷歌A2A协议
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Wed, 11 Feb 2026 17:01:46 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>一问一答：光网络光电管控系统能否像多智能体A2A协议一样实现AgentOS化？</title><link>https://cubewatermelon.github.io/post/yi-wen-yi-da-%EF%BC%9A-guang-wang-luo-guang-dian-guan-kong-xi-tong-neng-fou-xiang-duo-zhi-neng-ti-A2A-xie-yi-yi-yang-shi-xian-AgentOS-hua-%EF%BC%9F.html</link><description>## 谷歌A2A协议
 在A2A（Agent-to-Agent）协议中，把 Agent 变成了网络上的“标准服务”，核心逻辑围绕着一份像名片一样的 Agent Card 展开，如下
 
 每一个 A2A 兼容的 Agent 都必须拥有一份机器可读的 JSON 格式文档。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/yi-wen-yi-da-%EF%BC%9A-guang-wang-luo-guang-dian-guan-kong-xi-tong-neng-fou-xiang-duo-zhi-neng-ti-A2A-xie-yi-yi-yang-shi-xian-AgentOS-hua-%EF%BC%9F.html</guid><pubDate>Wed, 11 Feb 2026 03:06:18 +0000</pubDate></item><item><title>2025-12 大模型训推基本知识</title><link>https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html</link><description>## 推理时间分类
 从按下回车键到看到完整的回答，推理时间主要可以拆解为以下两个个核心指标：TTFT和TPOT
 
 1. **首字延迟 (TTFT: Time to First Token)**
-这是用户感知最明显的指标，指的是从发送请求到模型吐出第一个字符所经历的时间。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html</guid><pubDate>Mon, 29 Dec 2025 01:44:15 +0000</pubDate></item><item><title>2025-11 大模型强化学习微调技术RLHF</title><link>https://cubewatermelon.github.io/post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html</link><description>大型语言模型 (LLM) 的后训练 (Post-training) 通常依赖于两种主流范式：监督微调(Supervised Fine-Tuning, SFT) 和强化学习 (Reinforcement Learning, RL)。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html</guid><pubDate>Thu, 13 Nov 2025 11:50:04 +0000</pubDate></item><item><title>202511 通信基础知识</title><link>https://cubewatermelon.github.io/post/202511%20-tong-xin-ji-chu-zhi-shi.html</link><description>- 对于数据中心光模块来说，绝大部分返厂的故障件都是因为脏污，本体元器件失效的占比确实不高（AI集群中29%的光链路故障中，64.7%由端面污染引起，仅9.3%为模块本体失效）
+这是用户感知最明显的指标，指的是从发送请求到模型吐出第一个字符所经历的时间。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html</guid><pubDate>Mon, 29 Dec 2025 01:44:15 +0000</pubDate></item><item><title>2025-12 大模型微调总结</title><link>https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-wei-diao-zong-jie.html</link><description>## 大模型快速微调
+- 鉴于小作坊难以实现大规模系统化大模型垂域微调，借鉴Deepseek的经验路径，通过轻量化SFT+重度RL方法来实现大模型的高质量策略回答
+- 可以这么做的原因一方面是我们关注的问题并不通用，回答模式上较为狭窄；另一方面是reward可以根据策略回答通过程序的方式，非常明确的计算出来，即“可靠、自动、低噪声的 reward”
+- 其中SFT阶段不追求输出策略上的极高准确性，通过少量数据，确保模型能稳定输出 可执行 / 可验证 的东西
+- 马上进入RL微调阶段，通过大量数据以及长时间的RL微调（结合相对较快的off-policy和相对而言慢的on-policy），来不断提升模型性能
+
+### RL微调
+- GRPO方法通过在每一轮训练中，比较针对同一prompt的多个输出的相对得分，来引导模型的训练
+- 每一轮需要多次调用仿真工具得到奖励分数，运行时间较慢
+- 本质上在计算πθ​(y∣x)，其中θ是模型的参数，πθ是在该参数下的模型（算子），x是输入prompt，y是输出，可以是response中每个token的输出概率，也可以是整个response输出的联合概率分布
+- GRPO在训练过程中，由于每一组生成回答间相对的不稳定性等原因，reward趋势也呈现较强的不稳定性，导致较差的训练效果
+- 采用Decoupled Clip and Dynamic sAmpling Policy Optimization (DAPO)来增强GRPO训练过程中的稳定性
+- 在DAPO中采用动态采样、非对称裁剪和token级损失函数来一定程度上提升训练稳定性
+
+### 思维链微调
+- 思维链一方面可以提升输出结果的可靠性和可解释性，另一方面在结果有问题，也可以通过思维链来溯源，并针对性的调整模型训练策略。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-wei-diao-zong-jie.html</guid><pubDate>Thu, 25 Dec 2025 08:54:41 +0000</pubDate></item><item><title>2025-11 大模型强化学习微调技术RLHF</title><link>https://cubewatermelon.github.io/post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html</link><description>大型语言模型 (LLM) 的后训练 (Post-training) 通常依赖于两种主流范式：监督微调(Supervised Fine-Tuning, SFT) 和强化学习 (Reinforcement Learning, RL)。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/2025-11%20-da-mo-xing-qiang-hua-xue-xi-wei-diao-ji-shu-RLHF.html</guid><pubDate>Thu, 13 Nov 2025 11:50:04 +0000</pubDate></item><item><title>202511 通信基础知识</title><link>https://cubewatermelon.github.io/post/202511%20-tong-xin-ji-chu-zhi-shi.html</link><description>- 对于数据中心光模块来说，绝大部分返厂的故障件都是因为脏污，本体元器件失效的占比确实不高（AI集群中29%的光链路故障中，64.7%由端面污染引起，仅9.3%为模块本体失效）
 ### ZR/ZR+
 - ZR光模块支持400G PS-DP-16QAM传输，距离在80-120km
 - ZR+光模块支持灵活速率，支持400km甚至更远，覆盖城域网和区域网
