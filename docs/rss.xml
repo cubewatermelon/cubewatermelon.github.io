@@ -1,5 +1,150 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Wed, 11 Feb 2026 17:01:46 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>一问一答：光网络光电管控系统能否像多智能体A2A协议一样实现AgentOS化？</title><link>https://cubewatermelon.github.io/post/yi-wen-yi-da-%EF%BC%9A-guang-wang-luo-guang-dian-guan-kong-xi-tong-neng-fou-xiang-duo-zhi-neng-ti-A2A-xie-yi-yi-yang-shi-xian-AgentOS-hua-%EF%BC%9F.html</link><description>## 谷歌A2A协议
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Yuchen's Blog</title><link>https://cubewatermelon.github.io</link><description>欢迎来到宋裕琛的博客！</description><copyright>Yuchen's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg</url><title>avatar</title><link>https://cubewatermelon.github.io</link></image><lastBuildDate>Fri, 17 Apr 2026 16:12:54 +0000</lastBuildDate><managingEditor>Yuchen's Blog</managingEditor><ttl>60</ttl><webMaster>Yuchen's Blog</webMaster><item><title>AI Agent 技术对比报告：Hermes Agent vs OpenClaw vs Claude (2026)</title><link>https://cubewatermelon.github.io/post/AI%20Agent%20-ji-shu-dui-bi-bao-gao-%EF%BC%9AHermes%20Agent%20vs%20OpenClaw%20vs%20Claude%20%282026%29.html</link><description># Hermes Agent vs OpenClaw vs Claude 技术对比报告
+
+&gt; 生成时间：2026年4月17日
+
+---
+
+## 一、产品概览
+
+| 维度 | Hermes Agent | OpenClaw | Claude |
+|------|-------------|----------|--------|
+| 开发方 | Nous Research | PSPDFKit | Anthropic |
+| 开源协议 | MIT | MIT | 闭源 |
+| 发布时间 | 2026年2月 | 2026.4.5 | 2024年10月 |
+| 定位 | 自进化AI Agent | 本地AI网关 | 云端桌面控制 |
+| GitHub Stars | 73.8k+ | - | - |
+
+---
+
+## 二、核心架构对比
+
+### Hermes Agent
+- 模型无关：支持200+模型，通过OpenRouter接入
+- 自进化机制：解决问题时自动生成可复用技能
+- 多平台消息：Telegram/Discord/Slack/WhatsApp全支持
+- 零追踪：无遥测数据，完全本地化
+
+### OpenClaw
+- 5层模块化设计，企业级架构
+- 多级缓存（L1内存+L2 Redis），命中率85%
+- 智能路由：成本优化/性能优先/均衡模式
+- RBAC权限控制 + AES-256加密
+
+### Claude Computer Use
+- 屏幕级别感知：截图、分析、执行闭环
+- 100万token超大上下文
+- Dispatch模式：用户离开时自主运行
+- /loop定时任务 + worktree子任务隔离
+
+---
+
+## 三、技术能力对比
+
+| 功能 | Hermes | OpenClaw | Claude |
+|------|:------:|:--------:|:------:|
+| 本地部署 | 是 | 是 | 否(云端) |
+| 持久记忆 | 是 | 是 | 是 |
+| 自动技能创建 | 是 | 否 | 否 |
+| 多平台消息 | 是 | 是 | 否 |
+| 浏览器自动化 | 是 | 需插件 | 是 |
+| 定时任务 | Cron | 调度器 | /loop |
+| Docker隔离 | 是 | 否 | 否 |
+
+---
+
+## 四、性能指标
+
+| 指标 | Hermes | OpenClaw | Claude |
+|------|-------|----------|-------|
+| 上下文窗口 | 取决于模型 | 取决于模型 | 100万token |
+| 延迟P50 | 取决于模型 | 120ms | 取决于模型 |
+| 缓存命中率 | - | 85% | - |
+| 吞吐量 | - | 1000req/s | - |
+
+---
+
+## 五、安全与隐私
+
+| 维度 | Hermes | OpenClaw | Claude |
+|------|-------|----------|-------|
+| 数据存储 | 完全本地 | 本地优先 | 云端处理 |
+| 追踪/遥测 | 零追踪 | 可选 | 有 |
+| 容器隔离 | Docker加固 | - | 云端沙箱 |
+
+---
+
+## 六、关键差异总结
+
+### Hermes Agent 独特优势
+- 自进化闭环：解决问题时自动生成可复用技能
+- 多平台消息网关：14+平台原生支持
+- 一键模型切换：无需修改代码
+- 零追踪：最注重隐私的方案
+
+### OpenClaw 独特优势
+- 企业级架构：5层模块化设计
+- 高性能：120ms P50延迟，85%缓存命中率
+- 插件生态：支持外部渠道和工具扩展
+- 成本优化：智能路由降低API成本
+
+### Claude Computer Use 独特优势
+- 桌面级控制：完整操作系统级别操作
+- 超大上下文：100万token上下文
+- 远程控制：手机/网页随时接管
+- Dispatch模式：离开时自主运行
+
+---
+
+## 七、迁移与互操作
+
+重要发现：Hermes Agent支持从OpenClaw一键迁移！
+
+---
+
+## 八、选型建议
+
+| 场景 | 推荐方案 | 理由 |
+|------|---------|------|
+| 个人隐私敏感 | Hermes Agent | 完全本地、零追踪 |
+| 需要多平台消息 | Hermes Agent | 14+平台原生支持 |
+| 企业级应用 | OpenClaw | RBAC、高性能、插件生态 |
+| 快速接入云端AI | Claude API | 成熟稳定 |
+| 桌面自动化任务 | Claude Computer Use | 屏幕级控制最成熟 |
+| 需要自进化能力 | Hermes Agent | 自动技能创建 |
+
+---
+
+## 九、快速入门
+
+### Hermes Agent
+```bash
+curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+hermes
+```
+
+### OpenClaw
+官网：https://docs.openclaw.ai/zh-CN
+
+### Claude Computer Use
+```bash
+npm install -g @anthropic-ai/claude-code
+claude
+```
+
+---
+
+## 十、参考资料
+
+- Hermes Agent: https://hermes-agent.org/zh/
+- Hermes GitHub: https://github.com/NousResearch/hermes-agent
+- OpenClaw: https://docs.openclaw.ai/zh-CN
+- Claude: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+
+---
+
+*本报告基于2026年4月公开信息整理*
+。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/AI%20Agent%20-ji-shu-dui-bi-bao-gao-%EF%BC%9AHermes%20Agent%20vs%20OpenClaw%20vs%20Claude%20%282026%29.html</guid><pubDate>Fri, 17 Apr 2026 16:12:23 +0000</pubDate></item><item><title>一问一答：光网络光电管控系统能否像多智能体A2A协议一样实现AgentOS化？</title><link>https://cubewatermelon.github.io/post/yi-wen-yi-da-%EF%BC%9A-guang-wang-luo-guang-dian-guan-kong-xi-tong-neng-fou-xiang-duo-zhi-neng-ti-A2A-xie-yi-yi-yang-shi-xian-AgentOS-hua-%EF%BC%9F.html</link><description>## 谷歌A2A协议
 在A2A（Agent-to-Agent）协议中，把 Agent 变成了网络上的“标准服务”，核心逻辑围绕着一份像名片一样的 Agent Card 展开，如下
 
 每一个 A2A 兼容的 Agent 都必须拥有一份机器可读的 JSON 格式文档。</description><guid isPermaLink="true">https://cubewatermelon.github.io/post/yi-wen-yi-da-%EF%BC%9A-guang-wang-luo-guang-dian-guan-kong-xi-tong-neng-fou-xiang-duo-zhi-neng-ti-A2A-xie-yi-yi-yang-shi-xian-AgentOS-hua-%EF%BC%9F.html</guid><pubDate>Wed, 11 Feb 2026 03:06:18 +0000</pubDate></item><item><title>2025-12 大模型训推基本知识</title><link>https://cubewatermelon.github.io/post/2025-12%20-da-mo-xing-xun-tui-ji-ben-zhi-shi.html</link><description>## 推理时间分类
