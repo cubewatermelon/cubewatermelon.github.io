@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# LightRAG 知识图谱构建流程深度解析
+
+## 整体架构
+
+LightRAG 的知识图谱构建采用 **文档分块 -> LLM抽取 -> 合并写入 -> 持久化** 的四阶段流水线，核心代码分布在：
+
+- `lightrag/lightrag.py` — 主入口与编排
+- `lightrag/operate.py` — 抽取、合并、查询核心逻辑
+- `lightrag/prompt.py` — LLM Prompt 设计
+- `lightrag/kg/` — 图存储实现（NetworkX、Neo4j、PostgreSQL 等）
+
+---
+
+## 第一阶段：文档分块 (Chunking)
+
+文档通过 `ainsert` (`lightrag.py:1370-1383`) 进入系统：
+
+```python
+tasks = [
+    self.chunks_vdb.upsert(inserting_chunks),          # 向量存储
+    self._process_extract_entities(inserting_chunks),  # 实体抽取
+    self.full_docs.upsert(new_docs),                   # 全文存储
+    self.text_chunks.upsert(inserting_chunks),         # KV存储
+]
+await asyncio.gather(*tasks)
+```
+
+- `chunker` 模块按 token 大小分块，每个 chunk 生成唯一 ID (`chunk-xxx`)
+- 分块内容同时写入 `text_chunks` (KV存储) 和 `chunks_vdb` (向量存储)
+
+---
+
+## 第二阶段：实体与关系抽取 (Extraction)
+
+核心函数 `extract_entities` (`operate.py:3232`) 对每个 chunk 调用 LLM 进行抽取。">
+<meta property="og:title" content="LightRAG 知识图谱构建流程深度解析">
+<meta property="og:description" content="# LightRAG 知识图谱构建流程深度解析
+
+## 整体架构
+
+LightRAG 的知识图谱构建采用 **文档分块 -> LLM抽取 -> 合并写入 -> 持久化** 的四阶段流水线，核心代码分布在：
+
+- `lightrag/lightrag.py` — 主入口与编排
+- `lightrag/operate.py` — 抽取、合并、查询核心逻辑
+- `lightrag/prompt.py` — LLM Prompt 设计
+- `lightrag/kg/` — 图存储实现（NetworkX、Neo4j、PostgreSQL 等）
+
+---
+
+## 第一阶段：文档分块 (Chunking)
+
+文档通过 `ainsert` (`lightrag.py:1370-1383`) 进入系统：
+
+```python
+tasks = [
+    self.chunks_vdb.upsert(inserting_chunks),          # 向量存储
+    self._process_extract_entities(inserting_chunks),  # 实体抽取
+    self.full_docs.upsert(new_docs),                   # 全文存储
+    self.text_chunks.upsert(inserting_chunks),         # KV存储
+]
+await asyncio.gather(*tasks)
+```
+
+- `chunker` 模块按 token 大小分块，每个 chunk 生成唯一 ID (`chunk-xxx`)
+- 分块内容同时写入 `text_chunks` (KV存储) 和 `chunks_vdb` (向量存储)
+
+---
+
+## 第二阶段：实体与关系抽取 (Extraction)
+
+核心函数 `extract_entities` (`operate.py:3232`) 对每个 chunk 调用 LLM 进行抽取。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/LightRAG%20-zhi-shi-tu-pu-gou-jian-liu-cheng-shen-du-jie-xi.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>LightRAG 知识图谱构建流程深度解析</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">LightRAG 知识图谱构建流程深度解析</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/42" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>LightRAG 知识图谱构建流程深度解析</h1>
+<h2>整体架构</h2>
+<p>LightRAG 的知识图谱构建采用 <strong>文档分块 -&gt; LLM抽取 -&gt; 合并写入 -&gt; 持久化</strong> 的四阶段流水线，核心代码分布在：</p>
+<ul>
+<li><code class="notranslate">lightrag/lightrag.py</code> — 主入口与编排</li>
+<li><code class="notranslate">lightrag/operate.py</code> — 抽取、合并、查询核心逻辑</li>
+<li><code class="notranslate">lightrag/prompt.py</code> — LLM Prompt 设计</li>
+<li><code class="notranslate">lightrag/kg/</code> — 图存储实现（NetworkX、Neo4j、PostgreSQL 等）</li>
+</ul>
+<hr>
+<h2>第一阶段：文档分块 (Chunking)</h2>
+<p>文档通过 <code class="notranslate">ainsert</code> (<code class="notranslate">lightrag.py:1370-1383</code>) 进入系统：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">tasks</span> <span class="pl-c1">=</span> [
+    <span class="pl-s1">self</span>.<span class="pl-c1">chunks_vdb</span>.<span class="pl-c1">upsert</span>(<span class="pl-s1">inserting_chunks</span>),          <span class="pl-c"># 向量存储</span>
+    <span class="pl-s1">self</span>.<span class="pl-c1">_process_extract_entities</span>(<span class="pl-s1">inserting_chunks</span>),  <span class="pl-c"># 实体抽取</span>
+    <span class="pl-s1">self</span>.<span class="pl-c1">full_docs</span>.<span class="pl-c1">upsert</span>(<span class="pl-s1">new_docs</span>),                   <span class="pl-c"># 全文存储</span>
+    <span class="pl-s1">self</span>.<span class="pl-c1">text_chunks</span>.<span class="pl-c1">upsert</span>(<span class="pl-s1">inserting_chunks</span>),         <span class="pl-c"># KV存储</span>
+]
+<span class="pl-k">await</span> <span class="pl-s1">asyncio</span>.<span class="pl-c1">gather</span>(<span class="pl-c1">*</span><span class="pl-s1">tasks</span>)</pre></div>
+<ul>
+<li><code class="notranslate">chunker</code> 模块按 token 大小分块，每个 chunk 生成唯一 ID (<code class="notranslate">chunk-xxx</code>)</li>
+<li>分块内容同时写入 <code class="notranslate">text_chunks</code> (KV存储) 和 <code class="notranslate">chunks_vdb</code> (向量存储)</li>
+</ul>
+<hr>
+<h2>第二阶段：实体与关系抽取 (Extraction)</h2>
+<p>核心函数 <code class="notranslate">extract_entities</code> (<code class="notranslate">operate.py:3232</code>) 对每个 chunk 调用 LLM 进行抽取。</p>
+<h3>Prompt 设计</h3>
+<p><code class="notranslate">prompt.py</code> 定义了两种抽取模式的 Prompt：</p>
+<p><strong>文本模式</strong> (<code class="notranslate">prompt.py:34-113</code>):</p>
+<ul>
+<li>实体行格式: <code class="notranslate">entity&lt;|#|&gt;名称&lt;|#|&gt;类型&lt;|#|&gt;描述</code></li>
+<li>关系行格式: <code class="notranslate">relation&lt;|#|&gt;源实体&lt;|#|&gt;目标实体&lt;|#|&gt;关键词&lt;|#|&gt;描述</code></li>
+<li>使用 <code class="notranslate">&lt;|#|&gt;</code> 作为字段分隔符，<code class="notranslate">&lt;|COMPLETE|&gt;</code> 作为结束标记</li>
+</ul>
+<p><strong>JSON模式</strong> (<code class="notranslate">prompt.py:238-306</code>, 启用 <code class="notranslate">entity_extraction_use_json=True</code>):</p>
+<ul>
+<li>输出 <code class="notranslate">{entities: [...], relationships: [...]}</code> 结构</li>
+<li>提供更精确的结构化抽取，适合支持 JSON mode 的 LLM</li>
+</ul>
+<p>Prompt 中包含：</p>
+<ul>
+<li>实体类型指导（Person, Organization, Location, Concept, Method 等 11 类）</li>
+<li>3 个精心设计的示例（叙事文本、学术论文、技术报告）</li>
+<li>数量限制 (<code class="notranslate">max_entity_records</code>, <code class="notranslate">max_total_records</code>)</li>
+<li>语言和命名约束</li>
+</ul>
+<h3>Gleaning 二次抽取</h3>
+<p>(<code class="notranslate">operate.py:3398-3499</code>) 当 <code class="notranslate">entity_extract_max_gleaning &gt; 0</code> 时：</p>
+<ol>
+<li>将初次抽取的 user prompt + LLM response 作为 history</li>
+<li>发送 <code class="notranslate">entity_continue_extraction_user_prompt</code>，让 LLM 补充遗漏的实体/关系</li>
+<li>合并时对比描述长度，保留更完整的版本</li>
+<li>有 token 预算保护：若 gleaning 的总输入超过 <code class="notranslate">MAX_EXTRACT_INPUT_TOKENS</code>，自动跳过</li>
+</ol>
+<h3>解析 LLM 输出</h3>
+<ul>
+<li><code class="notranslate">_process_extraction_result</code> (<code class="notranslate">operate.py:1197-1325</code>) 解析文本格式：按行分割、修复分隔符错误、逐行尝试解析为实体或关系</li>
+<li><code class="notranslate">_process_json_extraction_result</code> (<code class="notranslate">operate.py:633-817</code>) 解析 JSON 格式：使用 <code class="notranslate">json_repair</code> 处理畸形 JSON，遍历 entities/relationships 数组</li>
+<li><code class="notranslate">_handle_single_entity_extraction</code> (<code class="notranslate">operate.py:421-505</code>) 验证实体名称、类型、描述</li>
+<li><code class="notranslate">_handle_single_relationship_extraction</code> (<code class="notranslate">operate.py:508-592</code>) 验证源/目标实体、关键词、描述</li>
+</ul>
+<p>解析后输出：</p>
+<ul>
+<li><code class="notranslate">maybe_nodes</code>: <code class="notranslate">{entity_name: [entity_data_list]}</code> 实体字典</li>
+<li><code class="notranslate">maybe_edges</code>: <code class="notranslate">{(src, tgt): [edge_data_list]}</code> 关系字典</li>
+</ul>
+<h3>并发控制</h3>
+<p>通过 <code class="notranslate">asyncio.Semaphore(llm_model_max_async)</code> 控制并发 chunk 处理数量，使用 <code class="notranslate">asyncio.wait(FIRST_EXCEPTION)</code> 实现快速失败。</p>
+<hr>
+<h2>第三阶段：合并写入图谱 (Merge &amp; Upsert)</h2>
+<p><code class="notranslate">merge_nodes_and_edges</code> (<code class="notranslate">operate.py:2826</code>) 是核心合并函数，采用 <strong>两阶段合并</strong>：</p>
+<h3>Phase 1 — 实体合并</h3>
+<p><code class="notranslate">_merge_nodes_then_upsert</code> (<code class="notranslate">operate.py:1912-2238</code>)：</p>
+<ol>
+<li><strong>查询已有实体</strong>: <code class="notranslate">knowledge_graph_inst.get_node(entity_name)</code> 获取现有数据</li>
+<li><strong>合并 source_ids</strong>: 将新 chunk 来源 ID 与已有来源合并，存入 <code class="notranslate">entity_chunks_storage</code></li>
+<li><strong>应用来源限制</strong>: <code class="notranslate">apply_source_ids_limit</code> 按 KEEP（保留最早）或 FIFO（保留最新）策略截断</li>
+<li><strong>合并描述列表</strong>: 已有描述 + 新描述，去重后按时间戳排序</li>
+<li><strong>Map-Reduce 摘要</strong>: <code class="notranslate">_handle_entity_relation_summary</code> (<code class="notranslate">operate.py:198-333</code>) 处理长描述：
+<ul>
+<li>若总 token &lt; <code class="notranslate">summary_context_size</code> 且条目数 &lt; <code class="notranslate">force_llm_summary_on_merge</code> → 直接拼接</li>
+<li>否则分块摘要，每块调 LLM 生成摘要，递归合并直到满足限制</li>
+</ul>
+</li>
+<li><strong>确定实体类型</strong>: 取 <code class="notranslate">Counter</code> 中出现最多的类型</li>
+<li><strong>写入双存储</strong>:
+<ul>
+<li><code class="notranslate">knowledge_graph_inst.upsert_node()</code> → 图存储（节点含 entity_type, description, source_id, file_path）</li>
+<li><code class="notranslate">entities_vdb.upsert()</code> → 向量存储（嵌入内容: <code class="notranslate">entity_name + description</code>）</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 2 — 关系合并</h3>
+<p><code class="notranslate">_merge_edges_then_upsert</code> (<code class="notranslate">operate.py:2241-2581</code>)：</p>
+<ol>
+<li><strong>查询已有边</strong>: <code class="notranslate">knowledge_graph_inst.has_edge(src, tgt)</code> + <code class="notranslate">get_edge()</code></li>
+<li><strong>合并 source_ids</strong>: 同实体合并逻辑，存入 <code class="notranslate">relation_chunks_storage</code></li>
+<li><strong>合并权重</strong>: 新权重 + 已有权重求和</li>
+<li><strong>合并关键词</strong>: 解析逗号分隔关键词，去重后排序拼接</li>
+<li><strong>合并描述</strong>: 同样使用 Map-Reduce 摘要</li>
+<li><strong>自动创建缺失节点</strong>: 若关系端点实体不存在，创建占位节点 (<code class="notranslate">entity_type=UNKNOWN</code>)</li>
+<li><strong>写入双存储</strong>:
+<ul>
+<li><code class="notranslate">knowledge_graph_inst.upsert_edge()</code> → 图存储</li>
+<li><code class="notranslate">relationships_vdb.upsert()</code> → 向量存储（嵌入内容: <code class="notranslate">keywords + src + tgt + description</code>）</li>
+</ul>
+</li>
+</ol>
+<p>关系视为 <strong>无向边</strong>，键使用 <code class="notranslate">sorted((src, tgt))</code> 保证方向无关性。</p>
+<h3>Phase 3 — 索引更新</h3>
+<p>将文档涉及的实体名和关系对记录到 <code class="notranslate">full_entities_storage</code> / <code class="notranslate">full_relations_storage</code>，用于后续文档删除时的反向定位。</p>
+<h3>并发安全</h3>
+<p>使用 <code class="notranslate">get_storage_keyed_lock</code> 对每个实体名/关系对加锁，防止同一实体的并发写入冲突。Semaphore 控制并发度 (<code class="notranslate">llm_model_max_async * 2</code>)。</p>
+<hr>
+<h2>第四阶段：持久化</h2>
+<p><code class="notranslate">_insert_done</code> (<code class="notranslate">lightrag.py:1410-1431</code>)：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">tasks</span> <span class="pl-c1">=</span> [<span class="pl-s1">storage_inst</span>.<span class="pl-c1">index_done_callback</span>() <span class="pl-k">for</span> <span class="pl-s1">storage_inst</span> <span class="pl-c1">in</span> [...]]
+<span class="pl-k">await</span> <span class="pl-s1">asyncio</span>.<span class="pl-c1">gather</span>(<span class="pl-c1">*</span><span class="pl-s1">tasks</span>)</pre></div>
+<p>对所有存储（full_docs, text_chunks, entities_vdb, relationships_vdb, chunks_vdb, chunk_entity_relation_graph, llm_response_cache 等）调用 <code class="notranslate">index_done_callback()</code>，将内存数据持久化到磁盘/数据库。</p>
+<hr>
+<h2>关键设计特点</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>特点</th>
+<th>代码位置</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>增量合并</strong></td>
+<td><code class="notranslate">operate.py:1912,2241</code></td>
+<td>新文档插入时与已有实体/关系合并，而非重建整个图谱</td>
+</tr>
+<tr>
+<td><strong>Map-Reduce 摘要</strong></td>
+<td><code class="notranslate">operate.py:198-333</code></td>
+<td>描述过多时自动分块摘要再合并，控制 token 预算，避免信息丢失</td>
+</tr>
+<tr>
+<td><strong>无向图</strong></td>
+<td><code class="notranslate">operate.py:2886-2888</code></td>
+<td>关系键用 <code class="notranslate">sorted((src,tgt))</code>，视为无向边</td>
+</tr>
+<tr>
+<td><strong>双存储架构</strong></td>
+<td>全流程</td>
+<td>图结构存 GraphStorage（拓扑查询），语义检索存 VectorStorage（相似度搜索）</td>
+</tr>
+<tr>
+<td><strong>并发安全</strong></td>
+<td><code class="notranslate">operate.py:2923-3035</code></td>
+<td><code class="notranslate">get_storage_keyed_lock</code> 对实体/关系粒度加锁</td>
+</tr>
+<tr>
+<td><strong>Gleaning 二次抽取</strong></td>
+<td><code class="notranslate">operate.py:3398-3499</code></td>
+<td>首轮抽取后再调 LLM 补充遗漏信息</td>
+</tr>
+<tr>
+<td><strong>来源追踪与限制</strong></td>
+<td><code class="notranslate">operate.py:1993-2017</code></td>
+<td>source_ids 限流策略 (KEEP/FIFO)，支持增量删除时反向定位</td>
+</tr>
+<tr>
+<td><strong>自动补全节点</strong></td>
+<td><code class="notranslate">operate.py:2548-2566</code></td>
+<td>关系端点实体不存在时自动创建占位节点</td>
+</tr>
+<tr>
+<td><strong>LLM 缓存</strong></td>
+<td><code class="notranslate">operate.py:3364-3374</code></td>
+<td>抽取结果缓存到 <code class="notranslate">llm_response_cache</code>，避免重复调用</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<hr>
+<h2>存储层架构</h2>
+<p>LightRAG 使用 4 类可插拔存储后端：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>存储类型</th>
+<th>用途</th>
+<th>默认实现</th>
+<th>其他实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KV_STORAGE</strong></td>
+<td>LLM缓存、文本块、文档信息</td>
+<td>JsonKVStorage</td>
+<td>PostgreSQL, Redis, MongoDB</td>
+</tr>
+<tr>
+<td><strong>VECTOR_STORAGE</strong></td>
+<td>实体/关系/块嵌入</td>
+<td>NanoVectorDBStorage</td>
+<td>Qdrant, Milvus, Faiss, PGVector</td>
+</tr>
+<tr>
+<td><strong>GRAPH_STORAGE</strong></td>
+<td>实体-关系图结构</td>
+<td>NetworkXStorage</td>
+<td>Neo4j, Memgraph, PostgreSQL</td>
+</tr>
+<tr>
+<td><strong>DOC_STATUS_STORAGE</strong></td>
+<td>文档处理状态</td>
+<td>JsonDocStatusStorage</td>
+<td>PostgreSQL</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>后端注册表在 <code class="notranslate">kg/__init__.py</code>，工厂方法 <code class="notranslate">kg/factory.py::get_storage_class()</code> 从配置解析后端类。</p>
+<hr>
+<h2>查询阶段简述</h2>
+<p>知识图谱建成后，查询通过 <code class="notranslate">kg_query</code> (<code class="notranslate">operate.py:3659</code>) 使用 5 种模式：</p>
+<ul>
+<li><strong>local</strong>: 从实体向量检索相关实体 → 扩展到其邻居关系和文本块</li>
+<li><strong>global</strong>: 从高层关键词检索关系 → 获取社区级摘要</li>
+<li><strong>hybrid</strong>: 结合 local + global</li>
+<li><strong>naive</strong>: 直接向量搜索，不使用图谱</li>
+<li><strong>mix</strong>: KG检索 + 向量检索，推荐配合 reranker 使用</li>
+</ul>
+<p>查询流程：关键词抽取 → 向量检索实体/关系 → 图扩展 → 构建上下文 → LLM生成回答</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
