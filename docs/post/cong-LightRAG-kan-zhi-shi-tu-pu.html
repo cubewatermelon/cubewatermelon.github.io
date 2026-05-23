@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 知识图谱基本知识与创建过程
+
+经典知识图谱的构建方式是先创建本体，再依据这个本体填充实例，这样生成的知识图谱较为稳定。">
+<meta property="og:title" content="从LightRAG看知识图谱">
+<meta property="og:description" content="# 知识图谱基本知识与创建过程
+
+经典知识图谱的构建方式是先创建本体，再依据这个本体填充实例，这样生成的知识图谱较为稳定。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/cong-LightRAG-kan-zhi-shi-tu-pu.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>从LightRAG看知识图谱</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">从LightRAG看知识图谱</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/40" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>知识图谱基本知识与创建过程</h1>
+<p>经典知识图谱的构建方式是先创建本体，再依据这个本体填充实例，这样生成的知识图谱较为稳定。</p>
+<p>但是像 LightRAG 不依赖于一开始的人工本体构建，更简易，但可能存在不稳定的问题。</p>
+<h2>一、知识图谱基本知识</h2>
+<h3>1. 什么是本体？</h3>
+<p><strong>本体 Ontology</strong>，在知识工程里可以理解为：</p>
+<blockquote>
+<p>对某个领域中"有哪些概念、概念之间有什么关系、每类概念有哪些属性、需要遵守什么约束"的形式化定义。</p>
+</blockquote>
+<p>换成人话说，本体就是先回答这些问题：</p>
+<ul>
+<li>这个领域里有哪些"东西"？</li>
+<li>这些东西分成哪些类别？</li>
+<li>这些类别之间是什么关系？</li>
+<li>每类东西有哪些字段？</li>
+<li>哪些关系是允许的？</li>
+<li>哪些规则是必须满足的？</li>
+</ul>
+<p>比如在光网络领域，如果我们要建设一个传统知识图谱，就不会一开始直接往里面塞文本，而是先设计：</p>
+<p><strong>实体类型：</strong></p>
+<ul>
+<li>网元 NetworkElement</li>
+<li>板卡 Board</li>
+<li>端口 Port</li>
+<li>光放大器 Amplifier</li>
+<li>WSS</li>
+<li>波长 Wavelength</li>
+<li>业务 Service</li>
+<li>告警 Alarm</li>
+<li>故障 Fault</li>
+</ul>
+<p><strong>关系类型：</strong></p>
+<ul>
+<li>网元 → 包含 → 板卡</li>
+<li>板卡 → 包含 → 端口</li>
+<li>端口 → 承载 → 波长</li>
+<li>波长 → 承载 → 业务</li>
+<li>告警 → 发生于 → 网元/板卡/端口</li>
+</ul>
+<p><strong>这套"类型、关系、属性、约束"的定义，就是本体。</strong></p>
+<hr>
+<h3>2. 本体和知识图谱是什么关系？</h3>
+<p>可以这样区分：</p>
+<ul>
+<li><strong>本体</strong> = 模型层 / Schema 层 / 设计规范</li>
+<li><strong>知识图谱</strong> = 数据层 / 实例层 / 具体知识</li>
+</ul>
+<p>例如本体中定义：</p>
+<pre class="notranslate"><code class="notranslate">实体类型：板卡 Board
+属性：板卡名称、槽位号、板卡类型、所属网元
+关系：板卡 属于 网元
+</code></pre>
+<p>知识图谱里填入具体实例：</p>
+<pre class="notranslate"><code class="notranslate">Board_01
+  类型：OTU业务板
+  槽位：Slot 3
+  所属网元：NE_A
+
+Board_01 ──属于── NE_A
+</code></pre>
+<p>再比如本体中定义：</p>
+<pre class="notranslate"><code class="notranslate">故障 Fault 可以导致 告警 Alarm
+</code></pre>
+<p>图谱实例里填入：</p>
+<pre class="notranslate"><code class="notranslate">低输入光功率 ──导致── LOS告警
+WSS衰减配置异常 ──导致── 波长功率异常
+EDFA增益异常 ──导致── OSNR下降
+</code></pre>
+<p>所以，<strong>本体规定"能表达什么"，知识图谱记录"具体发生了什么/具体有哪些知识"。</strong></p>
+<hr>
+<h3>3. 为什么传统知识图谱要先设计本体？</h3>
+<p>因为传统知识图谱强调几个目标：</p>
+<ul>
+<li>结构稳定</li>
+<li>语义清晰</li>
+<li>可验证</li>
+<li>可推理</li>
+<li>可治理</li>
+<li>可长期维护</li>
+</ul>
+<p>如果没有本体，大家随便抽实体关系，就可能变成：</p>
+<pre class="notranslate"><code class="notranslate">GNN ──用于── RSA
+图神经网络 ──应用于── 路由频谱分配
+Graph Neural Network ──solves── Routing and Spectrum Assignment
+</code></pre>
+<p>这些表达语义类似，但名字、关系、方向都不同，后续很难检索、统计、推理。</p>
+<p>有了本体，就可以统一成：</p>
+<pre class="notranslate"><code class="notranslate">Algorithm: GNN
+Task: RSA
+Relation: used_for
+</code></pre>
+<p>这样后续就可以稳定查询：</p>
+<ul>
+<li>查询所有用于 RSA 的算法</li>
+<li>查询所有会导致 LOS 告警的故障原因</li>
+<li>查询某个 MML 命令可以操作哪些对象</li>
+<li>查询某类板卡支持哪些业务能力</li>
+</ul>
+<blockquote>
+<p>需要注意的是，这套构建知识图谱的过程类似类、实例、继承等代码规则。<br>
+实体类似于一个类，会包含各种属性。</p>
+</blockquote>
+<p>比如：</p>
+<ul>
+<li>"ROADM" 可以是一个<strong>类</strong></li>
+<li>"北京站点的 NE_001" 是一个<strong>具体实例</strong></li>
+</ul>
+<p><strong>继承的意义</strong>是：子类继承父类属性和约束。</p>
+<p>例如：</p>
+<pre class="notranslate"><code class="notranslate">OpticalDevice
+  ├── NetworkElement
+  ├── Board
+  ├── Port
+  ├── Amplifier
+  └── WSS
+</code></pre>
+<p><strong>约束</strong>是本体中非常重要但经常被忽视的一部分。它规定什么关系是合法的、属性取值是什么范围。</p>
+<p>例如：</p>
+<pre class="notranslate"><code class="notranslate">contains 关系：
+domain = NetworkElement
+range = Board
+</code></pre>
+<p>意思是：</p>
+<pre class="notranslate"><code class="notranslate">NetworkElement 可以 contains Board
+但 Alarm 不应该 contains Board
+</code></pre>
+<p>有了约束，图谱质量才能被校验。</p>
+<p><strong>规则</strong>比约束更进一步，可以用于推理。</p>
+<p>例如：</p>
+<pre class="notranslate"><code class="notranslate">如果某业务经过的所有波长都出现低功率，
+且上游站点输出正常，
+且本站输入异常，
+则可能存在跨段光纤衰耗异常。
+</code></pre>
+<p>简化成规则：</p>
+<pre class="notranslate"><code class="notranslate">LowInputPower(Port_A)
+AND NormalOutputPower(Upstream_Port)
+AND SameWavelength(λ_i)
+→ SuspectedFiberLoss(Span_X)
+</code></pre>
+<hr>
+<h2>二、知识图谱创建过程</h2>
+<p>下面详细展开。</p>
+<h3>第一步：需求定义</h3>
+<p>传统知识图谱不是为了"存所有知识"，而是围绕业务问题建设。</p>
+<p>比如你的光网络场景，要先明确目标：</p>
+<ul>
+<li>目标一：支撑 MML 命令智能查询</li>
+<li>目标二：支撑故障根因定位</li>
+<li>目标三：支撑设备对象关系管理</li>
+<li>目标四：支撑论文技术调研</li>
+</ul>
+<p>不同目标决定本体怎么设计。</p>
+<p>例如，如果目标是 MML 智能调用，本体重点是：</p>
+<ul>
+<li>MMLCommand</li>
+<li>CommandParameter</li>
+<li>ManagedObject</li>
+<li>Board</li>
+<li>Port</li>
+<li>Precondition</li>
+<li>Postcondition</li>
+<li>RiskLevel</li>
+<li>RollbackCommand</li>
+</ul>
+<p>如果目标是故障诊断，本体重点是：</p>
+<ul>
+<li>Alarm</li>
+<li>Fault</li>
+<li>RootCause</li>
+<li>Symptom</li>
+<li>NetworkElement</li>
+<li>PerformanceMetric</li>
+<li>Location</li>
+<li>ServiceImpact</li>
+<li>DiagnosisRule</li>
+</ul>
+<p>所以本体设计不是越全越好，而是要服务业务查询和推理。</p>
+<hr>
+<h3>第二步：本体设计</h3>
+<p>本体设计通常要回答 5 个问题：</p>
+<h4>问题一：有哪些实体类型？</h4>
+<p>以光网络故障诊断为例：</p>
+<ul>
+<li>NetworkElement</li>
+<li>Board</li>
+<li>Port</li>
+<li>OpticalChannel</li>
+<li>Wavelength</li>
+<li>Alarm</li>
+<li>PerformanceMetric</li>
+<li>FaultSymptom</li>
+<li>RootCause</li>
+<li>DiagnosisCase</li>
+<li>MMLCommand</li>
+</ul>
+<h4>问题二：实体之间有哪些关系？</h4>
+<ul>
+<li>NetworkElement → contains → Board</li>
+<li>Board → contains → Port</li>
+<li>Port → carries → Wavelength</li>
+<li>Alarm → occurs_on → Port</li>
+<li>PerformanceMetric → measured_on → Port</li>
+<li>RootCause → causes → Alarm</li>
+<li>DiagnosisCase → has_symptom → FaultSymptom</li>
+<li>MMLCommand → queries → NetworkElement</li>
+<li>MMLCommand → configures → Port</li>
+</ul>
+<h4>问题三：每类实体有哪些属性？</h4>
+<p>Alarm:</p>
+<ul>
+<li>alarm_id</li>
+<li>alarm_name</li>
+<li>severity</li>
+<li>timestamp</li>
+<li>location</li>
+<li>probable_cause</li>
+</ul>
+<p>Port:</p>
+<ul>
+<li>port_id</li>
+<li>board_id</li>
+<li>port_type</li>
+<li>direction</li>
+<li>status</li>
+</ul>
+<p>PerformanceMetric:</p>
+<ul>
+<li>metric_name</li>
+<li>value</li>
+<li>unit</li>
+<li>timestamp</li>
+</ul>
+<h4>问题四：有哪些约束？</h4>
+<p>属性约束：</p>
+<pre class="notranslate"><code class="notranslate">Alarm.severity ∈ {CR, MJ, MN, WR}
+Port.direction ∈ {input, output}
+Power.unit = dBm
+</code></pre>
+<p>关系约束：</p>
+<pre class="notranslate"><code class="notranslate">occurs_on:
+  domain = Alarm
+  range = OpticalDevice
+
+contains:
+  domain = NetworkElement
+  range = Board
+</code></pre>
+<h4>问题五：有哪些推理规则？</h4>
+<pre class="notranslate"><code class="notranslate">如果某站点所有波长输入功率同步下降，
+则优先怀疑线路段衰耗或光纤问题。
+
+如果单波长异常而其他波长正常，
+则优先怀疑 WSS 单波衰减、波长配置或通道级问题。
+</code></pre>
+<hr>
+<h3>第三步：数据源梳理</h3>
+<p>传统知识图谱要有稳定数据源。常见来源包括：</p>
+<p><strong>结构化数据：</strong></p>
+<ul>
+<li>资源台账</li>
+<li>网管配置数据</li>
+<li>告警数据库</li>
+<li>性能数据库</li>
+</ul>
+<p><strong>半结构化数据：</strong></p>
+<ul>
+<li>XML</li>
+<li>YAML</li>
+<li>MML命令输出</li>
+<li>设备配置文件</li>
+</ul>
+<p><strong>非结构化数据：</strong></p>
+<ul>
+<li>PDF手册</li>
+<li>Word文档</li>
+<li>运维案例</li>
+<li>论文</li>
+<li>故障报告</li>
+<li>专家经验</li>
+</ul>
+<p>对于企业知识图谱，结构化和半结构化数据通常更可靠；非结构化文档需要 NLP 或 LLM 辅助抽取。</p>
+<hr>
+<h3>第四步：实体抽取</h3>
+<p>实体抽取就是从数据中识别出具体对象。</p>
+<p>例如从 MML 输出里抽：</p>
+<pre class="notranslate"><code class="notranslate">NE: NE_001
+Board: Slot_3_OTU
+Port: 3-1-1
+Wavelength: λ39
+Alarm: LOS
+</code></pre>
+<p>从论文中抽：</p>
+<pre class="notranslate"><code class="notranslate">Algorithm: GNN
+Algorithm: PPO
+Task: RSA
+Metric: Blocking Probability
+Dataset: NSFNET
+</code></pre>
+<p>传统方式一般包括：</p>
+<ul>
+<li>规则抽取</li>
+<li>词典匹配</li>
+<li>正则表达式</li>
+<li>机器学习模型</li>
+<li>人工标注校验</li>
+</ul>
+<p>例如光网络里很多对象有固定格式，很适合规则抽取：</p>
+<pre class="notranslate"><code class="notranslate">端口：3-1-1
+槽位：Slot 3
+波长：λ39 / 193.1 THz
+功率：-12.3 dBm
+告警：LOS / LOF / BDI / ODU-AIS
+</code></pre>
+<hr>
+<h3>第五步：关系抽取</h3>
+<p>关系抽取是把实体之间连起来。</p>
+<p>例如从配置数据里得到：</p>
+<pre class="notranslate"><code class="notranslate">NE_001 contains Board_03
+Board_03 contains Port_3_1_1
+Port_3_1_1 carries Wavelength_39
+</code></pre>
+<p>从告警数据里得到：</p>
+<pre class="notranslate"><code class="notranslate">Alarm_001 occurs_on Port_3_1_1
+Alarm_001 has_severity Critical
+</code></pre>
+<p>从专家规则里得到：</p>
+<pre class="notranslate"><code class="notranslate">LowInputPower causes LOS
+WSS_Attenuation_Error causes Single_Wavelength_Power_Abnormal
+</code></pre>
+<p>传统关系抽取可以来自：</p>
+<ul>
+<li>数据库外键</li>
+<li>配置文件层级</li>
+<li>规则模板</li>
+<li>人工维护</li>
+<li>NLP模型</li>
+<li>专家标注</li>
+</ul>
+<p>企业图谱里最可靠的关系通常来自已有系统数据，例如资源拓扑、告警表、业务路径表，而不是纯文本自动抽取。</p>
+<hr>
+<h3>第六步：实体对齐与消歧</h3>
+<p>这是传统知识图谱非常关键的一步。</p>
+<p><strong>同一个对象可能有多个名字：</strong></p>
+<pre class="notranslate"><code class="notranslate">NE001
+NE_001
+北京东站NE1
+Beijing-East-NE-1
+</code></pre>
+<p>它们可能其实是同一个网元。</p>
+<p><strong>同一个概念也可能有多个表达：</strong></p>
+<pre class="notranslate"><code class="notranslate">GNN
+Graph Neural Network
+图神经网络
+</code></pre>
+<p>实体对齐就是把它们归一到一个标准实体。</p>
+<p>例如：</p>
+<pre class="notranslate"><code class="notranslate">Graph Neural Network
+图神经网络
+GNN
+→ Algorithm:GNN
+</code></pre>
+<p><strong>消歧</strong>则是区分同名不同物。</p>
+<p>例如 <code class="notranslate">LOS</code> 可能是：</p>
+<ul>
+<li>Loss of Signal 告警</li>
+<li>在别的领域表示 Line of Sight</li>
+</ul>
+<p>在光网络场景中必须根据上下文判断。</p>
+<p>传统方法通常包括：</p>
+<ul>
+<li>唯一ID</li>
+<li>标准命名规范</li>
+<li>别名表</li>
+<li>规则匹配</li>
+<li>相似度匹配</li>
+<li>人工审核</li>
+</ul>
+<hr>
+<h3>第七步：图谱入库</h3>
+<h4>属性图 Property Graph</h4>
+<p>这是工程中很常用的图数据库形式，例如 Neo4j。</p>
+<p>节点和边都可以有属性。</p>
+<p>例如：</p>
+<pre class="notranslate"><code class="notranslate">节点：
+(:Port {id:"3-1-1", type:"line", status:"active"})
+
+边：
+(:Board)-[:HAS_PORT {source:"inventory"}]-&gt;(:Port)
+</code></pre>
+<p>查询语言常见是 Cypher。</p>
+<hr>
+<h3>第八步：质量校验</h3>
+<p>传统知识图谱强调质量治理，否则图越大越乱。</p>
+<p>常见校验包括：</p>
+<ul>
+<li><strong>类型校验：</strong> Alarm 是否错误连到了 Paper？</li>
+<li><strong>关系约束校验：</strong> contains 的主语是否一定是 NetworkElement？</li>
+<li><strong>属性取值校验：</strong> severity 是否在合法枚举中？</li>
+<li><strong>重复实体校验：</strong> GNN 和 Graph Neural Network 是否重复？</li>
+<li><strong>孤立节点检查：</strong> 是否存在没有任何关系的实体？</li>
+<li><strong>冲突检查：</strong> 同一个端口是否同时属于两个不同板卡？</li>
+</ul>
+<p>图谱后续可能支撑自动化决策，错图谱会导致错操作。</p>
+<hr>
+<h3>第九步：推理与应用</h3>
+<p>有了本体、实例和规则后，图谱可以用于推理。</p>
+<p>例如本体里定义：</p>
+<pre class="notranslate"><code class="notranslate">OTUBoard 是 Board 的子类
+Board 是 OpticalDevice 的子类
+</code></pre>
+<p>如果图谱里有：</p>
+<pre class="notranslate"><code class="notranslate">Board_03 rdf:type OTUBoard
+</code></pre>
+<p>系统可以推理出：</p>
+<pre class="notranslate"><code class="notranslate">Board_03 也是 Board
+Board_03 也是 OpticalDevice
+</code></pre>
+<p>再比如：</p>
+<pre class="notranslate"><code class="notranslate">如果 Alarm occurs_on Port
+Port belongs_to Board
+Board belongs_to NetworkElement
+</code></pre>
+<p>可以推理：</p>
+<pre class="notranslate"><code class="notranslate">Alarm impacts NetworkElement
+</code></pre>
+<p>在光网络诊断里，推理可以用于：</p>
+<ul>
+<li>告警传播分析</li>
+<li>业务影响分析</li>
+<li>根因候选排序</li>
+<li>配置一致性检查</li>
+<li>MML命令前置条件校验</li>
+</ul></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
