@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="模型可以不断更换，但一个人的长期记忆、项目状态和上下文资产，不应该被锁在某个模型中。">
+<meta property="og:title" content="Supermemory">
+<meta property="og:description" content="模型可以不断更换，但一个人的长期记忆、项目状态和上下文资产，不应该被锁在某个模型中。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/Supermemory.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>Supermemory</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Supermemory</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/57" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>模型可以不断更换，但一个人的长期记忆、项目状态和上下文资产，不应该被锁在某个模型中。<br>
+<a href="https://supermemory.ai/" rel="nofollow">https://supermemory.ai/</a></p>
+<h2>Supermemory是什么</h2>
+<p>Supermemory不是一颗新的大模型，而是一个面向AI的长期记忆平台。</p>
+<p>用户可以将对话、文件、网页、邮件和会议记录导入其中。Supermemory对这些内容进行解析，提取重要事实、偏好、关系和项目状态，并在需要时提供给大模型。</p>
+<p>它的基本流程是：</p>
+<pre lang="text" class="notranslate"><code class="notranslate">导入资料
+  ↓
+提取事实、偏好与项目状态
+  ↓
+回答前检索相关记忆
+  ↓
+大模型生成回答
+  ↓
+沉淀新的事实和决定
+</code></pre>
+<p>例如，用户曾经明确提出：“分析法规时不要超出原文引申。”以后再修改监管材料时，系统就可以主动找回这一偏好，不需要用户重复说明。</p>
+<p>为了避免不同内容相互干扰，Supermemory还可以划分不同的记忆空间，分别保存工作、生活以及不同项目的资料。</p>
+<h2>它如何接入不同AI</h2>
+<p>Supermemory可以通过MCP、插件或API接入Claude、Cursor、自建Agent等工具。</p>
+<p>大模型负责理解、推理和生成内容，Supermemory负责保存和检索长期上下文。因此，即使更换模型，只要仍然接入同一个记忆库，过去积累的信息仍可继续使用。</p>
+<p>不过，这并不意味着所有AI应用都能自动共享记忆。只有开放了相应接口，或者主动集成Supermemory的工具，才能访问这份记忆。</p>
+<h2>SMFS：把记忆变成文件系统</h2>
+<p>SMFS是Supermemory面向Agent推出的文件系统方案。</p>
+<p>传统Agent面对大量文件时，通常需要反复列目录、猜文件名、搜索关键词和打开文件，既低效，也会消耗大量Token。</p>
+<p>SMFS将这一过程简化为：</p>
+<pre lang="text" class="notranslate"><code class="notranslate">语义搜索
+  ↓
+找到相关文件和片段
+  ↓
+打开原文件核查
+</code></pre>
+<p>Agent仍然可以使用熟悉的<code class="notranslate">ls</code>、<code class="notranslate">cat</code>和<code class="notranslate">grep</code>等命令，但背后获得了语义检索能力。</p>
+<p>例如，搜索“哪些国家要求卫星流量在境内落地”，即使原文使用的是“本地PoP”“境内NOC”或“流量本地汇聚”等不同表述，也可能被检索出来。</p>
+<p>搜索结果同时保留原始文件路径，Agent可以继续查看上下文、核对来源并编辑文件，而不是只得到一个脱离原文的文本片段。</p>
+<h2>SMFS的核心价值</h2>
+<p>SMFS的价值并不在于压缩文件，而在于减少Agent寻找信息时的无效操作。</p>
+<p>它主要提供四项能力：</p>
+<ul>
+<li>通过语义搜索快速定位相关文件；</li>
+<li>用文件路径关联原文、检索结果和云端记忆；</li>
+<li>将PDF、图片和音视频转化为Agent可读的文本；</li>
+<li>通过<code class="notranslate">profile.md</code>向Agent提供用户画像和近期项目状态。</li>
+</ul>
+<p>Supermemory公布的测试显示，SMFS可以明显减少Agent处理大量文件时的Token消耗。不过，这些结果主要来自厂商自己的测试，在复杂多跳推理中仍可能出现检索不完整的问题。</p>
+<h2>Supermemory与RAG、MCP的关系</h2>
+<p>几项技术解决的问题并不相同：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>技术</th>
+<th>主要作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAG</td>
+<td>从大量资料中检索相关内容</td>
+</tr>
+<tr>
+<td>Supermemory</td>
+<td>管理长期记忆和持续变化的上下文</td>
+</tr>
+<tr>
+<td>MCP</td>
+<td>连接大模型与外部记忆服务</td>
+</tr>
+<tr>
+<td>SMFS</td>
+<td>将记忆服务包装成Agent熟悉的文件系统</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>简单来说：</p>
+<blockquote>
+<p>RAG负责“找资料”，Supermemory负责“保持记忆”，MCP负责“连接工具”，SMFS负责“让Agent像操作文件一样使用记忆”。</p>
+</blockquote>
+<h2>它还有哪些不足</h2>
+<p>长期记忆并不是记得越多越好。</p>
+<p>Supermemory仍然需要解决几个关键问题：</p>
+<ul>
+<li>如何避免把错误推测写入长期记忆；</li>
+<li>如何识别已经过期或被更新的信息；</li>
+<li>如何隔离工作、生活和敏感项目；</li>
+<li>如何处理多Agent同时修改文件的冲突；</li>
+<li>如何让用户方便地查看、修改和删除记忆。</li>
+</ul>
+<p>语义检索也只能找到“相似内容”，不一定能完整找出复杂推理所需的全部证据。因此，重要结论仍然需要回到原始文件进行核验。</p>
+<h2>结语</h2>
+<p>Supermemory最值得关注的，不只是增加了一个记忆功能，而是提出了一种新的AI使用方式：</p>
+<blockquote>
+<p>用户的长期记忆不必依附于某一颗大模型，而可以成为跨模型、跨工具复用的独立数字资产。</p>
+</blockquote>
+<p>在这套体系中，大模型负责思考，Supermemory负责保持用户和项目的连续状态，SMFS则让Agent能够高效地调用这些记忆。</p>
+<p>未来AI能力的差异，可能不仅取决于模型有多聪明，也取决于它能否在用户授权和控制下，持续、准确地理解同一个人。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
