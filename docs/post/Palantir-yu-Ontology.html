@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="## Palantir 是什么公司？
+
+**Palantir Technologies** 是一家美国软件公司，核心业务是帮助政府和大型企业把分散、复杂的数据整合起来，用于分析、决策和业务执行。">
+<meta property="og:title" content="Palantir与Ontology">
+<meta property="og:description" content="## Palantir 是什么公司？
+
+**Palantir Technologies** 是一家美国软件公司，核心业务是帮助政府和大型企业把分散、复杂的数据整合起来，用于分析、决策和业务执行。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/Palantir-yu-Ontology.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>Palantir与Ontology</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Palantir与Ontology</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/58" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h2>Palantir 是什么公司？</h2>
+<p><strong>Palantir Technologies</strong> 是一家美国软件公司，核心业务是帮助政府和大型企业把分散、复杂的数据整合起来，用于分析、决策和业务执行。它并不是传统意义上的云计算公司或数据经纪商，而是提供一套部署在客户内部或云端的<strong>数据与人工智能操作平台</strong>。</p>
+<h2>一、Palantir 的起源</h2>
+<p>Palantir 的成立与两个背景有关：</p>
+<ol>
+<li>
+<p><strong>“9·11”之后的反恐需求</strong><br>
+美国政府和情报机构拥有大量来自不同系统的数据，但这些数据往往彼此割裂。Palantir 希望帮助分析人员将人员、地点、通信、交易和事件等信息关联起来，从而发现潜在风险。</p>
+</li>
+<li>
+<p><strong>PayPal 反欺诈技术的延伸</strong><br>
+Palantir 的早期团队与 PayPal 有密切关系。创始人 Peter Thiel 曾参与 PayPal 的创立；团队试图把 PayPal 用于识别欺诈和异常交易的思路，应用到政府情报和安全领域。</p>
+</li>
+</ol>
+<p>Palantir 于 2003 年由 <strong>Peter Thiel、Alex Karp、Stephen Cohen、Joe Lonsdale 和 Nathan Gettings</strong> （据说是xx科技帮派）等人共同创办。早期获得了美国中央情报局投资部门 <strong>In-Q-Tel</strong> 的支持，这帮助它进入了政府和情报机构市场。</p>
+<h2>二、Palantir 的主营产品</h2>
+<p>目前可以将其业务理解为四个平台：</p>
+<h3>1. Gotham：政府、国防与情报平台</h3>
+<p><strong>Gotham</strong> 是 Palantir 最早、最具代表性的产品，主要面向：</p>
+<ul>
+<li>国防和军队</li>
+<li>情报机构</li>
+<li>警察及执法部门</li>
+<li>边境和反恐机构</li>
+<li>灾害与应急管理部门</li>
+</ul>
+<p>它能够整合卫星、传感器、通信、报告、地图和人员关系等数据，帮助用户：</p>
+<ul>
+<li>识别数据之间的关系</li>
+<li>追踪事件和目标</li>
+<li>规划任务与行动</li>
+<li>进行战场或安全态势分析</li>
+<li>支持实时决策</li>
+</ul>
+<p>简单说，Gotham 更偏向于“<strong>安全、情报和作战决策系统</strong>”。</p>
+<h3>2. Foundry：企业数据运营平台</h3>
+<p><strong>Foundry</strong> 主要面向商业企业和大型组织。它可以把企业分散在 ERP、供应链、生产、销售、库存、财务等系统中的数据统一起来，并建立数据与现实业务对象之间的联系。</p>
+<p>典型应用包括：</p>
+<ul>
+<li>制造业：预测设备故障、优化生产排程</li>
+<li>医疗行业：管理患者、床位和供应链</li>
+<li>零售业：分析库存和需求</li>
+<li>能源行业：优化设备和运营</li>
+<li>金融业：风险管理和反欺诈</li>
+<li>航空与物流：优化航线、运输和供应链</li>
+</ul>
+<p>Foundry 的重点不只是“看报表”，而是把数据转化为可执行的业务流程。Palantir 将这一套核心数据模型称为 <strong>Ontology（本体）</strong>，用于描述客户业务中的人员、设备、订单、工厂、供应商等对象及其关系。</p>
+<h3>3. AIP：人工智能平台</h3>
+<p><strong>AIP</strong> 是 Palantir 的人工智能平台，重点是把生成式 AI 和大语言模型接入企业或政府的真实数据与业务流程中。</p>
+<p>它可以用于：</p>
+<ul>
+<li>企业内部智能问答</li>
+<li>自动生成分析报告</li>
+<li>供应链和生产决策</li>
+<li>辅助军事或应急规划</li>
+<li>自动化任务分派</li>
+<li>让 AI 在权限和安全规则下执行操作</li>
+</ul>
+<p>Palantir 的主张不是简单地提供一个聊天机器人，而是让 AI 能够在受控环境中访问数据、理解业务，并采取相应行动。例如，AI 不仅告诉企业“某工厂可能出现供应短缺”，还可以进一步模拟方案、生成采购建议或启动审批流程。[ref:8,40]</p>
+<h3>4. Apollo：软件部署与基础设施平台</h3>
+<p><strong>Apollo</strong> 是底层的软件交付和运维平台，负责让 Gotham、Foundry 和 AIP 在不同环境中运行，包括：</p>
+<ul>
+<li>公有云</li>
+<li>私有云</li>
+<li>企业内部服务器</li>
+<li>国防和机密网络</li>
+<li>网络条件较差或完全隔离的环境</li>
+</ul>
+<p>Apollo 的价值在于：Palantir 的软件可以持续更新，同时满足政府、军队和大型企业对安全性及特殊部署环境的要求。</p>
+<h2>Ontology</h2>
+<p>Ontology = 企业现实世界的数字化地图 + 业务逻辑 + 操作权限 + 可执行动作</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
