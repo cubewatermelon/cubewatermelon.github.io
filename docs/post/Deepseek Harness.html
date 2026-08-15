@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="<html>
+<body>
+<!--StartFragment--><!DOCTYPE html><h1 cid='n0' mdtype='heading' class='md-end-block md-heading md-focus' style='box-sizing: border-box; white-space: pre-wrap; break-after: avoid-page; break-inside: avoid; orphans: 4; font-size: 2.25em; margin-top: 1rem; margin-bottom: 1rem; position: relative; font-weight: bold; line-height: 1.2; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain md-expand' style='box-sizing: border-box;'>DeepSeek Harness 插件化机制、缓存与推理回传解析</span></h1><blockquote cid='n2' mdtype='blockquote' style='box-sizing: border-box; margin: 0.8em 0px; border-left: 4px solid rgb(223, 226, 229); padding: 0px 15px; color: rgb(119, 119, 119); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><p cid='n3' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px; white-space: pre-wrap; position: relative;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>本文整理自一次关于 DeepSeek Harness（DSH）框架的深入问答，内容均基于框架源码（</span><span md-inline='code' spellcheck='false' class='md-pair-s' style='box-sizing: border-box;'><code style='box-sizing: border-box; font-family: var(--monospace); text-align: left; vertical-align: initial; border: 1px solid rgb(231, 234, 237); background-color: rgb(243, 244, 244); border-radius: 3px; padding: 0px 2px; font-size: 0.9em;'>node_modules/@deepseek-ai/*</code></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>）核实的事实，重点覆盖三大主题：</span><span md-inline='softbreak' class='md-softbreak' style='box-sizing: border-box;'>
+</span><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>① Agent 插件化架构 ② KV 缓存命中机制 ③ 思考模式下的推理回传（reasoning passback）</span></strong></span></p></blockquote><div tabindex='-1' cid='n4' mdtype='hr' class='md-hr md-end-block' style='box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><hr style='box-sizing: content-box; height: 2px; margin: 16px 0px; border: 0px none; padding: 0px; background-color: rgb(231, 231, 231); overflow: hidden;'></div><h2 cid='n5' mdtype='heading' class='md-end-block md-heading' style='box-sizing: border-box; white-space: pre-wrap; break-after: avoid-page; break-inside: avoid; orphans: 4; font-size: 1.75em; margin-top: 1rem; margin-bottom: 1rem; position: relative; font-weight: bold; line-height: 1.225; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>目录</span></h2><ol class='ol-list' start='' cid='n6' mdtype='list' style='box-sizing: border-box; margin: 0.8em 0px; padding-left: 30px; position: relative; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><li class='md-list-item' cid='n7' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n8' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%B8%80%E4%BC%9A%E8%AF%9D%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%83%8C%E6%99%AF' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>会话环境与背景</span></a></span></p></li><li class='md-list-item' cid='n9' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n10' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%BA%8Cagent-%E9%A2%84%E8%AE%BEptc-%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E6%A8%A1%E5%BC%8F' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>Agent 预设：PTC 模式与其他内置模式</span></a></span></p></li><li class='md-list-item' cid='n11' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n12' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%B8%89%E6%8F%92%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E6%9C%80%E5%B0%8F%E6%A0%B8%E5%BF%83--%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%8F%92%E4%BB%B6' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>插件化架构：最小核心 + 事件驱动插件</span></a></span></p></li><li class='md-list-item' cid='n13' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n14' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E5%9B%9B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E4%B8%80%E4%B8%AA%E5%85%B8%E5%9E%8B%E7%9A%84%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>上下文压缩：一个典型的插件体系</span></a></span></p></li><li class='md-list-item' cid='n15' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n16' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%BA%94%E8%BD%A8%E8%BF%B9trajectory%E4%BC%9A%E8%AF%9D%E8%BF%87%E7%A8%8B%E7%9A%84%E5%AE%8C%E6%95%B4%E6%A1%A3%E6%A1%88' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>轨迹（Trajectory）：会话过程的完整档案</span></a></span></p></li><li class='md-list-item' cid='n17' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n18' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E5%85%ADkv-%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD%E6%9C%BA%E5%88%B6' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>KV 缓存命中机制</span></a></span></p></li><li class='md-list-item' cid='n19' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n20' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%B8%83%E6%8E%A8%E7%90%86%E5%9B%9E%E4%BC%A0reasoning-passback' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>推理回传（Reasoning Passback）</span></a></span></p></li><li class='md-list-item' cid='n21' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n22' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E5%85%AB%E6%80%BB%E7%BB%93' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>总结</span></a></span></p></li></ol><div tabindex='-1' cid='n23' mdtype='hr' class='md-hr md-end-block' style='box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><hr style='box-sizing: content-box; height: 2px; margin: 16px 0px; border: 0px none; padding: 0px; background-color: rgb(231, 231, 231); overflow: hidden;'></div><h2 cid='n24' mdtype='heading' class='md-end-block md-heading' style='box-sizing: border-box; white-space: pre-wrap; break-after: avoid-page; break-inside: avoid; orphans: 4; font-size: 1.75em; margin-top: 1rem; margin-bottom: 1rem; position: relative; font-weight: bold; line-height: 1.225; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>一、会话环境与背景</span></h2><ul class='ul-list' cid='n25' mdtype='list' data-mark='-' style='box-sizing: border-box; margin: 0.8em 0px; padding-left: 30px; position: relative; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><li class='md-list-item' cid='n26' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n27' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>运行框架</span></strong></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>：DeepSeek Harness（DSH）智能体框架</span></p></li><li class='md-list-item' cid='n28' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n29' mdtype='paragraph' class='md-end-block md-p md-focus' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>当前模型</span></strong></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>：</span><span md-inline='code' spellcheck='false' class='md-pair-s' style='box-sizing: border-box;'><code style='box-sizing: border-box; font-family: var(--monospace); text-align: left; vertical-align: initial; border: 1px solid rgb(231, 234, 237); background-color: rgb(243, 244, 244); border-radius: 3px; padding: 0px 2px; font-size: 0.9em;'>deepseek-v4-flash</code></span></p></li><li class='md-list-item' cid='n32' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n33' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>能力清单</span></strong></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>：文件读写、PowerShell、检索（文件/网页）、Skills、todo/goal 计划、子代理、后台任务、工作流等</span></p></li></ul><p cid='n34' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0.8em 0px; white-space: pre-wrap; position: relative; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>本次对话从环境认知开始，经历了 LightRAG 与知识图谱文档对比、PTC 模式探源、轨迹（trajectory）解析、插件架构（loop、compaction）、缓存命中机制，最后深入推理回传机制。">
+<meta property="og:title" content="Deepseek Harness">
+<meta property="og:description" content="<html>
+<body>
+<!--StartFragment--><!DOCTYPE html><h1 cid='n0' mdtype='heading' class='md-end-block md-heading md-focus' style='box-sizing: border-box; white-space: pre-wrap; break-after: avoid-page; break-inside: avoid; orphans: 4; font-size: 2.25em; margin-top: 1rem; margin-bottom: 1rem; position: relative; font-weight: bold; line-height: 1.2; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain md-expand' style='box-sizing: border-box;'>DeepSeek Harness 插件化机制、缓存与推理回传解析</span></h1><blockquote cid='n2' mdtype='blockquote' style='box-sizing: border-box; margin: 0.8em 0px; border-left: 4px solid rgb(223, 226, 229); padding: 0px 15px; color: rgb(119, 119, 119); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><p cid='n3' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px; white-space: pre-wrap; position: relative;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>本文整理自一次关于 DeepSeek Harness（DSH）框架的深入问答，内容均基于框架源码（</span><span md-inline='code' spellcheck='false' class='md-pair-s' style='box-sizing: border-box;'><code style='box-sizing: border-box; font-family: var(--monospace); text-align: left; vertical-align: initial; border: 1px solid rgb(231, 234, 237); background-color: rgb(243, 244, 244); border-radius: 3px; padding: 0px 2px; font-size: 0.9em;'>node_modules/@deepseek-ai/*</code></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>）核实的事实，重点覆盖三大主题：</span><span md-inline='softbreak' class='md-softbreak' style='box-sizing: border-box;'>
+</span><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>① Agent 插件化架构 ② KV 缓存命中机制 ③ 思考模式下的推理回传（reasoning passback）</span></strong></span></p></blockquote><div tabindex='-1' cid='n4' mdtype='hr' class='md-hr md-end-block' style='box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><hr style='box-sizing: content-box; height: 2px; margin: 16px 0px; border: 0px none; padding: 0px; background-color: rgb(231, 231, 231); overflow: hidden;'></div><h2 cid='n5' mdtype='heading' class='md-end-block md-heading' style='box-sizing: border-box; white-space: pre-wrap; break-after: avoid-page; break-inside: avoid; orphans: 4; font-size: 1.75em; margin-top: 1rem; margin-bottom: 1rem; position: relative; font-weight: bold; line-height: 1.225; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>目录</span></h2><ol class='ol-list' start='' cid='n6' mdtype='list' style='box-sizing: border-box; margin: 0.8em 0px; padding-left: 30px; position: relative; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><li class='md-list-item' cid='n7' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n8' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%B8%80%E4%BC%9A%E8%AF%9D%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%83%8C%E6%99%AF' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>会话环境与背景</span></a></span></p></li><li class='md-list-item' cid='n9' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n10' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%BA%8Cagent-%E9%A2%84%E8%AE%BEptc-%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E6%A8%A1%E5%BC%8F' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>Agent 预设：PTC 模式与其他内置模式</span></a></span></p></li><li class='md-list-item' cid='n11' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n12' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%B8%89%E6%8F%92%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E6%9C%80%E5%B0%8F%E6%A0%B8%E5%BF%83--%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%8F%92%E4%BB%B6' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>插件化架构：最小核心 + 事件驱动插件</span></a></span></p></li><li class='md-list-item' cid='n13' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n14' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E5%9B%9B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E4%B8%80%E4%B8%AA%E5%85%B8%E5%9E%8B%E7%9A%84%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>上下文压缩：一个典型的插件体系</span></a></span></p></li><li class='md-list-item' cid='n15' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n16' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%BA%94%E8%BD%A8%E8%BF%B9trajectory%E4%BC%9A%E8%AF%9D%E8%BF%87%E7%A8%8B%E7%9A%84%E5%AE%8C%E6%95%B4%E6%A1%A3%E6%A1%88' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>轨迹（Trajectory）：会话过程的完整档案</span></a></span></p></li><li class='md-list-item' cid='n17' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n18' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E5%85%ADkv-%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD%E6%9C%BA%E5%88%B6' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>KV 缓存命中机制</span></a></span></p></li><li class='md-list-item' cid='n19' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n20' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E4%B8%83%E6%8E%A8%E7%90%86%E5%9B%9E%E4%BC%A0reasoning-passback' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>推理回传（Reasoning Passback）</span></a></span></p></li><li class='md-list-item' cid='n21' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n22' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='link' class='md-meta-i-c  md-link' style='box-sizing: border-box;'><a class='md-inner-link' href='#%E5%85%AB%E6%80%BB%E7%BB%93' style='box-sizing: border-box; cursor: pointer; color: rgb(65, 131, 196); -webkit-user-drag: none;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>总结</span></a></span></p></li></ol><div tabindex='-1' cid='n23' mdtype='hr' class='md-hr md-end-block' style='box-sizing: border-box; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><hr style='box-sizing: content-box; height: 2px; margin: 16px 0px; border: 0px none; padding: 0px; background-color: rgb(231, 231, 231); overflow: hidden;'></div><h2 cid='n24' mdtype='heading' class='md-end-block md-heading' style='box-sizing: border-box; white-space: pre-wrap; break-after: avoid-page; break-inside: avoid; orphans: 4; font-size: 1.75em; margin-top: 1rem; margin-bottom: 1rem; position: relative; font-weight: bold; line-height: 1.225; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>一、会话环境与背景</span></h2><ul class='ul-list' cid='n25' mdtype='list' data-mark='-' style='box-sizing: border-box; margin: 0.8em 0px; padding-left: 30px; position: relative; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><li class='md-list-item' cid='n26' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n27' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>运行框架</span></strong></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>：DeepSeek Harness（DSH）智能体框架</span></p></li><li class='md-list-item' cid='n28' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n29' mdtype='paragraph' class='md-end-block md-p md-focus' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>当前模型</span></strong></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>：</span><span md-inline='code' spellcheck='false' class='md-pair-s' style='box-sizing: border-box;'><code style='box-sizing: border-box; font-family: var(--monospace); text-align: left; vertical-align: initial; border: 1px solid rgb(231, 234, 237); background-color: rgb(243, 244, 244); border-radius: 3px; padding: 0px 2px; font-size: 0.9em;'>deepseek-v4-flash</code></span></p></li><li class='md-list-item' cid='n32' mdtype='list_item' style='box-sizing: border-box; margin: 0px; position: relative;'><p cid='n33' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0px 0px 0.5rem; white-space: pre-wrap; position: relative;'><span md-inline='strong' class='md-pair-s ' style='box-sizing: border-box;'><strong style='box-sizing: border-box;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>能力清单</span></strong></span><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>：文件读写、PowerShell、检索（文件/网页）、Skills、todo/goal 计划、子代理、后台任务、工作流等</span></p></li></ul><p cid='n34' mdtype='paragraph' class='md-end-block md-p' style='box-sizing: border-box; line-height: inherit; orphans: 4; margin: 0.8em 0px; white-space: pre-wrap; position: relative; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, &quot;Clear Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, &quot;Segoe UI Emoji&quot;, sans-serif; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;'><span md-inline='plain' class='md-plain' style='box-sizing: border-box;'>本次对话从环境认知开始，经历了 LightRAG 与知识图谱文档对比、PTC 模式探源、轨迹（trajectory）解析、插件架构（loop、compaction）、缓存命中机制，最后深入推理回传机制。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/Deepseek%20Harness.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>Deepseek Harness</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Deepseek Harness</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody">
+
+<h1><span>DeepSeek Harness 插件化机制、缓存与推理回传解析</span></h1><blockquote><p><span>本文整理自一次关于 DeepSeek Harness（DSH）框架的深入问答，内容均基于框架源码（</span><span><code class="notranslate">node_modules/@deepseek-ai/*</code></span><span>）核实的事实，重点覆盖三大主题：</span><span>
+</span><span><strong><span>① Agent 插件化架构 ② KV 缓存命中机制 ③ 思考模式下的推理回传（reasoning passback）</span></strong></span></p></blockquote><div tabindex="-1"><hr></div><h2><span>目录</span></h2><ol start=""><li><p><span><a href="#%E4%B8%80%E4%BC%9A%E8%AF%9D%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%83%8C%E6%99%AF"><span>会话环境与背景</span></a></span></p></li><li><p><span><a href="#%E4%BA%8Cagent-%E9%A2%84%E8%AE%BEptc-%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E6%A8%A1%E5%BC%8F"><span>Agent 预设：PTC 模式与其他内置模式</span></a></span></p></li><li><p><span><a href="#%E4%B8%89%E6%8F%92%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E6%9C%80%E5%B0%8F%E6%A0%B8%E5%BF%83--%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%8F%92%E4%BB%B6"><span>插件化架构：最小核心 + 事件驱动插件</span></a></span></p></li><li><p><span><a href="#%E5%9B%9B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E4%B8%80%E4%B8%AA%E5%85%B8%E5%9E%8B%E7%9A%84%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB"><span>上下文压缩：一个典型的插件体系</span></a></span></p></li><li><p><span><a href="#%E4%BA%94%E8%BD%A8%E8%BF%B9trajectory%E4%BC%9A%E8%AF%9D%E8%BF%87%E7%A8%8B%E7%9A%84%E5%AE%8C%E6%95%B4%E6%A1%A3%E6%A1%88"><span>轨迹（Trajectory）：会话过程的完整档案</span></a></span></p></li><li><p><span><a href="#%E5%85%ADkv-%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD%E6%9C%BA%E5%88%B6"><span>KV 缓存命中机制</span></a></span></p></li><li><p><span><a href="#%E4%B8%83%E6%8E%A8%E7%90%86%E5%9B%9E%E4%BC%A0reasoning-passback"><span>推理回传（Reasoning Passback）</span></a></span></p></li><li><p><span><a href="#%E5%85%AB%E6%80%BB%E7%BB%93"><span>总结</span></a></span></p></li></ol><div tabindex="-1"><hr></div><h2><span>一、会话环境与背景</span></h2><ul><li><p><span><strong><span>运行框架</span></strong></span><span>：DeepSeek Harness（DSH）智能体框架</span></p></li><li><p><span><strong><span>当前模型</span></strong></span><span>：</span><span><code class="notranslate">deepseek-v4-flash</code></span></p></li><li><p><span><strong><span>能力清单</span></strong></span><span>：文件读写、PowerShell、检索（文件/网页）、Skills、todo/goal 计划、子代理、后台任务、工作流等</span></p></li></ul><p><span>本次对话从环境认知开始，经历了 LightRAG 与知识图谱文档对比、PTC 模式探源、轨迹（trajectory）解析、插件架构（loop、compaction）、缓存命中机制，最后深入推理回传机制。本文聚焦后四个技术主题。</span></p><div tabindex="-1"><hr></div><h2><span>二、Agent 预设：PTC 模式与其他内置模式</span></h2><h3><span>2.1 预设即"插件组装"</span></h3><p><span>DSH 官方定义：</span></p><blockquote><p><span><strong><span>预设（Agent preset）即一个会话的 Agent 所运行的插件组装——它的工具、提示词与能力。</span></strong></span><span> 复制一份既有预设改成自己的，或用「创造模式」让 Agent 帮你创建。</span></p></blockquote><p><span>预设对"此后新建的会话生效，运行中的会话保持它开始时的预设"。</span></p><h3><span>2.2 四种内置预设</span></h3>
+预设 | 说明
+-- | --
+标准模式 | 功能完整的编码 Agent：文件编辑、Shell、文件/网页检索、Skills、计划、目标、子代理、工作流
+PTC 模式（Code mode） | 标准模式全部能力 + Code Mode SDK：工具以异步绑定形式暴露，模型可写一段 TypeScript 程序（支持顶层 await/return）在一次运行中组合多步操作
+极简模式 | 仅双工具：持久 bash + str_replace_editor，无上下文压缩
+创造模式 | 标准模式能力 + 运行时检查、插件实验、预设创作指导
+<p><span><strong><span>一句话概括</span></strong></span><span>：</span></p><blockquote><p><span>普通回复是"思考的终点"——推理使命已完成，产出已交付，下一轮从头思考即可，回传纯属浪费；工具调用是"思考的中断"——模型话没说完，推理必须保留下来，才能在工具结果回来后接着想，这是协议要求，也是思考连续性的需要。</span></p></blockquote><h3><span>7.5 与缓存的关系</span></h3><ul><li><p><span>推理回传在工具往返期间</span><span><strong><span>追加</span></strong></span><span>：它附加在请求前缀尾部（该条 assistant 消息内部），</span><span><strong><span>不破坏</span></strong></span><span>更早部分（系统提示词、历史）的缓存复用；</span></p></li><li><p><span>推理内容本身每次是新的（每轮思考不同），属于 cache miss，但它后面紧跟的 tool 结果等又是追加的；</span></p></li><li><p><span>无工具调用的轮次丢弃推理 → 历史更精简、前缀更稳定、不产生多余 token 成本。</span></p></li></ul><div tabindex="-1"><hr></div><h2><span>八、总结</span></h2><ol start=""><li><p><span><strong><span>插件化</span></strong></span><span>：DSH 采用"最小核心 loop + 事件驱动插件"架构。loop 是唯一含具体循环逻辑的插件，其余一切策略（压缩、重试、权限、子代理、持久化、UI）都是挂在其事件体系上的外围插件；Agent 预设（标准/PTC/极简/创造）本质是插件组装方案。</span></p></li><li><p><span><strong><span>能力 seam 模式</span></strong></span><span>：以压缩为例——接口（</span><span><code class="notranslate">dsh-compaction</code></span><span>）与实现（</span><span><code class="notranslate">dsh-compaction-basic</code></span><span>）分离，接口只规定"做什么"，实现决定"怎么做"，两者可独立替换；替换入口是 preset 的 </span><span><code class="notranslate">agent.cordis.yml</code></span><span>。</span></p></li><li><p><span><strong><span>缓存</span></strong></span><span>：高命中率来自框架把请求前缀做"字节级稳定"（只追加历史、工具目录跨模式稳定、压缩回放前缀、排除噪声），命中主体是系统提示词 + 工具 schema + 历史消息前缀；命中由 DeepSeek 服务端前缀缓存自动完成，框架不主动"做"缓存，只是"省"出来的。</span></p></li><li><p><span><strong><span>推理回传</span></strong></span><span>：思考模式下工具调用轮必须回传 </span><span><code class="notranslate">reasoning_content</code></span><span>（协议强制 + 思考连续性），普通回复轮丢弃推理（终态无需续接 + 省 token）；DSH 适配器精确执行这条规则，并以"丢弃"策略优化成本与缓存。</span></p></li></ol><div tabindex="-1"><hr></div><p><span><em><span>文档基于 DeepSeek Harness 框架源码核实整理，主要来源：</span><span><code class="notranslate">dsh-agent-loop</code></span><span>、</span><span><code class="notranslate">dsh-compaction(-basic/-tool-result-pruner)</code></span><span>、</span><span><code class="notranslate">dsh-llm-deepseek</code></span><span>、</span><span><code class="notranslate">dsh-client-ui-trajectory</code></span><span>、</span><span><code class="notranslate">dsh/config/agent-presets/*</code></span><span> 等包的 README 与源码。</span></em></span></p>
+
+# DeepSeek Harness 插件化机制、缓存与推理回传解析
+<blockquote>
+<p>本文整理自一次关于 DeepSeek Harness（DSH）框架的深入问答，内容均基于框架源码（<code class="notranslate">node_modules/@deepseek-ai/*</code>）核实的事实，重点覆盖三大主题：<br>
+<strong>① Agent 插件化架构 ② KV 缓存命中机制 ③ 思考模式下的推理回传（reasoning passback）</strong></p>
+</blockquote>
+<hr>
+<h2>目录</h2>
+<ol>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E4%B8%80%E4%BC%9A%E8%AF%9D%E7%8E%AF%E5%A2%83%E4%B8%8E%E8%83%8C%E6%99%AF" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">会话环境与背景</a>](#一会话环境与背景)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E4%BA%8Cagent-%E9%A2%84%E8%AE%BEptc-%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%85%B6%E4%BB%96%E5%86%85%E7%BD%AE%E6%A8%A1%E5%BC%8F" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">Agent 预设：PTC 模式与其他内置模式</a>](#二agent-预设ptc-模式与其他内置模式)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E4%B8%89%E6%8F%92%E4%BB%B6%E5%8C%96%E6%9E%B6%E6%9E%84%E6%9C%80%E5%B0%8F%E6%A0%B8%E5%BF%83--%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E6%8F%92%E4%BB%B6" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">插件化架构：最小核心 + 事件驱动插件</a>](#三插件化架构最小核心--事件驱动插件)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E5%9B%9B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E4%B8%80%E4%B8%AA%E5%85%B8%E5%9E%8B%E7%9A%84%E6%8F%92%E4%BB%B6%E4%BD%93%E7%B3%BB" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">上下文压缩：一个典型的插件体系</a>](#四上下文压缩一个典型的插件体系)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E4%BA%94%E8%BD%A8%E8%BF%B9trajectory%E4%BC%9A%E8%AF%9D%E8%BF%87%E7%A8%8B%E7%9A%84%E5%AE%8C%E6%95%B4%E6%A1%A3%E6%A1%88" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">轨迹（Trajectory）：会话过程的完整档案</a>](#五轨迹trajectory会话过程的完整档案)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E5%85%ADkv-%E7%BC%93%E5%AD%98%E5%91%BD%E4%B8%AD%E6%9C%BA%E5%88%B6" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">KV 缓存命中机制</a>](#六kv-缓存命中机制)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E4%B8%83%E6%8E%A8%E7%90%86%E5%9B%9E%E4%BC%A0reasoning-passback" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">推理回传（Reasoning Passback）</a>](#七推理回传reasoning-passback)</li>
+<li>[<a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/61#%E5%85%AB%E6%80%BB%E7%BB%93" data-hovercard-type="issue" data-hovercard-url="/cubewatermelon/cubewatermelon.github.io/issues/61/hovercard">总结</a>](#八总结)</li>
+</ol>
+<hr>
+<h2>一、会话环境与背景</h2>
+<ul>
+<li><strong>运行框架</strong>：DeepSeek Harness（DSH）智能体框架</li>
+<li><strong>当前模型</strong>：<code class="notranslate">deepseek-v4-flash</code></li>
+<li><strong>能力清单</strong>：文件读写、PowerShell、检索（文件/网页）、Skills、todo/goal 计划、子代理、后台任务、工作流等</li>
+</ul>
+<p>本次对话从环境认知开始，经历了 LightRAG 与知识图谱文档对比、PTC 模式探源、轨迹（trajectory）解析、插件架构（loop、compaction）、缓存命中机制，最后深入推理回传机制。本文聚焦后四个技术主题。</p>
+<hr>
+<h2>二、Agent 预设：PTC 模式与其他内置模式</h2>
+<h3>2.1 预设即"插件组装"</h3>
+<p>DSH 官方定义：</p>
+<blockquote>
+<p><strong>预设（Agent preset）即一个会话的 Agent 所运行的插件组装——它的工具、提示词与能力。</strong> 复制一份既有预设改成自己的，或用「创造模式」让 Agent 帮你创建。</p>
+</blockquote>
+<p>预设对"此后新建的会话生效，运行中的会话保持它开始时的预设"。</p>
+<h3>2.2 四种内置预设</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>预设</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准模式</strong></td>
+<td>功能完整的编码 Agent：文件编辑、Shell、文件/网页检索、Skills、计划、目标、子代理、工作流</td>
+</tr>
+<tr>
+<td><strong>PTC 模式</strong>（Code mode）</td>
+<td>标准模式全部能力 + <strong>Code Mode SDK</strong>：工具以异步绑定形式暴露，模型可写一段 TypeScript 程序（支持顶层 <code class="notranslate">await</code>/<code class="notranslate">return</code>）在一次运行中组合多步操作</td>
+</tr>
+<tr>
+<td><strong>极简模式</strong></td>
+<td>仅双工具：持久 bash + str_replace_editor，无上下文压缩</td>
+</tr>
+<tr>
+<td><strong>创造模式</strong></td>
+<td>标准模式能力 + 运行时检查、插件实验、预设创作指导</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>PTC 模式在中文 UI 中的全称是"PTC 模式"，英文为 "Code mode"；其核心是 <code class="notranslate">@deepseek-ai/dsh-code-runtime</code>（目前基于 Node worker 线程后端），对外通过 <code class="notranslate">run_code</code> 工具暴露。<strong>每个预设本质上是一套不同的插件组装方案</strong>。</p>
+<hr>
+<h2>三、插件化架构：最小核心 + 事件驱动插件</h2>
+<h3>3.1 loop 是一个插件——而且是"唯一不可替换的核心插件"</h3>
+<p><code class="notranslate">@deepseek-ai/dsh-agent-loop</code> 的 package.json 描述：</p>
+<blockquote>
+<p><strong>"The concrete agent loop plugin for the DeepSeek Harness"</strong></p>
+</blockquote>
+<p>其 README 强调：</p>
+<blockquote>
+<p><strong>这是 harness 中唯一包含具体循环逻辑的包。</strong> 其他所有内容要么是抽象服务，要么是针对扩展点的插件：新行为应放入插件，而不是这里。</p>
+</blockquote>
+<p>loop 的职责被刻意保持最小——<strong>调用模型、运行工具、重复</strong>（call model, run tools, repeat），并驱动**会话（session）→ 轮次（turn）→ 步骤（step）**的生命周期：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>层面</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心循环</td>
+<td>调用模型 → 运行工具 → 重复</td>
+</tr>
+<tr>
+<td>服务接口</td>
+<td><code class="notranslate">AgentLoop</code>（ctx 键 <code class="notranslate">agentLoop</code>），实现 <code class="notranslate">AgentFactory</code>（<code class="notranslate">ctx.agents.create()/resume()</code>）</td>
+</tr>
+<tr>
+<td>inbox 机制</td>
+<td><code class="notranslate">followup</code> / <code class="notranslate">steer</code> / <code class="notranslate">inject</code> 三种输入队列，控制唤醒与下一步</td>
+</tr>
+<tr>
+<td>并发</td>
+<td>独占调用形成屏障，并行安全调用用有界滚动池（默认 10）</td>
+</tr>
+<tr>
+<td>模型适配</td>
+<td><code class="notranslate">ctx.llm.prepareCall()</code>、适配器默认值标记、重试策略</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h3>3.2 一切策略能力都是外围插件</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>能力</th>
+<th>实现方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>上下文压缩</td>
+<td>插件监听 <code class="notranslate">agent/pre-step</code>（压力）、<code class="notranslate">agent/request-error</code>（溢出修复）</td>
+</tr>
+<tr>
+<td>模型请求重试</td>
+<td><code class="notranslate">dsh-llm-retry</code> 监听 <code class="notranslate">agent/request-error</code>，退避重试</td>
+</tr>
+<tr>
+<td>沙箱/权限/计划模式</td>
+<td><code class="notranslate">tools/pre-execute</code> 拒绝或询问、<code class="notranslate">tools.guard()</code> 策略、<code class="notranslate">tools/post-execute</code> 处理结果</td>
+</tr>
+<tr>
+<td>子代理</td>
+<td><strong>在循环外部</strong>：<code class="notranslate">ctx.subagents</code> 提供方用 <code class="notranslate">ctx.agents.create()</code> 创建 agent</td>
+</tr>
+<tr>
+<td>持久化</td>
+<td>监听 <code class="notranslate">session/event</code> 延后写入，<code class="notranslate">session/flush</code> 显式屏障</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>监听 <code class="notranslate">session/event</code>（token 流、工具活动）+ <code class="notranslate">agent/*</code> 控制事件</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>架构哲学</strong>：loop 只提供事件体系（<code class="notranslate">agent/*</code>、<code class="notranslate">tools/*</code>、<code class="notranslate">session/*</code>），所有策略（目标、计划、子代理、权限、重试、压缩）都是挂在这副骨架上的外围插件。这正是 DSH 能自由组合出标准/PTC/极简/创造等预设的原因。</p>
+<hr>
+<h2>四、上下文压缩：一个典型的插件体系</h2>
+<h3>4.1 "三包一体"的分层结构（capability seam 模式）</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>包</th>
+<th>角色</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">@deepseek-ai/dsh-compaction</code></td>
+<td><strong>Service Definition</strong>（接口层）</td>
+<td>定义 <code class="notranslate">CompactionEngine</code> 抽象服务（<code class="notranslate">ctx.compaction</code>）、<code class="notranslate">compaction/*</code> 事件、<code class="notranslate">CompactionResult</code>、工具配对边界 helper。<strong>只规定"压缩做什么"</strong></td>
+</tr>
+<tr>
+<td><code class="notranslate">@deepseek-ai/dsh-compaction-basic</code></td>
+<td><strong>Service Provider</strong>（默认实现）</td>
+<td><code class="notranslate">ctx.tokenMeter</code> 压力测量、阈值/保留尾部预算、<code class="notranslate">llm.stream()</code> 摘要、溢出恢复。<strong>规定"怎么做"</strong></td>
+</tr>
+<tr>
+<td><code class="notranslate">@deepseek-ai/dsh-command-compact</code></td>
+<td><strong>Consumer</strong></td>
+<td>面向用户的 <code class="notranslate">/compact</code> 手动压缩命令</td>
+</tr>
+<tr>
+<td><code class="notranslate">@deepseek-ai/dsh-compaction-tool-result-pruner</code></td>
+<td><strong>配套服务</strong>（可选）</td>
+<td>无模型的工具结果剪枝：把超大的 <code class="notranslate">tool/result</code> 改写为"头部 + 省略标记 + 尾部"</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>关键设计：</p>
+<ul>
+<li>接口与实现<strong>可独立演进、独立替换</strong>（Service Definition 只依赖 <code class="notranslate">dsh-session</code> 和 <code class="notranslate">dsh-llm</code>，不依赖具体后端）</li>
+<li><code class="notranslate">tokenMeter</code>（token 计量）<strong>刻意不在</strong>压缩的 realm 里——它常驻 host 平面，所有会话共享（浏览器 UI 每时每刻在读它的计量结果）</li>
+</ul>
+<h3>4.2 压缩的组装位置（agent.cordis.yml）</h3>
+<p>压缩插件的组装点在每个 Agent preset 的 <code class="notranslate">agent.cordis.yml</code>。以标准模式为例：</p>
+<div class="highlight highlight-source-yaml"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> ── compaction ──────────────────────────────────────────</span>
+- <span class="pl-ent">id</span>: <span class="pl-s">compaction</span>
+  <span class="pl-ent">name</span>: <span class="pl-s">cordis:group</span>
+  <span class="pl-ent">group</span>: <span class="pl-c1">true</span>
+  <span class="pl-ent">isolate</span>:
+    <span class="pl-ent">compaction</span>: <span class="pl-c1">true</span>
+    <span class="pl-ent">toolResultPruner</span>: <span class="pl-c1">true</span>
+  <span class="pl-ent">config</span>:
+    - <span class="pl-ent">id</span>: <span class="pl-s">compaction-basic</span>
+      <span class="pl-ent">name</span>: <span class="pl-s"><span class="pl-pds">'</span>@deepseek-ai/dsh-compaction-basic<span class="pl-pds">'</span></span>
+    - <span class="pl-ent">id</span>: <span class="pl-s">command-compact</span>
+      <span class="pl-ent">name</span>: <span class="pl-s"><span class="pl-pds">'</span>@deepseek-ai/dsh-command-compact<span class="pl-pds">'</span></span>
+    - <span class="pl-ent">id</span>: <span class="pl-s">tool-result-pruner</span>
+      <span class="pl-ent">name</span>: <span class="pl-s"><span class="pl-pds">'</span>@deepseek-ai/dsh-compaction-tool-result-pruner<span class="pl-pds">'</span></span>
+      <span class="pl-ent">config</span>:
+        <span class="pl-ent">thresholdChars</span>: <span class="pl-c1">8192</span>
+        <span class="pl-ent">headChars</span>: <span class="pl-c1">4096</span>
+        <span class="pl-ent">tailChars</span>: <span class="pl-c1">1024</span></pre></div>
+<h3>4.3 如何替换压缩功能（三条路径）</h3>
+<p><strong>路径 A：在预设配置里替换（推荐）</strong></p>
+<ol>
+<li>Web GUI 的"Agent 预设"设置里复制一份预设；</li>
+<li>编辑其 <code class="notranslate">agent.cordis.yml</code> 的 <code class="notranslate">compaction</code> group：换 <code class="notranslate">name</code> 为自定义后端包名、调参或整体删除（极简模式即无压缩）；</li>
+<li>新建会话时选择该自定义预设。</li>
+</ol>
+<p><code class="notranslate">compaction-basic</code> 关键配置：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>配置键</th>
+<th>默认</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">thresholdRatio</code></td>
+<td><code class="notranslate">0.8</code></td>
+<td>上下文用量达窗口 80% 触发压缩</td>
+</tr>
+<tr>
+<td><code class="notranslate">retainRatio</code></td>
+<td><code class="notranslate">0.16</code></td>
+<td>保留近期表层 16% 逐字内容</td>
+</tr>
+<tr>
+<td><code class="notranslate">retainTokens</code></td>
+<td>—</td>
+<td>与 <code class="notranslate">retainRatio</code> 互斥的绝对保留预算</td>
+</tr>
+<tr>
+<td><code class="notranslate">summarizationProvider</code> / <code class="notranslate">summarizationModel</code></td>
+<td>空</td>
+<td>指定摘要模型（默认复用当前路由）</td>
+</tr>
+<tr>
+<td><code class="notranslate">maxTokens</code></td>
+<td><code class="notranslate">8192</code></td>
+<td>摘要输出上限</td>
+</tr>
+<tr>
+<td><code class="notranslate">auto</code></td>
+<td><code class="notranslate">true</code></td>
+<td>是否自动触发（<code class="notranslate">false</code> 则仅 <code class="notranslate">/compact</code> 手动）</td>
+</tr>
+<tr>
+<td><code class="notranslate">modelPolicies</code></td>
+<td><code class="notranslate">[]</code></td>
+<td>按 <code class="notranslate">{provider, model}</code> 精确覆盖策略</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>路径 B：实现自己的压缩后端</strong><br>
+继承 <code class="notranslate">CompactionEngine</code>，实现 <code class="notranslate">compactIfNeeded(agent, trigger, signal)</code>、<code class="notranslate">compactNow(agent, signal)</code>、<code class="notranslate">compactRegion(start, end, agent, signal?)</code>，摘要直接走 <code class="notranslate">ctx.llm.stream()</code>（不是 loop 步骤），用 <code class="notranslate">compactCheckpointSource(compactionId)</code> 创建替换检查点，以插件形式注册为 <code class="notranslate">ctx.compaction</code>。</p>
+<p><strong>路径 C：只换摘要策略（最轻量）</strong><br>
+覆盖 <code class="notranslate">BasicCompactionEngine</code> 受保护的 <code class="notranslate">summarize()</code> 子类钩子——压力测量、保留策略、缩减验证全部由基类负责，只改"怎么总结"（模板摘要器或远程摘要器）。</p>
+<h3>4.4 压缩的表面约定（surface contract）</h3>
+<ul>
+<li>成功压缩 = 用一个 user 角色的摘要检查点替换较早表层范围（<code class="notranslate">surfaceOp: {op: 'replace', start, end}</code>），原始事件仍保留在日志中（回放具有确定性）</li>
+<li>压缩以 <code class="notranslate">compaction/start</code>（获取锁）开始、<code class="notranslate">compaction/end</code>（释放锁）结束；<code class="notranslate">compaction/*</code> 事件仅存在于日志，不出现在表层</li>
+<li>只有 <code class="notranslate">user/message</code>、<code class="notranslate">assistant/message</code>、<code class="notranslate">tool/result</code> 可以携带 <code class="notranslate">surfaceOp</code></li>
+<li>模型看到的检查点格式：<code class="notranslate">&lt;compacted-summary&gt;</code> 标签包裹的结构化摘要（Primary Request / Key Technical Concepts / Files and Code / Errors and Fixes / Pending Jobs / Current Work / Next Step / Critical Context 等段落）</li>
+</ul>
+<hr>
+<h2>五、轨迹（Trajectory）：会话过程的完整档案</h2>
+<h3>5.1 记录类型与字段</h3>
+<p>轨迹记录有 7 种类型（<code class="notranslate">TrajectoryCellKind</code>）：<code class="notranslate">system</code>、<code class="notranslate">user</code>、<code class="notranslate">context</code>、<code class="notranslate">compacted</code>、<code class="notranslate">message</code>、<code class="notranslate">tool</code>、<code class="notranslate">subtool</code>。</p>
+<p>每条记录包含：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="notranslate">#N</code> 序号 + 摘要</td>
+<td>记录索引与单行摘要（<code class="notranslate">text</code> / <code class="notranslate">previewMarkdown</code>）</td>
+</tr>
+<tr>
+<td><code class="notranslate">inputDetail</code></td>
+<td>输入方向完整内容（对 tool 是调用参数，对 user 是消息原文）</td>
+</tr>
+<tr>
+<td><code class="notranslate">outputDetail</code></td>
+<td>输出方向完整内容（助手回复 / 工具结果）</td>
+</tr>
+<tr>
+<td><code class="notranslate">thinkingDetail</code></td>
+<td>模型的推理内容</td>
+</tr>
+<tr>
+<td><code class="notranslate">sourceBlocks</code> / <code class="notranslate">outputBlocks</code></td>
+<td>按模型消息顺序保留的原始内容块（文本、图片、tool-call 块）</td>
+</tr>
+<tr>
+<td><code class="notranslate">schemaDetail</code></td>
+<td>调用那一刻模型看到的工具 schema</td>
+</tr>
+<tr>
+<td><code class="notranslate">assistantMetrics</code></td>
+<td>首 token 时间（TTFT）、解码吞吐、token 用量</td>
+</tr>
+<tr>
+<td><code class="notranslate">startedAt</code> / <code class="notranslate">timeSeconds</code></td>
+<td>开始时间与耗时</td>
+</tr>
+<tr>
+<td><code class="notranslate">isError</code> / <code class="notranslate">callId</code></td>
+<td>失败标记与调用关联 ID</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h3>5.2 tool 部分的 payload 是什么</h3>
+<p><strong>payload = <code class="notranslate">argsRaw</code> = 那次工具调用时模型实际传给工具的全部原始参数</strong>（未经加工、原样保留）。构建代码：</p>
+<div class="highlight highlight-source-js"><pre class="notranslate">...<span class="pl-s1">node</span><span class="pl-kos">.</span><span class="pl-c1">call</span> <span class="pl-c1">!==</span> <span class="pl-c1">null</span> ? <span class="pl-kos">{</span> <span class="pl-c1">inputDetail</span>: <span class="pl-s1">node</span><span class="pl-kos">.</span><span class="pl-c1">call</span><span class="pl-kos">.</span><span class="pl-c1">argsRaw</span> <span class="pl-kos">}</span> : <span class="pl-kos">{</span><span class="pl-kos">}</span><span class="pl-kos">,</span>   <span class="pl-c">// payload（输入方向）</span>
+<span class="pl-s1">outputDetail</span>: <span class="pl-en">detailResult</span><span class="pl-kos">(</span><span class="pl-s1">node</span><span class="pl-kos">)</span><span class="pl-kos">,</span>                                    <span class="pl-c">// 结果（输出方向）</span></pre></div>
+<p>UI 渲染逻辑：<code class="notranslate">direction === "input"</code> 显示 <code class="notranslate">inputDetail</code>（标签 "Payload"），<code class="notranslate">direction === "output"</code> 显示 <code class="notranslate">outputDetail</code>（标签 "Result"）。未捕获时显示 "No payload captured" / "No result captured"。</p>
+<p>举例：本次会话中调用 <code class="notranslate">pwsh</code> 工具时，轨迹里那条 tool 记录的 payload 就是 <code class="notranslate">{"command": "Get-ChildItem ...", "description": "..."}</code> 这样的原始调用参数。工具结果若是合法 JSON，轨迹面板会用 JSON 树展示。</p>
+<hr>
+<h2>六、KV 缓存命中机制</h2>
+<h3>6.1 本质：DeepSeek 服务端前缀缓存</h3>
+<p>高缓存命中<strong>不是框架"主动命中"缓存，而是保证请求前缀稳定，让 DeepSeek 服务端的前缀缓存（prefix caching / KV cache）自动命中</strong>。框架只做了一件事：把"每次都要重新算的部分"压缩到最小，把"不变的部分"保持字节级稳定。</p>
+<p>适配器把官方返回的命中 token 映射为轨迹面板的 <code class="notranslate">cacheRead</code>：</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// dsh-llm-deepseek/lib/index.js</span>
+<span class="pl-k">const</span> <span class="pl-s1">cacheRead</span> <span class="pl-c1">=</span> <span class="pl-s1">usage</span><span class="pl-kos">.</span><span class="pl-c1">prompt_tokens_details</span><span class="pl-kos">?.</span><span class="pl-c1">cached_tokens</span> <span class="pl-c1">??</span> <span class="pl-s1">usage</span><span class="pl-kos">.</span><span class="pl-c1">prompt_cache_hit_tokens</span><span class="pl-kos">;</span>
+<span class="pl-s1">inputTokens</span>: <span class="pl-s1">usage</span><span class="pl-kos">.</span><span class="pl-c1">prompt_tokens</span> <span class="pl-c1">-</span> <span class="pl-kos">(</span><span class="pl-s1">cacheRead</span> <span class="pl-c1">??</span> <span class="pl-c1">0</span><span class="pl-kos">)</span><span class="pl-kos">,</span>  <span class="pl-c">// 计费输入 = 总输入 - 缓存命中</span></pre></div>
+<p>注意：DeepSeek 的 <code class="notranslate">prompt_tokens</code> <strong>包含</strong>缓存命中部分，框架要把它减去才是真正的"新算力"输入。</p>
+<h3>6.2 缓存命中的主要内容（按体积排序）</h3>
+<ol>
+<li><strong>系统提示词</strong>（最大头）：DSH 系统提示词 + 会话 persona/工作规则，每次逐字相同</li>
+<li><strong>工具 schema</strong>：当前挂载的全部工具定义，工具目录不变即完全重复</li>
+<li><strong>历史消息前缀</strong>：早先轮次的 user 消息、assistant 回复、工具调用/结果</li>
+<li><strong>推理回传</strong>（条件性）：仅含工具调用的 assistant 轮次才回传 <code class="notranslate">reasoning_content</code></li>
+</ol>
+<blockquote>
+<p><strong>一句话：命中主体 = 系统提示词 + 工具目录 + 历史对话，即请求的"骨架部分"；每次新增的是本轮新消息和工具结果，追加在可复用前缀之后。</strong></p>
+</blockquote>
+<h3>6.3 DSH 做到高命中率的五条设计</h3>
+<ol>
+<li><strong>历史严格"只追加"（append-only）</strong>：loop 保留的响应块只追加到下一个请求尾部，前面的 token 一个不动；表层替换或压缩会从第一个被遮蔽 token 起使复用失效。</li>
+<li><strong>工具目录跨模式稳定</strong>：计划模式与正常模式<strong>不切换工具列表</strong>（即使某工具计划模式下不可用也照样列出）——"The tool catalog stays the same across modes for request-cache stability."</li>
+<li><strong>压缩时逐字回放前缀</strong>：摘要调用<strong>特意</strong>逐字回放系统提示词、工具与已遮蔽区域消息，将压缩指令作为最后一条 user 消息追加——"复用提供方的热前缀 cache，而非使它失效"。</li>
+<li><strong>排除噪声进历史</strong>：只有表层事件进入模型历史；流分片、生命周期边界等仅写入日志的事件被排除。</li>
+<li><strong>组装瀑布的字节级一致性</strong>：系统提示词、schema 的组装是确定性的，不掺入会变化的文本（如时间戳单独注入，不进系统提示词）。</li>
+</ol>
+<h3>6.4 什么会击穿缓存</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>事件</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>切换 provider / model</td>
+<td>完全不同的缓存域，全部失效</td>
+</tr>
+<tr>
+<td>修改系统提示词、工具 schema、前缀</td>
+<td>从第一个变化的 token 起失效</td>
+</tr>
+<tr>
+<td>压缩替换（checkpoint）</td>
+<td>从被遮蔽的第一个历史 token 起失效</td>
+</tr>
+<tr>
+<td>工具结果被剪枝改写</td>
+<td>从该结果起失效</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>结论</strong>：高命中率 = 框架把请求前缀做"稳定"，命中是"省出来的"而非"做出来的"。长会话中 cacheRead 动辄几十万 token 而 inputTokens（新增计算）只有几千，正是因为绝大部分请求内容是重复发送的历史前缀。</p>
+<hr>
+<h2>七、推理回传（Reasoning Passback）</h2>
+<h3>7.1 定义</h3>
+<blockquote>
+<p><strong>推理回传 = 思考模式（thinking mode）下，携带工具调用的 assistant 轮次必须把模型的思考过程（<code class="notranslate">reasoning_content</code>）一并写入消息历史，作为后续对话上下文。</strong></p>
+</blockquote>
+<p>这是 DeepSeek 思考模式 API 的<strong>硬性协议要求</strong>（thinking-mode passback），不是可选优化。缺失时服务端返回 <strong>400 错误</strong>。多个主流框架都因此专门修复过：</p>
+<ul>
+<li>[<a href="https://github.com/openai/codex/issues/24500" data-hovercard-type="issue" data-hovercard-url="/openai/codex/issues/24500/hovercard">OpenAI Codex：DeepSeek thinking mode 缺失 reasoning_content 报 400</a>](<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="4519989070" data-permission-text="Title is private" data-url="https://github.com/openai/codex/issues/24500" data-hovercard-type="issue" data-hovercard-url="/openai/codex/issues/24500/hovercard" href="https://github.com/openai/codex/issues/24500">openai/codex#24500</a>)</li>
+<li>[<a href="https://github.com/langchain-ai/langchain/pull/35093" data-hovercard-type="pull_request" data-hovercard-url="/langchain-ai/langchain/pull/35093/hovercard">langchain：assistant tool-call 必须包含 reasoning_content</a>](<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="3915384353" data-permission-text="Title is private" data-url="https://github.com/langchain-ai/langchain/issues/35093" data-hovercard-type="pull_request" data-hovercard-url="/langchain-ai/langchain/pull/35093/hovercard" href="https://github.com/langchain-ai/langchain/pull/35093">langchain-ai/langchain#35093</a>)</li>
+<li>[<a href="https://github.com/microsoft/agent-framework/issues/5538" data-hovercard-type="issue" data-hovercard-url="/microsoft/agent-framework/issues/5538/hovercard">微软 agent-framework：跨工具调用循环保留并回放 reasoning_content</a>](<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="4342203000" data-permission-text="Title is private" data-url="https://github.com/microsoft/agent-framework/issues/5538" data-hovercard-type="issue" data-hovercard-url="/microsoft/agent-framework/issues/5538/hovercard" href="https://github.com/microsoft/agent-framework/issues/5538">microsoft/agent-framework#5538</a>)</li>
+<li>[<a href="https://github.com/zed-industries/zed/pull/44497" data-hovercard-type="pull_request" data-hovercard-url="/zed-industries/zed/pull/44497/hovercard">Zed：修复 DeepSeek Reasoner 工具调用处理</a>](<a class="issue-link js-issue-link" data-error-text="Failed to load title" data-id="3712437088" data-permission-text="Title is private" data-url="https://github.com/zed-industries/zed/issues/44497" data-hovercard-type="pull_request" data-hovercard-url="/zed-industries/zed/pull/44497/hovercard" href="https://github.com/zed-industries/zed/pull/44497">zed-industries/zed#44497</a>)</li>
+<li>[<a href="https://www.leiphone.com/category/ai/3KPgkefKuQNtTxzN.html" rel="nofollow">雷峰网：DeepSeek 文档更新，Agent 开发者要注意这个字段</a>](<a href="https://www.leiphone.com/category/ai/3KPgkefKuQNtTxzN.html" rel="nofollow">https://www.leiphone.com/category/ai/3KPgkefKuQNtTxzN.html</a>)</li>
+</ul>
+<h3>7.2 DSH 适配器的实现规则</h3>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// dsh-llm-deepseek/lib/index.js serializeAssistant()</span>
+<span class="pl-k">return</span> <span class="pl-kos">{</span>
+  <span class="pl-c1">role</span>: <span class="pl-s">"assistant"</span><span class="pl-kos">,</span>
+  <span class="pl-c1">content</span>: <span class="pl-s1">text</span><span class="pl-kos">,</span>
+  <span class="pl-c">// 只有"有工具调用 且 有推理内容"时才回传 reasoning_content</span>
+  ...<span class="pl-s1">toolCalls</span><span class="pl-kos">.</span><span class="pl-c1">length</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span> <span class="pl-c1">&amp;&amp;</span> <span class="pl-s1">reasoning</span><span class="pl-kos">.</span><span class="pl-c1">length</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span> ? <span class="pl-kos">{</span> <span class="pl-c1">reasoning_content</span>: <span class="pl-s1">reasoning</span> <span class="pl-kos">}</span> : <span class="pl-kos">{</span><span class="pl-kos">}</span><span class="pl-kos">,</span>
+  ...<span class="pl-s1">toolCalls</span><span class="pl-kos">.</span><span class="pl-c1">length</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span> ? <span class="pl-kos">{</span> <span class="pl-c1">tool_calls</span>: <span class="pl-s1">toolCalls</span> <span class="pl-kos">}</span> : <span class="pl-kos">{</span><span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span></pre></div>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>场景</th>
+<th>是否回传推理</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有工具调用 + 有推理</td>
+<td>✅ 回传</td>
+<td>思考模式 API 强制要求</td>
+</tr>
+<tr>
+<td>有工具调用 + 无推理（推理关闭）</td>
+<td>❌ 省略</td>
+<td>没有可回传的内容</td>
+</tr>
+<tr>
+<td>无工具调用（纯文本回复轮）</td>
+<td>❌ 丢弃推理</td>
+<td>终态不需要续接，省 token</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h3>7.3 为什么会有这个机制</h3>
+<p><strong>① 协议硬约束</strong>：思考模式下，任何带 <code class="notranslate">tool_calls</code> 的 assistant 消息必须携带 <code class="notranslate">reasoning_content</code>，否则 400。这是服务端对消息格式的强制校验。</p>
+<p><strong>② 思考的"中断-延续"特性（深层原因）</strong>：思考模式的推理 token 是自回归解码历史的一部分——模型"先思考、后回答"，思考与答案是同一段生成流。</p>
+<ul>
+<li><strong>单轮对话</strong>：推理使命已完成，答案（<code class="notranslate">content</code>）就是思考的产出物，推理用完即弃，下一轮用户提问是新输入，模型从头思考即可。</li>
+<li><strong>工具调用</strong>：模型发出 <code class="notranslate">tool_calls</code> 后对话被<strong>中断</strong>——它还没说完话，在等工具结果回来才能继续。此时推理记录的是"我为什么调用这个工具、我想确认什么"，是<strong>接下来解读工具结果所必需的上下文</strong>。工具结果返回后模型要<strong>接着自己上一轮的想法继续思考</strong>。推理不回传，模型就丢失了发起调用的动机链，解读结果的逻辑会断裂。</li>
+</ul>
+<h3>7.4 为什么普通步骤的推理无需回传</h3>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th></th>
+<th>普通回复轮</th>
+<th>工具调用轮</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>该轮状态</td>
+<td><strong>终态</strong>（话说完了）</td>
+<td><strong>中断态</strong>（等工具结果回来才能继续）</td>
+</tr>
+<tr>
+<td>推理的作用</td>
+<td>通往答案的思考，答案已在 <code class="notranslate">content</code> 里</td>
+<td>发起调用的动机链，是后续解读工具结果的依据</td>
+</tr>
+<tr>
+<td>后续是否依赖这段推理</td>
+<td>❌ 不依赖，下轮是新输入</td>
+<td>✅ 依赖，模型要"接上"自己的思考</td>
+</tr>
+<tr>
+<td>省略推理的后果</td>
+<td>无——答案完整，思考不参与续接</td>
+<td>400 错误（协议）+ 思考断裂（语义）</td>
+</tr>
+<tr>
+<td>回传的成本</td>
+<td>白白膨胀历史、多付 token</td>
+<td>必须支付，换取合法的多轮工具调用</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>一句话概括</strong>：</p>
+<blockquote>
+<p>普通回复是"思考的终点"——推理使命已完成，产出已交付，下一轮从头思考即可，回传纯属浪费；工具调用是"思考的中断"——模型话没说完，推理必须保留下来，才能在工具结果回来后接着想，这是协议要求，也是思考连续性的需要。</p>
+</blockquote>
+<h3>7.5 与缓存的关系</h3>
+<ul>
+<li>推理回传在工具往返期间<strong>追加</strong>：它附加在请求前缀尾部（该条 assistant 消息内部），<strong>不破坏</strong>更早部分（系统提示词、历史）的缓存复用；</li>
+<li>推理内容本身每次是新的（每轮思考不同），属于 cache miss，但它后面紧跟的 tool 结果等又是追加的；</li>
+<li>无工具调用的轮次丢弃推理 → 历史更精简、前缀更稳定、不产生多余 token 成本。</li>
+</ul>
+<hr>
+<h2>八、总结</h2>
+<ol>
+<li>
+<p><strong>插件化</strong>：DSH 采用"最小核心 loop + 事件驱动插件"架构。loop 是唯一含具体循环逻辑的插件，其余一切策略（压缩、重试、权限、子代理、持久化、UI）都是挂在其事件体系上的外围插件；Agent 预设（标准/PTC/极简/创造）本质是插件组装方案。</p>
+</li>
+<li>
+<p><strong>能力 seam 模式</strong>：以压缩为例——接口（<code class="notranslate">dsh-compaction</code>）与实现（<code class="notranslate">dsh-compaction-basic</code>）分离，接口只规定"做什么"，实现决定"怎么做"，两者可独立替换；替换入口是 preset 的 <code class="notranslate">agent.cordis.yml</code>。</p>
+</li>
+<li>
+<p><strong>缓存</strong>：高命中率来自框架把请求前缀做"字节级稳定"（只追加历史、工具目录跨模式稳定、压缩回放前缀、排除噪声），命中主体是系统提示词 + 工具 schema + 历史消息前缀；命中由 DeepSeek 服务端前缀缓存自动完成，框架不主动"做"缓存，只是"省"出来的。</p>
+</li>
+<li>
+<p><strong>推理回传</strong>：思考模式下工具调用轮必须回传 <code class="notranslate">reasoning_content</code>（协议强制 + 思考连续性），普通回复轮丢弃推理（终态无需续接 + 省 token）；DSH 适配器精确执行这条规则，并以"丢弃"策略优化成本与缓存。</p>
+</li>
+</ol>
+<hr>
+<p><em>文档基于 DeepSeek Harness 框架源码核实整理，主要来源：<code class="notranslate">dsh-agent-loop</code>、<code class="notranslate">dsh-compaction(-basic/-tool-result-pruner)</code>、<code class="notranslate">dsh-llm-deepseek</code>、<code class="notranslate">dsh-client-ui-trajectory</code>、<code class="notranslate">dsh/config/agent-presets/*</code> 等包的 README 与源码。</em></p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
