@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.meekdai.com/Gmeek/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# IEEE 802.11标准核心定义与物理层演进脉络
+IEEE 802.11是IEEE制定的无线局域网（WLAN）技术标准系列，核心定义了无线通信的**物理层（PHY）**和**介质访问控制层（MAC）**规范，是所有Wi-Fi设备的技术基础。">
+<meta property="og:title" content="802.11定义了什么？WiFi技术的演进脉络">
+<meta property="og:description" content="# IEEE 802.11标准核心定义与物理层演进脉络
+IEEE 802.11是IEEE制定的无线局域网（WLAN）技术标准系列，核心定义了无线通信的**物理层（PHY）**和**介质访问控制层（MAC）**规范，是所有Wi-Fi设备的技术基础。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://cubewatermelon.github.io/post/802.11-ding-yi-le-shen-me-%EF%BC%9FWiFi-ji-shu-de-yan-jin-mai-luo.html">
+<meta property="og:image" content="https://s21.ax1x.com/2025/04/15/pEf0vaq.jpg">
+<title>802.11定义了什么？WiFi技术的演进脉络</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">802.11定义了什么？WiFi技术的演进脉络</h1>
+<div class="title-right">
+    <a href="https://cubewatermelon.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/cubewatermelon/cubewatermelon.github.io/issues/71" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>IEEE 802.11标准核心定义与物理层演进脉络</h1>
+<p>IEEE 802.11是IEEE制定的无线局域网（WLAN）技术标准系列，核心定义了无线通信的**物理层（PHY）<strong>和</strong>介质访问控制层（MAC）**规范，是所有Wi-Fi设备的技术基础。以下从标准核心定义、物理层演进脉络两个维度梳理，重点突出与物理信道建模直接相关的内容。</p>
+<h2>一、802.11标准的核心定义</h2>
+<p>标准覆盖OSI模型的物理层与数据链路层MAC子层，其中物理层规范是信道建模的核心依据。</p>
+<h3>1. MAC层（简要）</h3>
+<p>位于数据链路层，核心定义了介质访问规则（CSMA/CA载波监听多路访问/冲突避免）、帧格式、QoS优先级、安全加密（WPA2/WPA3）、功率管理、漫游机制等，是无线资源调度的核心，不直接定义物理信道特性。</p>
+<h3>2. 物理层（PHY，信道建模核心依据）</h3>
+<p>物理层规范定义了无线信号的传输体制、频段信道、调制编码、帧结构、射频指标等全部空中接口特性，核心包括5部分：</p>
+<ul>
+<li>
+<p><strong>频段与信道规划</strong><br>
+定义了免授权ISM频段的使用规则：2.4GHz（2.400<del>2.4835GHz）、5GHz（5.150</del>5.850GHz）、6GHz（5.925~7.125GHz，即Wi-Fi 6E/7的6E频段）；<br>
+明确了信道带宽（从20MHz逐步扩展到320MHz）、中心频点计算方式、信道编号规则，以及各地区的发射功率限值、频谱使用约束。</p>
+</li>
+<li>
+<p><strong>传输技术体制</strong><br>
+每代标准对应明确的波形体制：从初代的DSSS直接序列扩频，到802.11a之后成为主流的OFDM正交频分复用，再到后续叠加的MIMO多天线、OFDMA多址、波束成形等技术，决定了信道的时域、频域、空域特性。</p>
+</li>
+<li>
+<p><strong>调制与编码方案（MCS）</strong><br>
+定义了调制阶数（BPSK→QPSK→16QAM→64QAM→256QAM→1024QAM→4096QAM）与信道编码码率（1/2、2/3、3/4、5/6等）的组合，对应不同的MCS索引；<br>
+每个MCS索引对应单流数据速率，结合空间流数量可计算总速率，同时定义了对应信噪比下的接收灵敏度，是链路预算与信道容量建模的核心参数。</p>
+</li>
+<li>
+<p><strong>物理层帧结构与前导码</strong><br>
+定义了PPDU（物理层协议数据单元）的结构：前导码（Preamble）、信号头、数据字段；<br>
+前导码用于接收机同步、信道估计、频偏校正，是信道估计与信道建模的关键参考信号，每代标准都有专属前导码格式以实现向下兼容。</p>
+</li>
+<li>
+<p><strong>空间信道规范</strong><br>
+定义了MIMO空间流数量、天线配置规则；<br>
+定义了波束成形的CSI（信道状态信息）反馈机制、探测帧格式；<br>
+最新标准扩展了多链路操作（MLO）的多信道聚合规则。</p>
+</li>
+</ul>
+<h2>二、802.11物理层标准演进脉络</h2>
+<p>Wi-Fi物理层演进始终围绕「带宽翻倍+调制升阶+空间扩展+多用户复用」四条主线，每一代标准都会配套对应的标准信道模型（由IEEE任务组TG制定），是信道建模的权威参考。</p>
+<h3>1. 初代奠基：IEEE 802.11-1997</h3>
+<ul>
+<li><strong>发布时间</strong>：1997年</li>
+<li><strong>工作频段</strong>：2.4GHz ISM频段</li>
+<li><strong>核心技术</strong>：支持DSSS直接序列扩频、FHSS跳频扩频、红外三种物理层，信道带宽固定20MHz</li>
+<li><strong>峰值速率</strong>：2Mbps（DSSS模式）</li>
+<li><strong>信道模型</strong>：无统一官方信道模型，后续基于室内开阔、室内多径场景补充基础模型</li>
+<li><strong>意义</strong>：确立了WLAN的基础技术框架。</li>
+</ul>
+<h3>2. 第二代双轨：802.11a &amp; 802.11b（1999年）</h3>
+<p>两个标准同年发布，分别走不同技术路线，互不兼容：</p>
+<ul>
+<li><strong>802.11b（2.4GHz主流）</strong><br>
+采用HR-DSSS高速直接序列扩频，峰值速率11Mbps；2.4GHz共14个20MHz信道，是早期普及的核心版本。</li>
+<li><strong>802.11a（5GHz先锋）</strong><br>
+首次引入<strong>OFDM正交频分复用</strong>，52个子载波（48个数据子载波）；峰值速率54Mbps；工作在5GHz频段，干扰少但穿墙能力弱。</li>
+<li><strong>意义</strong>：OFDM凭借高频谱效率成为后续所有Wi-Fi标准的物理层基础。</li>
+</ul>
+<h3>3. 第三代统一：802.11g（2003年）</h3>
+<ul>
+<li><strong>发布时间</strong>：2003年</li>
+<li><strong>工作频段</strong>：2.4GHz</li>
+<li><strong>核心技术</strong>：向下兼容802.11b的HR-DSSS，同时引入与802.11a一致的OFDM调制</li>
+<li><strong>峰值速率</strong>：54Mbps（OFDM模式）</li>
+<li><strong>意义</strong>：统一了2.4GHz高速传输体制，实现向下兼容，推动Wi-Fi大规模民用普及。</li>
+</ul>
+<h3>4. 第四代MIMO时代：802.11n（2009年，Wi-Fi 4）</h3>
+<ul>
+<li><strong>发布时间</strong>：2009年正式发布，Wi-Fi联盟命名为Wi-Fi 4</li>
+<li><strong>工作频段</strong>：2.4GHz + 5GHz双频段</li>
+<li><strong>核心物理层革新</strong>：
+<ol>
+<li>首次引入<strong>MIMO多输入多输出</strong>，最多支持4个空间流，空分复用成倍提升速率；</li>
+<li>支持40MHz信道绑定；</li>
+<li>引入64QAM高阶调制、短保护间隔（Short GI）。</li>
+</ol>
+</li>
+<li><strong>峰值速率</strong>：4流+40MHz+64QAM = 600Mbps</li>
+<li><strong>对应标准信道模型</strong>：<strong>IEEE 802.11 TGn信道模型</strong><br>
+定义了A~F共6种典型室内场景（从视距到高时延扩展），是最经典、应用最广的WLAN信道模型，也是后续所有模型的基础。</li>
+<li><strong>意义</strong>：Wi-Fi正式进入百兆时代，MIMO成为物理层性能提升的核心路径。</li>
+</ul>
+<h3>5. 第五代千兆时代：802.11ac（2014年，Wi-Fi 5）</h3>
+<ul>
+<li><strong>发布时间</strong>：2014年正式发布，Wi-Fi联盟命名为Wi-Fi 5</li>
+<li><strong>工作频段</strong>：仅5GHz频段</li>
+<li><strong>核心物理层革新</strong>：
+<ol>
+<li>信道带宽扩展到80MHz、160MHz（80+80非连续）；</li>
+<li>引入256QAM高阶调制；</li>
+<li>最多支持8个空间流；</li>
+<li>引入下行<strong>MU-MIMO多用户MIMO</strong>，标准化波束成形技术。</li>
+</ol>
+</li>
+<li><strong>峰值速率</strong>：8流+160MHz+256QAM = 3.47Gbps</li>
+<li><strong>对应标准信道模型</strong>：<strong>IEEE 802.11 TGac信道模型</strong><br>
+在TGn基础上扩展宽带支持，适配80/160MHz场景，补充了室外、大型室内空间的信道模型。</li>
+<li><strong>意义</strong>：Wi-Fi进入千兆时代，满足高清视频、大文件传输的带宽需求。</li>
+</ul>
+<h3>6. 第六代高效时代：802.11ax（2021年，Wi-Fi 6/6E）</h3>
+<ul>
+<li><strong>发布时间</strong>：2021年正式发布；2020年推出6GHz扩展版Wi-Fi 6E</li>
+<li><strong>工作频段</strong>：2.4GHz + 5GHz + 6GHz（6E专属）</li>
+<li><strong>核心物理层革新</strong>：
+<ol>
+<li>引入<strong>OFDMA正交频分多址</strong>，子载波划分为资源单元（RU），上下行均可多用户同时传输，解决高密场景冲突；</li>
+<li>引入1024QAM高阶调制；</li>
+<li>支持上下行全双工MU-MIMO；</li>
+<li>加长OFDM符号周期，提升抗多径能力。</li>
+</ol>
+</li>
+<li><strong>峰值速率</strong>：8流+160MHz+1024QAM = 9.6Gbps</li>
+<li><strong>对应标准信道模型</strong>：<strong>IEEE 802.11 TGax信道模型</strong><br>
+针对高密场景、室外场景、6GHz频段优化，定义了更精细的时延扩展、多普勒频移模型，适配OFDMA多用户调度仿真。</li>
+<li><strong>意义</strong>：从“拼峰值速率”转向“提升多用户场景效率”，是当前家庭、企业的主流标准。</li>
+</ul>
+<h3>7. 第七代超高速时代：802.11be（2024年，Wi-Fi 7）</h3>
+<ul>
+<li><strong>发布时间</strong>：2024年12月IEEE正式发布标准，Wi-Fi联盟命名为Wi-Fi 7</li>
+<li><strong>工作频段</strong>：2.4GHz + 5GHz + 6GHz全频段，6GHz为主力</li>
+<li><strong>核心物理层革新</strong>：
+<ol>
+<li>信道带宽扩展到<strong>320MHz连续带宽</strong>，支持240MHz非连续带宽；</li>
+<li>引入<strong>4096QAM</strong>超高阶调制，频谱效率再提升20%；</li>
+<li>最多支持16个空间流；</li>
+<li>引入<strong>MLO多链路操作</strong>，可同时绑定多个频段/信道聚合传输；</li>
+<li>增强型MU-MIMO、协作MIMO。</li>
+</ol>
+</li>
+<li><strong>峰值速率</strong>：16流+320MHz+4096QAM，单链路峰值约46Gbps</li>
+<li><strong>对应标准信道模型</strong>：<strong>IEEE 802.11 TGbe信道模型</strong><br>
+支持320MHz超宽带信道，补充了工业场景、密集室内场景的信道特性，优化了多链路、协作传输的信道模型。</li>
+<li><strong>意义</strong>：Wi-Fi正式进入10G+时代，开始向工业控制、实时业务场景渗透。</li>
+</ul>
+<hr>
+<p>整体来看，802.11物理层的演进本质是不断挖掘时域、频域、空域的复用潜力，每一代标准配套的官方信道模型，都是物理信道建模、算法仿真和设备性能验证的核心基准。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://cubewatermelon.github.io">Yuchen's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行 "+diffDay+" 天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.disabled=true;
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","cubewatermelon/cubewatermelon.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
